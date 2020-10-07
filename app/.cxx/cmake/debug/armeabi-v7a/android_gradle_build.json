@@ -1,0 +1,61 @@
+{
+  "stringTable": {
+    "0": "D:/PoseEstimationForMobileInJava-master/PoseEstimationForMobileInJava-master/app/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi24 --gcc-toolchain=C:/Users/Moon/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/Moon/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Djupiter_opencv_320_EXPORTS -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -std=c++11 -frtti -fexceptions -std=gnu++11 -fexceptions -frtti -O0 -fPIC"
+  },
+  "buildFiles": [
+    "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\platforms.cmake",
+    "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake",
+    "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "jupiter_opencv_320-Debug-armeabi-v7a": {
+      "buildCommand": "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" jupiter_opencv_320",
+      "buildType": "debug",
+      "toolchain": "1835064442",
+      "abi": "armeabi-v7a",
+      "artifactName": "jupiter_opencv_320",
+      "files": [
+        {
+          "src": "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\src\\main\\cpp\\native-lib.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libjupiter_opencv_320.so",
+      "runtimeFiles": [
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_java3.so",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_calib3d.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_core.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_features2d.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_flann.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_highgui.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_imgcodecs.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_imgproc.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_ml.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_objdetect.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_photo.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_shape.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_stitching.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_superres.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_video.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_videoio.a",
+        "D:\\PoseEstimationForMobileInJava-master\\PoseEstimationForMobileInJava-master\\app\\libs\\armeabi-v7a\\libopencv_videostab.a"
+      ]
+    }
+  },
+  "toolchains": {
+    "1835064442": {
+      "cppCompilerExecutable": "C:\\Users\\Moon\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
