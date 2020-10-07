@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-# Pose Estimation For Mobile implemented in Java using TF Lite
-
-## Description
-A replica of PoseEstimation project on github which implemented in Kotlin
-(https://github.com/edvardHua/PoseEstimationForMobile)
-=======
 In_The_Closet
 =============
 2020년 2학기 충북대학교 산학프로젝트
