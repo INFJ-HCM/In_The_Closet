@@ -111,10 +111,11 @@ public class Camera2Renderer extends CameraGLRendererBase {
             } else {
                 for (String cameraID : camList) {
                     CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraID);
-                    if( id == CameraBridgeViewBase.CAMERA_ID_BACK &&
-                        characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK ||
-                        id == CameraBridgeViewBase.CAMERA_ID_FRONT &&
-                        characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT) {
+                    //songhui 수정
+                    if( id == CameraBridgeViewBase.CAMERA_ID_FRONT &&
+                        characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT ||
+                        id == CameraBridgeViewBase.CAMERA_ID_BACK &&
+                        characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
                         mCameraID = cameraID;
                         break;
                     }
