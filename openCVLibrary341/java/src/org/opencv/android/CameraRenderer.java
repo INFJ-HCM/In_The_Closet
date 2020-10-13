@@ -64,7 +64,7 @@ public class CameraRenderer extends CameraGLRendererBase {
                 int localCameraIndex = mCameraIndex;
                 //songhui 수정
                 if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_FRONT) {
-                    Log.i(LOGTAG, "Trying to open BACK camera");
+                    Log.i(LOGTAG, "Trying to open front camera");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
                         Camera.getCameraInfo( camIdx, cameraInfo );
@@ -75,7 +75,7 @@ public class CameraRenderer extends CameraGLRendererBase {
                         }
                     }
                 } else if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_BACK) {
-                    Log.i(LOGTAG, "Trying to open FRONT camera");
+                    Log.i(LOGTAG, "Trying to open back camera");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
                         Camera.getCameraInfo( camIdx, cameraInfo );
@@ -87,9 +87,9 @@ public class CameraRenderer extends CameraGLRendererBase {
                 }
                 //songhui 수정
                 if (localCameraIndex == CameraBridgeViewBase.CAMERA_ID_FRONT) {
-                    Log.e(LOGTAG, "Back camera not found!");
+                    Log.e(LOGTAG, "front camera not found!");
                 } else if (localCameraIndex == CameraBridgeViewBase.CAMERA_ID_BACK) {
-                    Log.e(LOGTAG, "Front camera not found!");
+                    Log.e(LOGTAG, "back camera not found!");
                 } else {
                     Log.d(LOGTAG, "Trying to open camera with new open(" + localCameraIndex + ")");
                     try {
