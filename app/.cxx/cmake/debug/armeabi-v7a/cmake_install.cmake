@@ -1,4 +1,4 @@
-# Install script for directory: D:/PoseEstimationForMobileInJava-master/PoseEstimationForMobileInJava-master/app
+# Install script for directory: C:/GITHUB/INTHECLOSET/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/PoseEstimationForMobileInJava-master/PoseEstimationForMobileInJava-master/app/.cxx/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/GITHUB/INTHECLOSET/app/.cxx/cmake/debug/armeabi-v7a/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
