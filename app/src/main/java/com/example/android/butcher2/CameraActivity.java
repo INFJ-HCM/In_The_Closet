@@ -57,10 +57,12 @@ public class CameraActivity extends Activity{
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_camera);
+
     if (null == savedInstanceState) {
+        //1. 들어감
         getFragmentManager()
           .beginTransaction()
-          .replace(R.id.container, Camera2BasicFragment.newInstance())
+          .replace(R.id.container, Camera2BasicFragment.newInstance())//2
           .commit();
     }
   }

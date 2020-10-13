@@ -12,7 +12,6 @@ import android.util.Log;
 @TargetApi(15)
 @SuppressWarnings("deprecation")
 public class CameraRenderer extends CameraGLRendererBase {
-
     public static final String LOGTAG = "CameraRenderer";
 
     private Camera mCamera;
@@ -35,6 +34,7 @@ public class CameraRenderer extends CameraGLRendererBase {
 
     @Override
     protected synchronized void openCamera(int id) {
+
         Log.i(LOGTAG, "openCamera");
         closeCamera();
         if (id == CameraBridgeViewBase.CAMERA_ID_ANY) {
@@ -65,6 +65,7 @@ public class CameraRenderer extends CameraGLRendererBase {
                 //songhui 수정
                 if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_FRONT) {
                     Log.i(LOGTAG, "Trying to open front camera");
+                    System.out.println("------------------------------------------------dddd");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
                         Camera.getCameraInfo( camIdx, cameraInfo );
@@ -75,6 +76,7 @@ public class CameraRenderer extends CameraGLRendererBase {
                         }
                     }
                 } else if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_BACK) {
+                    System.out.println("-----------------------------------------------rrrr");
                     Log.i(LOGTAG, "Trying to open back camera");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
