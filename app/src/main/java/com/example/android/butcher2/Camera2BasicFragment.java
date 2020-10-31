@@ -12,7 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
-//4
+
 package com.example.android.butcher2;
 
 import android.Manifest;
@@ -109,7 +109,6 @@ public class Camera2BasicFragment extends Fragment
 
                 @Override
                 public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-
                     openCamera(width, height);
 
                 }
@@ -150,9 +149,9 @@ public class Camera2BasicFragment extends Fragment
             new CameraDevice.StateCallback() {
 
                 @Override
-                //7
+
                 public void onOpened(@NonNull CameraDevice currentCameraDevice) {
-                    System.out.println("a");
+
                     // This method is called when the camera is opened.  We start camera preview here.
                     cameraOpenCloseLock.release();
                     cameraDevice = currentCameraDevice;
@@ -161,7 +160,7 @@ public class Camera2BasicFragment extends Fragment
 
                 @Override
                 public void onDisconnected(@NonNull CameraDevice currentCameraDevice) {
-                    System.out.println("b");
+
                     cameraOpenCloseLock.release();
                     currentCameraDevice.close();
                     cameraDevice = null;
@@ -169,7 +168,7 @@ public class Camera2BasicFragment extends Fragment
 
                 @Override
                 public void onError(@NonNull CameraDevice currentCameraDevice, int error) {
-                    System.out.println("c");
+
                     cameraOpenCloseLock.release();
                     currentCameraDevice.close();
                     cameraDevice = null;
@@ -387,7 +386,7 @@ public class Camera2BasicFragment extends Fragment
     }
 
     public static Camera2BasicFragment newInstance() {
-        //3
+
         return new Camera2BasicFragment();
     }
 
@@ -408,6 +407,10 @@ public class Camera2BasicFragment extends Fragment
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
             if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
                 continue;
+            }
+            else
+            {
+                System.out.println("왜여기로들어오냐고 ");//3 왜여기로 들어가냐고
             }
 
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
@@ -505,7 +508,7 @@ public class Camera2BasicFragment extends Fragment
     }
 
     /** Opens the camera specified by {@link Camera2BasicFragment#cameraId}. */
-    //5
+
     private void openCamera(int width, int height) {
 
         if (!checkedPermissions && !allPermissionsGranted()) {
@@ -537,7 +540,7 @@ public class Camera2BasicFragment extends Fragment
 
                 return;
             }
-
+            cameraId = manager.getCameraIdList () [1];//songhui20201101 추가  이것이 성공이었다 !!!!!!!!!!!!!!!!댄스댄스
             manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (CameraAccessException e) {
       Log.e(TAG, "Failed to open Camera", e);
@@ -614,7 +617,7 @@ public class Camera2BasicFragment extends Fragment
 
 
   /** Creates a new {@link CameraCaptureSession} for camera preview. */
-  //8
+
   private void createCameraPreviewSession() {
     try {
       SurfaceTexture texture = textureView.getSurfaceTexture();
@@ -646,7 +649,7 @@ public class Camera2BasicFragment extends Fragment
               captureSession = cameraCaptureSession;
               try {
 
-                  System.out.println("s");
+
                 // Auto focus should be continuous for camera preview.
                 previewRequestBuilder.set(
                     CaptureRequest.CONTROL_AF_MODE,
@@ -670,7 +673,7 @@ public class Camera2BasicFragment extends Fragment
     } catch (CameraAccessException e) {
       Log.e(TAG, "Failed to preview Camera", e);
     }
-      System.out.println("ddcc");
+
   }
 
   /**
@@ -681,7 +684,7 @@ public class Camera2BasicFragment extends Fragment
    * @param viewWidth The width of `textureView`
    * @param viewHeight The height of `textureView`
    */
-  //6
+
   private void configureTransform(int viewWidth, int viewHeight) {
     Activity activity = getActivity();
     if (null == textureView || null == previewSize || null == activity) {
@@ -704,7 +707,7 @@ public class Camera2BasicFragment extends Fragment
       matrix.postRotate(90 * (rotation - 2), centerX, centerY);
     } else if (Surface.ROTATION_180 == rotation) {
       matrix.postRotate(180, centerX, centerY);
-    }System.out.println("10");
+    }
     textureView.setTransform(matrix);
   }
 
