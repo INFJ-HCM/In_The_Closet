@@ -29,6 +29,7 @@ public class Camera2Renderer extends CameraGLRendererBase {
     private String mCameraID;
     private Size mPreviewSize = new Size(-1, -1);
 
+
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler;
     private Semaphore mCameraOpenCloseLock = new Semaphore(1);

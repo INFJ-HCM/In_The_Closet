@@ -16,8 +16,11 @@ limitations under the License.
 package com.example.android.butcher2;
 
 import android.app.Activity;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -77,5 +80,6 @@ public class CameraActivity extends Activity{
           mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
       }
   }
+
 
 }

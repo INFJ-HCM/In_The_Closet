@@ -1604,8 +1604,8 @@ CVAPI(void)  cvSeqPop( CvSeq* seq, void* element CV_DEFAULT(NULL));
 CVAPI(void)  cvSeqPopFront( CvSeq* seq, void* element CV_DEFAULT(NULL));
 
 
-#define CV_FRONT 1
-#define CV_BACK 0
+#define CV_FRONT 0
+#define CV_BACK 1
 /** Adds several new elements to the end of sequence */
 CVAPI(void)  cvSeqPushMulti( CvSeq* seq, const void* elements,
                              int count, int in_front CV_DEFAULT(0) );

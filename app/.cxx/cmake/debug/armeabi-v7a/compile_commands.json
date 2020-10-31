@@ -1,7 +1,7 @@
 [
 {
-  "directory": "C:/GITHUB/INTHECLOSET/app/.cxx/cmake/debug/armeabi-v7a",
-  "command": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi24 --gcc-toolchain=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Djupiter_opencv_320_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -std=gnu++11 -fexceptions -frtti -O0  -fPIC   -o CMakeFiles\\jupiter_opencv_320.dir\\src\\main\\cpp\\native-lib.cpp.o -c C:\\GITHUB\\INTHECLOSET\\app\\src\\main\\cpp\\native-lib.cpp",
-  "file": "C:/GITHUB/INTHECLOSET/app/src/main/cpp/native-lib.cpp"
+  "directory": "C:/GITHUB/IN_THE_CLOSET/app/.cxx/cmake/debug/armeabi-v7a",
+  "command": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=armv7-none-linux-androideabi23 --gcc-toolchain=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot  -Djupiter_opencv_320_EXPORTS -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -std=c++11 -frtti -fexceptions -std=gnu++11 -fexceptions -frtti -O0  -fPIC   -o CMakeFiles\\jupiter_opencv_320.dir\\src\\main\\cpp\\native-lib.cpp.o -c C:\\GITHUB\\IN_THE_CLOSET\\app\\src\\main\\cpp\\native-lib.cpp",
+  "file": "C:/GITHUB/IN_THE_CLOSET/app/src/main/cpp/native-lib.cpp"
 }
 ]
