@@ -37,7 +37,7 @@ public class CameraRenderer extends CameraGLRendererBase {
 
         Log.i(LOGTAG, "openCamera");
         closeCamera();
-        if (id == CameraBridgeViewBase.CAMERA_ID_ANY) {
+        if (id == CameraBridgeViewBase.CAMERA_ID_FRONT) {//songhui20201031
             Log.d(LOGTAG, "Trying to open camera with old open()");
             try {
                 mCamera = Camera.open();
@@ -65,7 +65,6 @@ public class CameraRenderer extends CameraGLRendererBase {
                 //songhui 수정
                 if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_FRONT) {
                     Log.i(LOGTAG, "Trying to open front camera");
-                    System.out.println("------------------------------------------------dddd");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
                         Camera.getCameraInfo( camIdx, cameraInfo );

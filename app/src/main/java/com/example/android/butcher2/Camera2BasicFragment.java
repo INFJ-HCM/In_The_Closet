@@ -111,6 +111,7 @@ public class Camera2BasicFragment extends Fragment
                 public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
 
                     openCamera(width, height);
+
                 }
 
                 @Override
@@ -405,16 +406,12 @@ public class Camera2BasicFragment extends Fragment
 
                 // We don't use a front facing camera in this sample.
                 Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-            System.out.println("4545");
             if (facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
-
                 continue;
             }
 
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
                 if (map == null) {
-
-
                     continue;
                 }
                 // // For still image captures, we use the largest available size.
