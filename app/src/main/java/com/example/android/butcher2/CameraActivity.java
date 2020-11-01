@@ -16,7 +16,6 @@ limitations under the License.
 package com.example.android.butcher2;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,7 +68,6 @@ public class CameraActivity extends Activity{
           .replace(R.id.container, Camera2BasicFragment.newInstance())//2
           .commit();
     }
-
   }
 
   @Override
