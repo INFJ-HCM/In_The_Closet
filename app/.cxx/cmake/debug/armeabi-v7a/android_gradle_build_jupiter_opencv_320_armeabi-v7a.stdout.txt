@@ -1,2 +1,2 @@
-ninja: Entering directory `C:\GITHUB\IN_THE_CLOSET\app\.cxx\cmake\debug\armeabi-v7a'
+ninja: Entering directory `C:\Users\hyunapark\AndroidStudioProjects\In_The_Closet2\app\.cxx\cmake\debug\armeabi-v7a'
 ninja: no work to do.

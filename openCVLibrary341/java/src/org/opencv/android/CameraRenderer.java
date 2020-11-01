@@ -75,7 +75,7 @@ public class CameraRenderer extends CameraGLRendererBase {
                         }
                     }
                 } else if (mCameraIndex == CameraBridgeViewBase.CAMERA_ID_BACK) {
-                    System.out.println("-----------------------------------------------rrrr");
+
                     Log.i(LOGTAG, "Trying to open back camera");
                     Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                     for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
