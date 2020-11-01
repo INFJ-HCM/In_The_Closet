@@ -4,33 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
+    android:background="#ffffff"
+    tools:context=".Loading">
     <TextView
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="300dp"
         android:gravity="center"
-        android:text="Virtual Fitting"
+       android:background="#ffffff"
+        android:text="Loading"
         android:textSize="50dp"
         />
-
-        <Button
-        android:id="@+id/btn_camera"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:text="Fitting Now" />
-
-        <Button
-        android:id="@+id/btn_lookbook"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"
-        android:text="Look Book"/>
-
-
-
 </LinearLayout>

@@ -728,7 +728,7 @@ public class Camera2BasicFragment extends Fragment
   /** Classifies a frame from the preview stream. */
   private void classifyFrame() {
     if (classifier == null || getActivity() == null || cameraDevice == null) {
-      showToast("Uninitialized Classifier or invalid context.");
+      //showToast("Uninitialized Classifier or invalid context.");//이건 왜뜨는거지
       return;
     }
     String textToShow = "";
