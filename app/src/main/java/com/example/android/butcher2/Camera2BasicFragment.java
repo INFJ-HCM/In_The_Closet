@@ -281,8 +281,9 @@ public class Camera2BasicFragment extends Fragment
         layoutFrame = view.findViewById(R.id.layout_frame);
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
-        gallary_open = view.findViewById(R.id.gallary_open);
 
+        //박현아 20201101 갤러리연동
+        gallary_open = view.findViewById(R.id.gallary_open);
         gallary_open.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
