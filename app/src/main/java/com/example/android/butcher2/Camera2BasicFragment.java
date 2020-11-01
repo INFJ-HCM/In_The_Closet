@@ -23,6 +23,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -60,6 +61,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.ToggleButton;
@@ -98,6 +100,8 @@ public class Camera2BasicFragment extends Fragment
     private DrawView drawView;
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
+
+    private Button gallary_open;
 
 
     /**
@@ -277,8 +281,17 @@ public class Camera2BasicFragment extends Fragment
         layoutFrame = view.findViewById(R.id.layout_frame);
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
-    }
+        gallary_open = view.findViewById(R.id.gallary_open);
 
+        gallary_open.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivity(intent);
+
+            }
+        });
+    }
     /** Load the model and labels. */
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
