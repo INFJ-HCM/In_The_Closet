@@ -7,10 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import java.util.ArrayList;
-
+import android.util.Log; //PCH
 
 public class DrawView extends View {
-
+    private static final String TAG = "PCH :"; //PCH
     private int mRatioWidth  = 0;
     private int mRatioHeight  = 0;
 
@@ -22,7 +22,7 @@ public class DrawView extends View {
     private int mImgWidth    = 0;
     private int mImgHeight   = 0;
 
-    private int mColorArray[] = {
+    private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
             getResources().getColor(R.color.color_top, null),
             getResources().getColor(R.color.color_neck, null),
             getResources().getColor(R.color.color_l_shoulder, null),
@@ -130,21 +130,23 @@ public class DrawView extends View {
 
         for (int i = 0; i < mDrawPoint.size(); i++) {
             if (i == 1) continue;
-            switch (i) {
+            switch (i) {    // Neck = (x, y) = (p1.x, p1.y)
                 case 0:
-                    canvas.drawLine(mDrawPoint.get(i).x, mDrawPoint.get(i).y, p1.x, p1.y, mPaint);
+                    canvas.drawLine(mDrawPoint.get(i).x, mDrawPoint.get(i).y, p1.x, p1.y, mPaint); // top~Neck
+                    //double Pythagoras = Math.sqrt(Math.pow(mDrawPoint.get(i).x - p1.x, 2) + Math.pow(mDrawPoint.get(i).y - p1.y, 2)); //PCH
+                    //Log.i("Pythagoras" ,  String.valueOf(Pythagoras)); //PCH
                     break;
                 case 2:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
+                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Lshoulder
                     break;
                 case 5:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
+                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Rshoulder
                     break;
                 case 8:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
+                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~LHip
                     break;
                 case 11:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
+                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~RHip
                     break;
                 default:
                     if (prePointF != null) {
@@ -163,7 +165,12 @@ public class DrawView extends View {
 
     }
 
-
+    // Neck = (x, y) = (p1.x, p1.y)
+    // top = (x, y) = (mDrawPoint.get(0).x, mDrawPoint.get(0).y)            // i=0
+    // Lshoulder = (x, y) = (mDrawPoint.get(2).x, mDrawPoint.get(2).y)      // i=2
+    // LHip = (x, y) = (mDrawPoint.get(8).x, mDrawPoint.get(8).y)           // i=8
+    // Rshoulder = (x, y) = (mDrawPoint.get(5).x, mDrawPoint.get(5).y)      // i=5
+    // RHip = (x, y) = (mDrawPoint.get(11).x, mDrawPoint.get(11).y)         // i=11
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

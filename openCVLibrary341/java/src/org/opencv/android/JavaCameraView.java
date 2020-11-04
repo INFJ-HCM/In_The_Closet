@@ -97,17 +97,8 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
                     int localCameraIndex = mCameraIndex;
-                    if (mCameraIndex == CAMERA_ID_BACK) {
-                        Log.i(TAG, "Trying to open back camera");
-                        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
-                        for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
-                            Camera.getCameraInfo( camIdx, cameraInfo );
-                            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                                localCameraIndex = camIdx;
-                                break;
-                            }
-                        }
-                    } else if (mCameraIndex == CAMERA_ID_FRONT) {
+                    //songhui 수정
+                    if (mCameraIndex == CAMERA_ID_FRONT) {
                         Log.i(TAG, "Trying to open front camera");
                         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
                         for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
@@ -117,11 +108,23 @@ public class JavaCameraView extends CameraBridgeViewBase implements PreviewCallb
                                 break;
                             }
                         }
+                        //songhui
+                    } else if (mCameraIndex == CAMERA_ID_BACK) {
+                        Log.i(TAG, "Trying to open back camera");
+                        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+                        for (int camIdx = 0; camIdx < Camera.getNumberOfCameras(); ++camIdx) {
+                            Camera.getCameraInfo( camIdx, cameraInfo );
+                            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                                localCameraIndex = camIdx;
+                                break;
+                            }
+                        }
                     }
-                    if (localCameraIndex == CAMERA_ID_BACK) {
-                        Log.e(TAG, "Back camera not found!");
-                    } else if (localCameraIndex == CAMERA_ID_FRONT) {
-                        Log.e(TAG, "Front camera not found!");
+                    //songhui 수정
+                    if (localCameraIndex == CAMERA_ID_FRONT) {
+                        Log.e(TAG, "front camera not found!");
+                    } else if (localCameraIndex == CAMERA_ID_BACK) {
+                        Log.e(TAG, "back camera not found!");
                     } else {
                         Log.d(TAG, "Trying to open camera with new open(" + Integer.valueOf(localCameraIndex) + ")");
                         try {

@@ -16,8 +16,11 @@ limitations under the License.
 package com.example.android.butcher2;
 
 import android.app.Activity;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -57,10 +60,12 @@ public class CameraActivity extends Activity{
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_camera);
+
     if (null == savedInstanceState) {
+        //1. 들어감
         getFragmentManager()
           .beginTransaction()
-          .replace(R.id.container, Camera2BasicFragment.newInstance())
+          .replace(R.id.container, Camera2BasicFragment.newInstance())//2
           .commit();
     }
   }
@@ -75,5 +80,6 @@ public class CameraActivity extends Activity{
           mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
       }
   }
+
 
 }
