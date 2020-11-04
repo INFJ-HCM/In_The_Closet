@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
-    "cmakeServerLogFile": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\armeabi-v7a\\cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cxx\\debug\\armeabi-v7a",
+    "cmakeArtifactsBaseFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+    "cmakeServerLogFile": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\armeabi-v7a\\cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cxx\\debug\\armeabi-v7a",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,9 +15,9 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
-      "cmakeToolchain": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\build\\cmake\\android.toolchain.cmake",
-      "cmakeExecutable": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+      "buildRoot": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+      "cmakeToolchain": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+      "cmakeExecutable": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
       "variables": [
         {
           "name": "CMAKE_CXX_FLAGS",
@@ -25,7 +25,7 @@
         },
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\prefab\\armeabi-v7a\\prefab"
+          "value": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\prefab\\armeabi-v7a\\prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -33,7 +33,7 @@
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\build\\cmake\\android.toolchain.cmake"
+          "value": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake"
         },
         {
           "name": "ANDROID_ABI",
@@ -41,7 +41,7 @@
         },
         {
           "name": "ANDROID_NDK",
-          "value": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2"
+          "value": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669"
         },
         {
           "name": "ANDROID_PLATFORM",
@@ -53,7 +53,7 @@
         },
         {
           "name": "CMAKE_ANDROID_NDK",
-          "value": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2"
+          "value": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669"
         },
         {
           "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
@@ -61,11 +61,11 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a"
+          "value": "C:\\GITHUB\\IN_THE_CLOSET\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
-          "value": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+          "value": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
         },
         {
           "name": "CMAKE_SYSTEM_NAME",
@@ -82,14 +82,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+  "cxxBuildFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
   "info": {
     "abi": "ARMEABI_V7A",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+  "originalCxxBuildFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
   "variant": {
     "buildSystemArgumentList": [
       "-DANDROID_TOOLCHAIN\u003dclang -DANDROID_STL\u003dgnustl_static"
@@ -106,24 +106,24 @@
     "module": {
       "buildSystem": "CMAKE",
       "cmake": {
-        "cmakeExe": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "cmakeExe": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
         "minimumCmakeVersion": "3.10.2",
-        "ninjaExe": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+        "ninjaExe": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
       },
-      "cmakeToolchainFile": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\build\\cmake\\android.toolchain.cmake",
-      "cxxFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx",
+      "cmakeToolchainFile": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+      "cxxFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx",
       "gradleModulePathName": ":app",
-      "intermediatesFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\build\\intermediates",
-      "makeFile": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\CMakeLists.txt",
-      "moduleBuildFile": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\build.gradle",
-      "moduleRootFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app",
+      "intermediatesFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\build\\intermediates",
+      "makeFile": "C:\\GITHUB\\IN_THE_CLOSET\\app\\CMakeLists.txt",
+      "moduleBuildFile": "C:\\GITHUB\\IN_THE_CLOSET\\app\\build.gradle",
+      "moduleRootFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
         "X86",
         "X86_64"
       ],
-      "ndkFolder": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2",
+      "ndkFolder": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669",
       "ndkMetaAbiList": [
         {
           "abi": "ARMEABI_V7A",
@@ -180,36 +180,36 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.0.6113669",
       "project": {
-        "compilerSettingsCacheFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\.cxx",
-        "cxxFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\.cxx",
+        "compilerSettingsCacheFolder": "C:\\GITHUB\\IN_THE_CLOSET\\.cxx",
+        "cxxFolder": "C:\\GITHUB\\IN_THE_CLOSET\\.cxx",
         "ideBuildTargetAbi": "armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2",
-        "sdkFolder": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk",
+        "rootBuildGradleFolder": "C:\\GITHUB\\IN_THE_CLOSET",
+        "sdkFolder": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk",
         "isPrefabEnabled": false
       },
       "splitsAbiFilterSet": [],
       "stlSharedObjectMap": {
         "LIBCXX_SHARED": {
-          "ARMEABI_V7A": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
-          "ARM64_V8A": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
-          "X86": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
-          "X86_64": "C:\\Users\\hyunapark\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669-2\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+          "ARMEABI_V7A": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
         },
         "LIBCXX_STATIC": {},
         "NONE": {},
         "SYSTEM": {}
       }
     },
-    "objFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\build\\intermediates\\cmake\\debug\\obj",
+    "objFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\build\\intermediates\\cmake\\debug\\obj",
     "variantName": "debug",
     "validAbiList": [
       "ARMEABI_V7A"
     ],
-    "prefabDirectory": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\prefab",
+    "prefabDirectory": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "C:\\Users\\hyunapark\\AndroidStudioProjects\\In_The_Closet2\\app\\.cxx\\cmake\\debug\\prefab\\armeabi-v7a"
+  "prefabFolder": "C:\\GITHUB\\IN_THE_CLOSET\\app\\.cxx\\cmake\\debug\\prefab\\armeabi-v7a"
 }

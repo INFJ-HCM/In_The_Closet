@@ -38,12 +38,6 @@
             android:layout_gravity="center_vertical"
             />
 
-        <Button
-            android:id="@+id/gallary_open"
-            android:layout_width="159dp"
-            android:layout_height="wrap_content"
-            android:text="gallary_open!" />
-
     </com.example.android.butcher2.AutoFitFrameLayout>
 
     <LinearLayout

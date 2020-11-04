@@ -23,6 +23,7 @@
         <activity
             android:name=".CameraActivity"
             android:screenOrientation="portrait" />
+
     </application>
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
