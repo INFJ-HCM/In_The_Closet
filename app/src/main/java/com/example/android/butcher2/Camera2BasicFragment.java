@@ -68,6 +68,8 @@ import android.widget.ToggleButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.opencv.android.FpsMeter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,6 +103,8 @@ public class Camera2BasicFragment extends Fragment
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
     private Button gallary_open;
+
+
 
 
 
@@ -291,7 +295,6 @@ public class Camera2BasicFragment extends Fragment
                 startActivity(intent);
             }
         });
-        
     }
 
     /** Load the model and labels. */

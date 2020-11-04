@@ -1,5 +1,6 @@
 package com.example.android.butcher2;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -7,7 +8,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import java.util.ArrayList;
+
 import android.util.Log; //PCH
+
+import org.opencv.android.FpsMeter;
 
 public class DrawView extends View {
     private static final String TAG = "PCH :"; //PCH
@@ -21,6 +25,8 @@ public class DrawView extends View {
     private float mRatioY    = 0;
     private int mImgWidth    = 0;
     private int mImgHeight   = 0;
+
+    private String mFps = "";
 
     private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
             getResources().getColor(R.color.color_top, null),
@@ -113,6 +119,8 @@ public class DrawView extends View {
         requestLayout();
     }
 
+    private FpsMeter fpsMeter = new FpsMeter();
+
     // 描写するメソッド
     @Override
     public void onDraw(Canvas canvas) {
@@ -121,9 +129,22 @@ public class DrawView extends View {
         initcircleRadius();
         initmPaint();
 
+        /*
+        문재식 Fps 그리기
+        */
+//        Log.e("1","1");
+//        fpsMeter.init();
+//        Log.e("2","2");
+        fpsMeter.measure();
+//        Log.e("3","3");
+        fpsMeter.draw(canvas, 500, 200);
+//        Log.e("4","4");
+
         if (mDrawPoint.isEmpty()) {
             return;
         }
+
+
         PointF prePointF = null;
         mPaint.setColor((int)0xff6fa8dc);
         PointF p1 = mDrawPoint.get(1);

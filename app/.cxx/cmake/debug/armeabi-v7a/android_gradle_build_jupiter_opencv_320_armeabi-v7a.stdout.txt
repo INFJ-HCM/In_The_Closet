@@ -1,2 +1,2 @@
-ninja: Entering directory `C:\GITHUB\VirtualFitting\app\.cxx\cmake\debug\armeabi-v7a'
+ninja: Entering directory `D:\PoseEstimationForMobileInJava-master\PoseEstimationForMobileInJava-master\app\.cxx\cmake\debug\armeabi-v7a'
 ninja: no work to do.
