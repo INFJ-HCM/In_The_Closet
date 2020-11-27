@@ -1,15 +1,15 @@
 package com.example.android.butcher2;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import java.util.ArrayList;
-
-import android.util.Log; //PCH
 
 import org.opencv.android.FpsMeter;
 
@@ -26,7 +26,8 @@ public class DrawView extends View {
     private int mImgWidth    = 0;
     private int mImgHeight   = 0;
 
-    private String mFps = "";
+    private Bitmap captureview = null;
+    private boolean captureFlag = false;
 
     private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
             getResources().getColor(R.color.color_top, null),
@@ -82,6 +83,7 @@ public class DrawView extends View {
             int mScaledDensity = 13 * (int) getContext().getResources().getDisplayMetrics().scaledDensity;
             mPaint.setStrokeWidth((float) mDenstity);
             mPaint.setTextSize((float) mScaledDensity);
+
         }
     }
 
@@ -91,6 +93,12 @@ public class DrawView extends View {
         mImgHeight = height;
         requestLayout();
     }
+
+    public void setCaptureview (Bitmap bitmap) {
+        captureview = bitmap;
+        captureFlag = true;
+    }
+
 
     // 配列のデータをポイント型に変換して点群配列に追加する
     public void setDrawPoint(float[][] point, float ratio){
@@ -129,16 +137,15 @@ public class DrawView extends View {
         initcircleRadius();
         initmPaint();
 
+        if(captureFlag) { // 캡쳐 버튼을 누를 때만 그려라
+            canvas.drawBitmap(captureview, 0, 0,null);
+            captureFlag = false;
+        }
         /*
         문재식 Fps 그리기
         */
-//        Log.e("1","1");
-//        fpsMeter.init();
-//        Log.e("2","2");
         fpsMeter.measure();
-//        Log.e("3","3");
         fpsMeter.draw(canvas, 500, 200);
-//        Log.e("4","4");
 
         if (mDrawPoint.isEmpty()) {
             return;
@@ -184,6 +191,27 @@ public class DrawView extends View {
             canvas.drawCircle(mDrawPoint.get(i).x, mDrawPoint.get(i).y,circleRadius, mPaint);
         }
 
+        /*
+         * 이미지 크기 값은 그림판 크기(Pixel 값)와 동일하다
+         */
+        Resources res = getResources();//drawable에 있는 그림을 로딩해주는 역할이다.
+        BitmapDrawable bd = null;
+        bd=(BitmapDrawable)res.getDrawable(R.drawable.shirt,null);
+        Bitmap bit = bd.getBitmap();
+
+        int width = bit.getWidth();
+        int height = bit.getHeight();
+        Bitmap resized = null;
+
+        resized = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true); // 옷 크기 재설정 추후 함수로 빼자
+
+//        String wid = Integer.toString(bit.getWidth());
+//        String he = Integer.toString(bit.getHeight());
+
+//        Log.e("X", wid);
+//        Log.e("Y", he);
+
+        canvas.drawBitmap(resized, mDrawPoint.get(1).x - (resized.getWidth()/2), mDrawPoint.get(1).y - 100,null);
     }
 
     // Neck = (x, y) = (p1.x, p1.y)

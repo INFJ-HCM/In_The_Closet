@@ -32,40 +32,33 @@ public class FpsMeter {
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE);
         mPaint.setTextSize(80);
-        Log.e("여기다", "알아서 들어오지?");
     }
 
     public void measure() {
         if (!mIsInitialized) {
             init();
             mIsInitialized = true;
-            Log.e("여기는", "몇번 오냐");
         } else {
-            Log.e("1","1");
+
             mFramesCouner++;
-            Log.e("2","2");
             if (mFramesCouner % STEP == 0) {
-                Log.e("3","3");
 
                 long time = Core.getTickCount();
                 double fps = STEP * mFrequency / (time - mprevFrameTime);
 
-                String tmp = String.valueOf(time);
-                String tmp2 = String.valueOf(fps);
-
-                Log.e("time", tmp);
-                Log.e("fps", tmp2);
+//                String tmp = String.valueOf(time);
+//                String tmp2 = String.valueOf(fps);
+//
+//                Log.e("time", tmp);
+//                Log.e("fps", tmp2);
 
                 mprevFrameTime = time;
                 if (mWidth != 0 && mHeight != 0)
                     mStrfps = FPS_FORMAT.format(fps) + " FPS@" + Integer.valueOf(mWidth) + "x" + Integer.valueOf(mHeight);
                 else
                     mStrfps = FPS_FORMAT.format(fps) + " FPS";
-//                Log.i(TAG, mStrfps);
-                Log.e("Hello", mStrfps);
             }
         }
-        //Log.e("hello", mStrfps);
     }
 
     public void setResolution(int width, int height) {
@@ -74,13 +67,13 @@ public class FpsMeter {
     }
 
     public void draw(Canvas canvas, float offsetx, float offsety) {
-        Log.e(TAG, mStrfps);
+        //Log.e(TAG, mStrfps);
         canvas.drawText(mStrfps, offsetx, offsety, mPaint);
     }
 
-    public String getFps()
-    {
-        Log.e(TAG, mStrfps);
-        return mStrfps;
-    }
+//    public String getFps()
+//    {
+//        Log.e(TAG, mStrfps);
+//        return mStrfps;
+//    }
 }

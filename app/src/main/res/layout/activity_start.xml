@@ -5,62 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
-
-    >
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="92dp"
-        android:layout_weight="0.8">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="300dp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Virtual Fitting"
-            android:textSize="50dp"
-
-            />
+            android:layout_marginTop="50dp"
+            android:text="In the Closet"
+            android:textSize="60sp"/>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="141dp"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="60dp"
+        android:layout_weight="1">
 
         <ImageButton
             android:id="@+id/btn_camera"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="100dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginRight="30dp"
             android:background="@android:color/transparent"
-            android:padding="15dp"
-
             android:scaleType="fitCenter"
-            android:src="@drawable/camera_button"
-            />
+            android:src="@drawable/camera_button" />
 
 
         <ImageButton
             android:id="@+id/btn_lookbook"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="100dp"
             android:layout_weight="1"
-            android:padding="10dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/lookbook_button"
             android:text="Look Book" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.4">
     </LinearLayout>
 
 </LinearLayout>
