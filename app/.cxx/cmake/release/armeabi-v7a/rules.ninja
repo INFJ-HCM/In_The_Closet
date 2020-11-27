@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\chaso\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\cmake.exe -HC:\GITHUB\Virtual1125\app -BC:\GITHUB\Virtual1125\app\.cxx\cmake\release\armeabi-v7a
+  command = C:\Users\chaso\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\cmake.exe -HC:\GITHUB\Virtual1127\app -BC:\GITHUB\Virtual1127\app\.cxx\cmake\release\armeabi-v7a
   description = Re-running CMake...
   generator = 1
 

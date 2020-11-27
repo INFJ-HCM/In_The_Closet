@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\armeabi-v7a",
-    "cmakeServerLogFile": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\armeabi-v7a\\cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cxx\\release\\armeabi-v7a",
+    "cmakeArtifactsBaseFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\armeabi-v7a",
+    "cmakeServerLogFile": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\armeabi-v7a\\cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cxx\\release\\armeabi-v7a",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,7 +15,7 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\armeabi-v7a",
+      "buildRoot": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\armeabi-v7a",
       "cmakeToolchain": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
       "cmakeExecutable": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
       "variables": [
@@ -25,7 +25,7 @@
         },
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\prefab\\armeabi-v7a\\prefab"
+          "value": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\prefab\\armeabi-v7a\\prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -61,7 +61,7 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "C:\\GITHUB\\Virtual1125\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a"
+          "value": "C:\\GITHUB\\Virtual1127\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
@@ -82,14 +82,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\armeabi-v7a",
+  "cxxBuildFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\armeabi-v7a",
   "info": {
     "abi": "ARMEABI_V7A",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\armeabi-v7a",
+  "originalCxxBuildFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\armeabi-v7a",
   "variant": {
     "buildSystemArgumentList": [
       "-DANDROID_TOOLCHAIN\u003dclang -DANDROID_STL\u003dgnustl_static"
@@ -111,12 +111,12 @@
         "ninjaExe": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
       },
       "cmakeToolchainFile": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
-      "cxxFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx",
+      "cxxFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx",
       "gradleModulePathName": ":app",
-      "intermediatesFolder": "C:\\GITHUB\\Virtual1125\\app\\build\\intermediates",
-      "makeFile": "C:\\GITHUB\\Virtual1125\\app\\CMakeLists.txt",
-      "moduleBuildFile": "C:\\GITHUB\\Virtual1125\\app\\build.gradle",
-      "moduleRootFolder": "C:\\GITHUB\\Virtual1125\\app",
+      "intermediatesFolder": "C:\\GITHUB\\Virtual1127\\app\\build\\intermediates",
+      "makeFile": "C:\\GITHUB\\Virtual1127\\app\\CMakeLists.txt",
+      "moduleBuildFile": "C:\\GITHUB\\Virtual1127\\app\\build.gradle",
+      "moduleRootFolder": "C:\\GITHUB\\Virtual1127\\app",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
@@ -180,12 +180,12 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.0.6113669",
       "project": {
-        "compilerSettingsCacheFolder": "C:\\GITHUB\\Virtual1125\\.cxx",
-        "cxxFolder": "C:\\GITHUB\\Virtual1125\\.cxx",
+        "compilerSettingsCacheFolder": "C:\\GITHUB\\Virtual1127\\.cxx",
+        "cxxFolder": "C:\\GITHUB\\Virtual1127\\.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "C:\\GITHUB\\Virtual1125",
+        "rootBuildGradleFolder": "C:\\GITHUB\\Virtual1127",
         "sdkFolder": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk",
         "isPrefabEnabled": false
       },
@@ -202,13 +202,13 @@
         "SYSTEM": {}
       }
     },
-    "objFolder": "C:\\GITHUB\\Virtual1125\\app\\build\\intermediates\\cmake\\release\\obj",
+    "objFolder": "C:\\GITHUB\\Virtual1127\\app\\build\\intermediates\\cmake\\release\\obj",
     "variantName": "release",
     "validAbiList": [
       "ARMEABI_V7A"
     ],
-    "prefabDirectory": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\prefab",
+    "prefabDirectory": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "C:\\GITHUB\\Virtual1125\\app\\.cxx\\cmake\\release\\prefab\\armeabi-v7a"
+  "prefabFolder": "C:\\GITHUB\\Virtual1127\\app\\.cxx\\cmake\\release\\prefab\\armeabi-v7a"
 }

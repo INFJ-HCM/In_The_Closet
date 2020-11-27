@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 //songhui20201101
 public class StartActivity extends Activity {
 
@@ -17,7 +19,7 @@ public class StartActivity extends Activity {
         //로딩 액티비티 실행
         Intent intent=new Intent(this,Loading.class);
 
-        Button camerabutton = (Button)findViewById(R.id.btn_camera);
+        ImageButton camerabutton = (ImageButton)findViewById(R.id.btn_camera);
         camerabutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

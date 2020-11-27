@@ -6,14 +6,9 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".Loading">
-    <TextView
-        android:id="@+id/text1"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
-        android:gravity="center"
-       android:background="#ffffff"
-        android:text="Loading"
-        android:textSize="50dp"
-        />
+        android:layout_height="match_parent"
+        android:id="@+id/loading"
+        ></ImageView>
 </LinearLayout>

@@ -19,8 +19,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ImageFormat;
 import android.graphics.Paint;
 import android.hardware.Camera;
 import android.hardware.Sensor;
@@ -38,7 +40,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -47,6 +53,7 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -101,14 +108,39 @@ public class CameraActivity extends Activity{
       capture.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            //전체화면
-              View rootView = getWindow().getDecorView(); //현재 화면 전체를 객체화한다.
-              Toast.makeText(getApplicationContext(),"저장 했습니다.",Toast.LENGTH_SHORT).show();
-              File screenShot = ScreenShot(rootView);
-              if(screenShot!=null){
-                //갤러리에 추가
-                  sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(screenShot)));
-              }
+              Button capture = findViewById(R.id.capture);
+              capture.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/AnimationCapture";
+                      final FrameLayout capture = (FrameLayout) findViewById(R.id.container);//캡쳐할영역(프레임레이아웃)
+
+                      File file = new File(path);
+                      if(!file.exists()){
+                          file.mkdirs();
+                      }
+
+                      SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
+                      Date date = new Date();
+                      capture.buildDrawingCache();
+                      Bitmap captureview = capture.getDrawingCache();
+
+                      FileOutputStream fos = null;
+                      try{
+                          fos = new FileOutputStream(path+"/Capture"+day.format(date)+".jpeg");
+                          captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                          sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG")));
+                          Toast.makeText(CameraActivity.this, "룩북에 저장완료 :)", Toast.LENGTH_SHORT).show();
+                          fos.flush();
+                          fos.close();
+                          capture.destroyDrawingCache();
+                      } catch (FileNotFoundException e) {
+                          e.printStackTrace();
+                      } catch (IOException e) {
+                          e.printStackTrace();
+                      }
+                  }
+              });
 
           }
       });
@@ -127,28 +159,28 @@ public class CameraActivity extends Activity{
   }
 
 //20201125songhui 스크린샷
-public File ScreenShot(View view){
-    view.setDrawingCacheEnabled(true); //화면에 뿌릴때 캐시를 사용하게 한다
-
-    Bitmap screenBitmap = view.getDrawingCache(); //캐시를 비트맵으로 변환
-
-    String filename; //저장될 파일명
-    filename = "sdfgjh.png";
-    File file = new File(Environment.getExternalStorageDirectory()+"/Pictures", filename); //Pictures폴더 screenshot.png 파일
-
-    FileOutputStream os = null;
-    try{
-        os = new FileOutputStream(file);
-        screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os); //비트맵을 PNG파일로 변환
-        os.close();
-    }catch (IOException e){
-        e.printStackTrace();
-        return null;
-        //[출처] <안드로이드 스튜디오> 현재화면을 캡쳐하여 저장해보자|작성자 쿠쿠
-    }
-    view.setDrawingCacheEnabled(false);
-    return file;
-}
+//public File ScreenShot(View view){
+//    view.setDrawingCacheEnabled(true); //화면에 뿌릴때 캐시를 사용하게 한다
+//
+//    Bitmap screenBitmap = view.getDrawingCache(); //캐시를 비트맵으로 변환
+//
+//    String filename; //저장될 파일명
+//    filename = "sdfgjh.png";
+//    File file = new File(Environment.getExternalStorageDirectory()+"/Pictures", filename); //Pictures폴더 screenshot.png 파일
+//
+//    FileOutputStream os = null;
+//    try{
+//        os = new FileOutputStream(file);
+//        screenBitmap.compress(Bitmap.CompressFormat.PNG, 90, os); //비트맵을 PNG파일로 변환
+//        os.close();
+//    }catch (IOException e){
+//        e.printStackTrace();
+//        return null;
+//        //[출처] <안드로이드 스튜디오> 현재화면을 캡쳐하여 저장해보자|작성자 쿠쿠
+//    }
+//    view.setDrawingCacheEnabled(false);
+//    return file;
+//}
     //[출처] <안드로이드 스튜디오> 현재화면을 캡쳐하여 저장해보자|작성자 쿠쿠
 
 }
