@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -26,8 +27,19 @@ public class DrawView extends View {
     private int mImgWidth    = 0;
     private int mImgHeight   = 0;
 
+    private int clothFlag = -1;
+    private Bitmap clothBitmap = null;
+
     private Bitmap captureview = null;
     private boolean captureFlag = false;
+
+    private BitmapDrawable[] clothArray = {
+            (BitmapDrawable)getResources().getDrawable(R.drawable.shirt, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.dress, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.suit, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.short_shirt, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.shirt2, null)
+    };
 
     private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
             getResources().getColor(R.color.color_top, null),
@@ -99,6 +111,65 @@ public class DrawView extends View {
         captureFlag = true;
     }
 
+    public void setClothFlag (int flag) {
+        clothFlag = flag;
+    }
+
+    public void chooseCloth() {
+        Resources res = getResources(); //drawable에 있는 그림을 로딩해주는 역할이다.
+        BitmapDrawable bd = null;
+        Bitmap bit = null;
+        int width, height;
+        Log.e("clothFlag", String.valueOf(clothFlag));
+        switch (clothFlag) {
+            case 0:
+                bit = clothArray[0].getBitmap();
+
+                // 리사이징
+                width = bit.getWidth();
+                height = bit.getHeight();
+                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                break;
+
+            case 1:
+                bit = clothArray[1].getBitmap();
+
+                //리사이징
+                width = bit.getWidth();
+                height = bit.getHeight();
+                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                break;
+
+            case 2:
+                clothBitmap = clothArray[2].getBitmap();
+
+                //리사이징
+//                width = bit.getWidth();
+//                height = bit.getHeight();
+//                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                break;
+
+            case 3:
+                bit = clothArray[3].getBitmap();
+
+                //리사이징
+                width = bit.getWidth();
+                height = bit.getHeight();
+                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                break;
+
+            case 4:
+                bit = clothArray[4].getBitmap();
+
+                //리사이징
+                width = bit.getWidth();
+                height = bit.getHeight();
+                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                break;
+            default:
+                break;
+        }
+    }
 
     // 配列のデータをポイント型に変換して点群配列に追加する
     public void setDrawPoint(float[][] point, float ratio){
@@ -137,10 +208,18 @@ public class DrawView extends View {
         initcircleRadius();
         initmPaint();
 
+        chooseCloth();
+        if(clothFlag == -1) {
+            return;
+        }
+
+
         if(captureFlag) { // 캡쳐 버튼을 누를 때만 그려라
             canvas.drawBitmap(captureview, 0, 0,null);
             captureFlag = false;
         }
+
+
         /*
         문재식 Fps 그리기
         */
@@ -186,24 +265,26 @@ public class DrawView extends View {
             prePointF = mDrawPoint.get(i);
         }
 
+        String str = "";
+
         for (int i = 0; i < mDrawPoint.size(); i++) {
             mPaint.setColor((int)mColorArray[i]);
+            str = String.valueOf(mDrawPoint.get(i).x) + " + " + String.valueOf(mDrawPoint.get(i).y);
+            if (i == 1 || i == 2 || i == 5) {
+                Log.e(String.valueOf(i), str);
+            }
+
             canvas.drawCircle(mDrawPoint.get(i).x, mDrawPoint.get(i).y,circleRadius, mPaint);
         }
 
         /*
          * 이미지 크기 값은 그림판 크기(Pixel 값)와 동일하다
          */
-        Resources res = getResources();//drawable에 있는 그림을 로딩해주는 역할이다.
-        BitmapDrawable bd = null;
-        bd=(BitmapDrawable)res.getDrawable(R.drawable.shirt,null);
-        Bitmap bit = bd.getBitmap();
 
-        int width = bit.getWidth();
-        int height = bit.getHeight();
-        Bitmap resized = null;
-
-        resized = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true); // 옷 크기 재설정 추후 함수로 빼자
+//        Resources res = getResources(); //drawable에 있는 그림을 로딩해주는 역할이다.
+//        BitmapDrawable bd = null;
+//        bd=(BitmapDrawable)res.getDrawable(R.drawable.suit, null);
+//        Bitmap bit = bd.getBitmap();
 
 //        String wid = Integer.toString(bit.getWidth());
 //        String he = Integer.toString(bit.getHeight());
@@ -211,7 +292,7 @@ public class DrawView extends View {
 //        Log.e("X", wid);
 //        Log.e("Y", he);
 
-        canvas.drawBitmap(resized, mDrawPoint.get(1).x - (resized.getWidth()/2), mDrawPoint.get(1).y - 100,null);
+        canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 100,null);
     }
 
     // Neck = (x, y) = (p1.x, p1.y)

@@ -106,14 +106,27 @@ public class Camera2BasicFragment extends Fragment
     private ImageClassifier classifier;
 
 
+    /**
+     * 스크린샷
+     */
     private Button screenshot;
     private TextView countView;
     private CountDownTimer countDownTimer;
     private int count = 5;
 
+
+    /**
+     * 옷 선택
+     */
     private DrawerLayout drawerLayout;
     private View drawerView;
     private Button cloth;
+    private ImageView none;
+    private ImageView shirt;
+    private ImageView dress;
+    private ImageView suit;
+    private ImageView short_shirt;
+    private ImageView shirt2;
 
     /**
      * Tag for the {@link Log}.
@@ -494,8 +507,43 @@ public class Camera2BasicFragment extends Fragment
         drawerView = (View) view.findViewById(R.id.drawerView);
         drawerLayout.setDrawerListener(listener);
 
-        //drawerLayout
+        none = (ImageView)view.findViewById(R.id.none);
+        shirt = (ImageView)view.findViewById(R.id.shirt);
+        dress = (ImageView)view.findViewById(R.id.dress);
+        suit = (ImageView)view.findViewById(R.id.suit);
+        short_shirt = (ImageView)view.findViewById(R.id.short_shirt);
+        shirt2 = (ImageView)view.findViewById(R.id.shirt2);
 
+
+        Button.OnClickListener onClickListener = new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.none :
+                        drawView.setClothFlag(-1);
+                        break ;
+                    case R.id.shirt :
+                        drawView.setClothFlag(0);
+                        break ;
+                    case R.id.dress :
+                        drawView.setClothFlag(1);
+                        break ;
+                    case R.id.suit :
+                        drawView.setClothFlag(2);
+                        break ;
+                    case R.id.short_shirt :
+                        drawView.setClothFlag(3);
+                        break ;
+                    case R.id.shirt2 :
+                        drawView.setClothFlag(4);
+                        break ;
+                }
+            }
+        } ;
+
+        /**
+         * Open Drawer
+         */
         cloth.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 drawerLayout.openDrawer(drawerView);
@@ -503,6 +551,9 @@ public class Camera2BasicFragment extends Fragment
         });
 
 
+        /**
+         * 타이머 설정
+         */
         countDownTimer = new CountDownTimer(5000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -517,7 +568,9 @@ public class Camera2BasicFragment extends Fragment
             }
         };
 
-        // 문재식 캡쳐
+        /**
+         * 스크린샷
+         */
         screenshot = view.findViewById(R.id.screenshot);
         screenshot.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -526,6 +579,13 @@ public class Camera2BasicFragment extends Fragment
                 countDownTimer.start(); // 시작햐
             }
         });
+
+        none.setOnClickListener(onClickListener) ;
+        shirt.setOnClickListener(onClickListener) ;
+        dress.setOnClickListener(onClickListener) ;
+        suit.setOnClickListener(onClickListener) ;
+        short_shirt.setOnClickListener(onClickListener) ;
+        shirt2.setOnClickListener(onClickListener) ;
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {

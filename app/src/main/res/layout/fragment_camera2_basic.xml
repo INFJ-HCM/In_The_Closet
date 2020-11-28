@@ -182,6 +182,11 @@
             android:textColor="#44000000"
             android:textSize="500sp"
             android:visibility="gone" />
+
+
     </FrameLayout>
+
+
     <include layout="@layout/activity_drawer" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
