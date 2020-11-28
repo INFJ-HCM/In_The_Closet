@@ -498,7 +498,6 @@ public class Camera2BasicFragment extends Fragment
             }
         };
 
-
         // 문재식 캡쳐
         screenshot = view.findViewById(R.id.screenshot);
         screenshot.setOnClickListener(new Button.OnClickListener() {
