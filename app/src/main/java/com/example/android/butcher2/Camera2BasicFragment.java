@@ -105,7 +105,7 @@ public class Camera2BasicFragment extends Fragment
     private ImageClassifier classifier;
 
 
-    private Button gallary_open;
+    private Button screenshot;
     private TextView countView;
     private CountDownTimer countDownTimer;
     private int count = 5;
@@ -500,8 +500,8 @@ public class Camera2BasicFragment extends Fragment
 
 
         // 문재식 캡쳐
-        gallary_open = view.findViewById(R.id.gallary_open);
-        gallary_open.setOnClickListener(new Button.OnClickListener() {
+        screenshot = view.findViewById(R.id.screenshot);
+        screenshot.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 countView.setVisibility(View.VISIBLE);
                 count = 5;
