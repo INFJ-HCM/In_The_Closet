@@ -47,6 +47,7 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -77,9 +78,11 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -97,12 +100,15 @@ public class Camera2BasicFragment extends Fragment
     private boolean checkedPermissions = false;
     private AutoFitFrameLayout layoutFrame;
     private AutoFitTextureView textureView;
-    private TextView textView;
     private DrawView drawView;
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
+
+
     private Button gallary_open;
-    private ImageView imageView;
+    private TextView countView;
+    private CountDownTimer countDownTimer;
+    private int count = 5;
 
 
     /**
@@ -114,7 +120,6 @@ public class Camera2BasicFragment extends Fragment
     private static final int PERMISSIONS_REQUEST_CODE = 1;
     private static final String FRAGMENT_DIALOG = "dialog";
     private static final String HANDLE_THREAD_NAME = "CameraBackground";
-
 
     /**
      * Conversion from screen rotation to JPEG orientation.
@@ -392,7 +397,6 @@ public class Camera2BasicFragment extends Fragment
                     new Runnable() {
                         @Override
                         public void run() {
-                            textView.setText(text);
                             drawView.invalidate();
                         }
                     });
@@ -475,20 +479,36 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         textureView = view.findViewById(R.id.texture);
-        textView = view.findViewById(R.id.text);
         layoutFrame = view.findViewById(R.id.layout_frame);
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
+        countView = view.findViewById(R.id.countView);
 
-        //박현아 20201101 갤러리연동
+        countDownTimer = new CountDownTimer(5000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                countView.setText(String.valueOf(count));
+                count--;
+            }
+
+            @Override
+            public void onFinish() {
+                countView.setVisibility(View.GONE);
+                screenShot();
+            }
+        };
+
+
+        // 문재식 캡쳐
         gallary_open = view.findViewById(R.id.gallary_open);
         gallary_open.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
-                screenShot(); // 시작햐
+                countView.setVisibility(View.VISIBLE);
+                count = 5;
+                countDownTimer.start(); // 시작햐
             }
         });
     }
-
 
     public void screenShot() {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnimationCapture"; // 경로 저장
@@ -514,7 +534,6 @@ public class Camera2BasicFragment extends Fragment
             captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG"))); // 폴더 위치
 
-            showToast("룩북에 저장완료 :)");
             fos.flush();
             fos.close();
             drawView.destroyDrawingCache();
@@ -576,6 +595,10 @@ public class Camera2BasicFragment extends Fragment
     public void onDestroy() {
         classifier.close();
         super.onDestroy();
+        try{
+            countDownTimer.cancel();
+        } catch (Exception e) {}
+        countDownTimer=null;
     }
 
     private boolean allPermissionsGranted() {
