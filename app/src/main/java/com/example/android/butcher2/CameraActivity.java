@@ -18,6 +18,11 @@ package com.example.android.butcher2;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
@@ -29,6 +34,8 @@ import org.opencv.android.OpenCVLoader;
 public class CameraActivity extends Activity {
 
     public static boolean isOpenCVInit = false;
+
+
 
     /**
      * Tag for the {@link Log}.
@@ -62,6 +69,7 @@ public class CameraActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+
         if (null == savedInstanceState) {
 
             getFragmentManager()
@@ -80,4 +88,6 @@ public class CameraActivity extends Activity {
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
     }
+
+
 }

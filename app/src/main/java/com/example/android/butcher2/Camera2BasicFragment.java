@@ -54,6 +54,7 @@ import android.os.HandlerThread;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.legacy.app.FragmentCompat;
 import androidx.core.content.ContextCompat;
 
@@ -110,6 +111,9 @@ public class Camera2BasicFragment extends Fragment
     private CountDownTimer countDownTimer;
     private int count = 5;
 
+    private DrawerLayout drawerLayout;
+    private View drawerView;
+    private Button cloth;
 
     /**
      * Tag for the {@link Log}.
@@ -484,6 +488,21 @@ public class Camera2BasicFragment extends Fragment
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
 
+
+        cloth = (Button) view.findViewById(R.id.cloth);
+        drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
+        drawerView = (View) view.findViewById(R.id.drawerView);
+        drawerLayout.setDrawerListener(listener);
+
+        //drawerLayout
+
+        cloth.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+
+
         countDownTimer = new CountDownTimer(5000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -508,6 +527,26 @@ public class Camera2BasicFragment extends Fragment
             }
         });
     }
+
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+        }
+    };
+
+
 
     public void screenShot() {
         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnimationCapture"; // 경로 저장
