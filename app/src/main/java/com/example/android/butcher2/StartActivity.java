@@ -14,14 +14,14 @@ import android.widget.ImageButton;
 
 import java.io.File;
 
-//songhui20201101
+//songhui20201128
 public class StartActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //로딩 액티비티 실행
+        //songhui20201101 로딩 액티비티 실행
         Intent intent=new Intent(this,Loading.class);
 
         ImageButton camerabutton = (ImageButton)findViewById(R.id.btn_camera);
@@ -32,6 +32,7 @@ public class StartActivity extends Activity {
                 startActivity(intent);
             }
         });
+        //songhui20201128 지정폴더 열기
         ImageButton lookbook = (ImageButton)findViewById(R.id.btn_lookbook);
         lookbook.setOnClickListener(new View.OnClickListener(){
             @Override
