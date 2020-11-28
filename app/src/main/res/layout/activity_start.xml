@@ -27,51 +27,67 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="481dp"
+        android:layout_height="match_parent"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
+        android:orientation="vertical"
         android:layout_weight="1">
 
-        <ImageButton
-            android:id="@+id/btn_camera"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="30dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/camera_button" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/btn_camera"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/camera_button" />
 
 
-        <ImageButton
-            android:id="@+id/btn_lookbook"
+            <ImageButton
+                android:id="@+id/btn_lookbook"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/lookbook_button"
+                android:text="Look Book" />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/lookbook_button"
-            android:text="Look Book" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="         Fitting Now          LookBook"
-            android:textColor="#000000"
-            android:textSize="25dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fitting"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_marginRight="30dp"
+                android:textSize="25dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="LookBook"
+                android:layout_marginLeft="30dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="25dp"/>
 
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.4">
-    </LinearLayout>
+
 
 </LinearLayout>
