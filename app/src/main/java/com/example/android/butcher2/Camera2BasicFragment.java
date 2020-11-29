@@ -21,7 +21,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -58,6 +61,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.legacy.app.FragmentCompat;
 import androidx.core.content.ContextCompat;
 
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -71,10 +76,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,7 +119,9 @@ public class Camera2BasicFragment extends Fragment
      */
     private Button screenshot;
     private TextView countView;
+    private TextView toastText;
     private CountDownTimer countDownTimer;
+    private CountDownTimer countDownToast;
     private int count = 5;
 
 
@@ -506,6 +516,7 @@ public class Camera2BasicFragment extends Fragment
         drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         drawerView = (View) view.findViewById(R.id.drawerView);
         drawerLayout.setDrawerListener(listener);
+        toastText = view.findViewById(R.id.toast);
 
         none = (ImageView)view.findViewById(R.id.none);
         shirt = (ImageView)view.findViewById(R.id.shirt);
@@ -565,6 +576,19 @@ public class Camera2BasicFragment extends Fragment
             public void onFinish() {
                 countView.setVisibility(View.GONE);
                 screenShot();
+                countDownToast.start();
+            }
+        };
+
+        countDownToast = new CountDownTimer(3000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                toastText.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFinish() {
+                toastText.setVisibility(View.GONE);
             }
         };
 
@@ -609,14 +633,13 @@ public class Camera2BasicFragment extends Fragment
 
 
     public void screenShot() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnimationCapture"; // 경로 저장
+        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/In the Closet"; // 경로 저장
 
         Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
-
         drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
 
         File file = new File(path); // 파일 생성
-        if (!file.exists()) {
+        if (!file.exists() || file.isDirectory()) {
             file.mkdirs();
         }
 
@@ -631,6 +654,7 @@ public class Camera2BasicFragment extends Fragment
             fos = new FileOutputStream(path + "/Capture" + day.format(date) + ".jpeg"); // 파일명 지정
             captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG"))); // 폴더 위치
+            Log.e("File", "file://" + path + "/Capture" + day.format(date) + ".JPEG");
 
             fos.flush();
             fos.close();
@@ -641,6 +665,28 @@ public class Camera2BasicFragment extends Fragment
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private InputStream getImageInputStram(Bitmap bmp) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        byte[] bitmapData = bytes.toByteArray();
+        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
+
+        return bs;
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
     }
 
 
