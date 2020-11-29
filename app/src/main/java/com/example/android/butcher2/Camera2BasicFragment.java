@@ -136,7 +136,7 @@ public class Camera2BasicFragment extends Fragment
     private ImageView dress;
     private ImageView suit;
     private ImageView short_shirt;
-    private ImageView shirt2;
+    private ImageView white_dress;
 
     /**
      * Tag for the {@link Log}.
@@ -523,8 +523,7 @@ public class Camera2BasicFragment extends Fragment
         dress = (ImageView)view.findViewById(R.id.dress);
         suit = (ImageView)view.findViewById(R.id.suit);
         short_shirt = (ImageView)view.findViewById(R.id.short_shirt);
-        shirt2 = (ImageView)view.findViewById(R.id.shirt2);
-
+        white_dress = (ImageView)view.findViewById(R.id.white_dress);
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -539,13 +538,13 @@ public class Camera2BasicFragment extends Fragment
                     case R.id.dress :
                         drawView.setClothFlag(1);
                         break ;
-                    case R.id.suit :
+                    case R.id.short_shirt :
                         drawView.setClothFlag(2);
                         break ;
-                    case R.id.short_shirt :
+                    case R.id.white_dress :
                         drawView.setClothFlag(3);
                         break ;
-                    case R.id.shirt2 :
+                    case R.id.suit :
                         drawView.setClothFlag(4);
                         break ;
                 }
@@ -609,7 +608,7 @@ public class Camera2BasicFragment extends Fragment
         dress.setOnClickListener(onClickListener) ;
         suit.setOnClickListener(onClickListener) ;
         short_shirt.setOnClickListener(onClickListener) ;
-        shirt2.setOnClickListener(onClickListener) ;
+        white_dress.setOnClickListener(onClickListener) ;
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {

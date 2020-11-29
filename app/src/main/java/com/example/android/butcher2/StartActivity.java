@@ -43,9 +43,9 @@ public class StartActivity extends Activity {
         camerabutton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),CameraActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(getApplicationContext(),CameraActivity.class);
+            startActivity(intent);
+        }
         });
         //songhui20201128 지정폴더 열기 - 안드로이드10 q적용X
         ImageButton lookbook = (ImageButton)findViewById(R.id.btn_lookbook);
@@ -53,7 +53,7 @@ public class StartActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Uri targetUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                String targetDir = Environment.getExternalStorageDirectory().toString() + "/AnimationCapture";   // 특정 경로
+                String targetDir = Environment.getExternalStorageDirectory().toString() + "/In the Closet";   // 특정 경로
                 targetUri = targetUri.buildUpon().appendQueryParameter("bucketId", String.valueOf(targetDir.toLowerCase().hashCode())).build();
                 Intent intent;
                 intent = new Intent(Intent.ACTION_VIEW, targetUri);

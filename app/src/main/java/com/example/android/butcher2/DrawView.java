@@ -36,9 +36,9 @@ public class DrawView extends View {
     private BitmapDrawable[] clothArray = {
             (BitmapDrawable)getResources().getDrawable(R.drawable.shirt, null),
             (BitmapDrawable)getResources().getDrawable(R.drawable.dress, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.suit, null),
             (BitmapDrawable)getResources().getDrawable(R.drawable.short_shirt, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.shirt2, null)
+            (BitmapDrawable)getResources().getDrawable(R.drawable.white_dress, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.suit, null),
     };
 
     private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
@@ -120,55 +120,108 @@ public class DrawView extends View {
         BitmapDrawable bd = null;
         Bitmap bit = null;
         int width, height;
+        float baseNum;
         Log.e("clothFlag", String.valueOf(clothFlag));
         switch (clothFlag) {
             case 0:
                 bit = clothArray[0].getBitmap();
+                clothBitmap = bit;
 
-                // 리사이징
-                width = bit.getWidth();
-                height = bit.getHeight();
-                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                if(mDrawPoint.get(5).x > 0 || mDrawPoint.get(2).x > 0  || mDrawPoint.get(5).x - mDrawPoint.get(2).x > 0 ) {
+                    // 리사이징
+                    width = bit.getWidth();
+                    height = bit.getHeight();
+                    baseNum = reSize(width);
+                    if (baseNum <= 0) return;
+                    clothBitmap = Bitmap.createScaledBitmap(bit, (int) (width * baseNum), (int) (height * baseNum), true);
+                }
                 break;
-
             case 1:
                 bit = clothArray[1].getBitmap();
+                clothBitmap = bit;
 
-                //리사이징
-                width = bit.getWidth();
-                height = bit.getHeight();
-                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                if(mDrawPoint.get(5).x > 0 || mDrawPoint.get(2).x > 0  || mDrawPoint.get(5).x - mDrawPoint.get(2).x > 0 ) {
+                    // 리사이징
+                    width = bit.getWidth();
+                    height = bit.getHeight();
+                    baseNum = reSize(width);
+                    if (baseNum <= 0) return;
+                    clothBitmap = Bitmap.createScaledBitmap(bit, (int) (width * baseNum), (int) (height * baseNum), true);
+                }
                 break;
 
             case 2:
-                clothBitmap = clothArray[2].getBitmap();
+                bit = clothArray[2].getBitmap();
+                clothBitmap = bit;
 
-                //리사이징
-//                width = bit.getWidth();
-//                height = bit.getHeight();
-//                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                if(mDrawPoint.get(5).x > 0 || mDrawPoint.get(2).x > 0  || mDrawPoint.get(5).x - mDrawPoint.get(2).x > 0 ) {
+                    // 리사이징
+                    width = bit.getWidth();
+                    height = bit.getHeight();
+                    baseNum = reSize(width);
+                    if (baseNum <= 0) return;
+                    clothBitmap = Bitmap.createScaledBitmap(bit, (int) (width * baseNum), (int) (height * baseNum), true);
+                }
                 break;
 
             case 3:
                 bit = clothArray[3].getBitmap();
+                clothBitmap = bit;
 
-                //리사이징
-                width = bit.getWidth();
-                height = bit.getHeight();
-                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
+                if(mDrawPoint.get(5).x > 0 || mDrawPoint.get(2).x > 0  || mDrawPoint.get(5).x - mDrawPoint.get(2).x > 0 ) {
+                    // 리사이징
+                    width = bit.getWidth();
+                    height = bit.getHeight();
+                    baseNum = reSize(width);
+                    if (baseNum <= 0) return;
+                    clothBitmap = Bitmap.createScaledBitmap(bit, (int) (width * baseNum), (int) (height * baseNum), true);
+                }
                 break;
 
             case 4:
                 bit = clothArray[4].getBitmap();
+                clothBitmap = bit;
 
-                //리사이징
-                width = bit.getWidth();
-                height = bit.getHeight();
-                clothBitmap = Bitmap.createScaledBitmap(bit, width * 3, height * 3, true);
-                break;
-            default:
+                if(mDrawPoint.get(5).x > 0 || mDrawPoint.get(2).x > 0  || mDrawPoint.get(5).x - mDrawPoint.get(2).x > 0 ) {
+                    // 리사이징
+                    width = bit.getWidth();
+                    height = bit.getHeight();
+                    baseNum = reSize(width);
+                    if (baseNum <= 0) return;
+                    clothBitmap = Bitmap.createScaledBitmap(bit, (int) (width * baseNum), (int) (height * baseNum), true);
+                }
                 break;
         }
+    }
+
+    public float reSize(int clothWidth) {
+        float shoulderWidth = mDrawPoint.get(5).x - mDrawPoint.get(2).x; // 어깨사이 넓이
+        float baseImageSize, baseNum = 0;
+        double n = 1.0;
+        if(shoulderWidth > 0 ) {
+            switch(clothFlag) {
+                case 0:
+                    n = 2.5;
+                    break;
+                case 1:
+                    n = 3;
+                    break;
+                case 2:
+                    n = 1.7;
+                    break;
+                case 3:
+                    n = 2;
+                    break;
+                case 4:
+                    n = 1.7;
+                    break;
+            }
+            baseImageSize = (float)(shoulderWidth * n); // 옷 사이즈 = 어깨사이 넓이 * n
+            baseNum = baseImageSize / clothWidth; // 기준 사이즈 배수 = 기준 사이즈 / 옷 사이즈
+            Log.e("배율", String.valueOf(baseNum));
+        }
+
+        return baseNum;
     }
 
     // 配列のデータをポイント型に変換して点群配列に追加する
@@ -208,23 +261,21 @@ public class DrawView extends View {
         initcircleRadius();
         initmPaint();
 
-        chooseCloth();
-        if(clothFlag == -1) {
-            return;
-        }
-
 
         if(captureFlag) { // 캡쳐 버튼을 누를 때만 그려라
             canvas.drawBitmap(captureview, 0, 0,null);
             captureFlag = false;
         }
 
-
+        chooseCloth();
+        if(clothFlag == -1) {
+            return;
+        }
         /*
         문재식 Fps 그리기
         */
-        fpsMeter.measure();
-        //fpsMeter.draw(canvas, 500, 200);
+        //fpsMeter.measure();
+       // fpsMeter.draw(canvas, 500, 200);
 
         if (mDrawPoint.isEmpty()) {
             return;
@@ -235,64 +286,70 @@ public class DrawView extends View {
         mPaint.setColor((int)0xff6fa8dc);
         PointF p1 = mDrawPoint.get(1);
 
-        for (int i = 0; i < mDrawPoint.size(); i++) {
-            if (i == 1) continue;
-            switch (i) {    // Neck = (x, y) = (p1.x, p1.y)
-                case 0:
-                    canvas.drawLine(mDrawPoint.get(i).x, mDrawPoint.get(i).y, p1.x, p1.y, mPaint); // top~Neck
-                    //double Pythagoras = Math.sqrt(Math.pow(mDrawPoint.get(i).x - p1.x, 2) + Math.pow(mDrawPoint.get(i).y - p1.y, 2)); //PCH
-                    //Log.i("Pythagoras" ,  String.valueOf(Pythagoras)); //PCH
-                    break;
-                case 2:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Lshoulder
-                    break;
-                case 5:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Rshoulder
-                    break;
-                case 8:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~LHip
-                    break;
-                case 11:
-                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~RHip
-                    break;
-                default:
-                    if (prePointF != null) {
-                        mPaint.setColor(0xff6fa8dc);
-                        canvas.drawLine(prePointF.x, prePointF.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
-                    }
-                    break;
-            }
-            prePointF = mDrawPoint.get(i);
-        }
+//        for (int i = 0; i < mDrawPoint.size(); i++) {
+//            if (i == 1) continue;
+//            switch (i) {    // Neck = (x, y) = (p1.x, p1.y)
+//                case 0:
+//                    canvas.drawLine(mDrawPoint.get(i).x, mDrawPoint.get(i).y, p1.x, p1.y, mPaint); // top~Neck
+//                    //double Pythagoras = Math.sqrt(Math.pow(mDrawPoint.get(i).x - p1.x, 2) + Math.pow(mDrawPoint.get(i).y - p1.y, 2)); //PCH
+//                    //Log.i("Pythagoras" ,  String.valueOf(Pythagoras)); //PCH
+//                    break;
+//                case 2:
+//                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Lshoulder
+//                    break;
+//                case 5:
+//                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~Rshoulder
+//                    break;
+//                case 8:
+//                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~LHip
+//                    break;
+//                case 11:
+//                    canvas.drawLine(p1.x, p1.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint); //Neck~RHip
+//                    break;
+//                default:
+//                    if (prePointF != null) {
+//                        mPaint.setColor(0xff6fa8dc);
+//                        canvas.drawLine(prePointF.x, prePointF.y, mDrawPoint.get(i).x, mDrawPoint.get(i).y, mPaint);
+//                    }
+//                    break;
+//            }
+//            prePointF = mDrawPoint.get(i);
+//        }
 
         String str = "";
 
-        for (int i = 0; i < mDrawPoint.size(); i++) {
-            mPaint.setColor((int)mColorArray[i]);
-            str = String.valueOf(mDrawPoint.get(i).x) + " + " + String.valueOf(mDrawPoint.get(i).y);
-            if (i == 1 || i == 2 || i == 5) {
-                Log.e(String.valueOf(i), str);
-            }
+//        for (int i = 0; i < mDrawPoint.size(); i++) {
+//            mPaint.setColor((int)mColorArray[i]);
+//            str = String.valueOf(mDrawPoint.get(i).x) + " + " + String.valueOf(mDrawPoint.get(i).y);
+//            if (i == 1 || i == 2 || i == 5) {
+//                Log.e(String.valueOf(i), str);
+//            }
+//
+//            canvas.drawCircle(mDrawPoint.get(i).x, mDrawPoint.get(i).y,circleRadius, mPaint);
+//        }
 
-            canvas.drawCircle(mDrawPoint.get(i).x, mDrawPoint.get(i).y,circleRadius, mPaint);
+        switch (clothFlag) {
+            case 0:
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 80,null);
+                break;
+
+            case 1:
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 40,null);
+                break;
+
+            case 2:
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
+                break;
+
+            case 3:
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 70,null);
+                break;
+
+            case 4:
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
+                break;
         }
 
-        /*
-         * 이미지 크기 값은 그림판 크기(Pixel 값)와 동일하다
-         */
-
-//        Resources res = getResources(); //drawable에 있는 그림을 로딩해주는 역할이다.
-//        BitmapDrawable bd = null;
-//        bd=(BitmapDrawable)res.getDrawable(R.drawable.suit, null);
-//        Bitmap bit = bd.getBitmap();
-
-//        String wid = Integer.toString(bit.getWidth());
-//        String he = Integer.toString(bit.getHeight());
-
-//        Log.e("X", wid);
-//        Log.e("Y", he);
-
-        canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 100,null);
     }
 
     // Neck = (x, y) = (p1.x, p1.y)

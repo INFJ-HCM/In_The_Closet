@@ -63,15 +63,6 @@
                 android:src="@drawable/dress" />
 
             <ImageView
-                android:id="@+id/suit"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/suit" />
-
-            <ImageView
                 android:id="@+id/short_shirt"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
@@ -81,13 +72,24 @@
                 android:src="@drawable/short_shirt" />
 
             <ImageView
-                android:id="@+id/shirt2"
+                android:id="@+id/white_dress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/white_dress" />
+
+            <ImageView
+                android:id="@+id/suit"
+                android:layout_width="240dp"
+                android:layout_height="240dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="60dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/shirt2" />
+                android:src="@drawable/suit" />
+
+
 
 
         </LinearLayout>
