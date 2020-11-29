@@ -224,7 +224,7 @@ public class DrawView extends View {
         문재식 Fps 그리기
         */
         fpsMeter.measure();
-        fpsMeter.draw(canvas, 500, 200);
+        //fpsMeter.draw(canvas, 500, 200);
 
         if (mDrawPoint.isEmpty()) {
             return;

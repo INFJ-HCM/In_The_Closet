@@ -15,8 +15,6 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import java.time.Instant;
 
 public class Loading extends Activity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +34,6 @@ public class Loading extends Activity {
                 startActivity(intent);
                 finish();
             }
-        },5000);
+        },3000);
     }
 }

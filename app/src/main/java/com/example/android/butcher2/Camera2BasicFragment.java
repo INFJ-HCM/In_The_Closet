@@ -651,10 +651,10 @@ public class Camera2BasicFragment extends Fragment
         FileOutputStream fos = null;
 
         try {
-            fos = new FileOutputStream(path + "/Capture" + day.format(date) + ".jpeg"); // 파일명 지정
+            fos = new FileOutputStream(path + "/Look" + day.format(date) + ".jpeg"); // 파일명 지정
             captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG"))); // 폴더 위치
-            Log.e("File", "file://" + path + "/Capture" + day.format(date) + ".JPEG");
+            Log.e("File", "file://" + path + "/Look" + day.format(date) + ".JPEG");
 
             fos.flush();
             fos.close();
