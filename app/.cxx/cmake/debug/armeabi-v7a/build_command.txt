@@ -1,22 +1,22 @@
-Executable : C:\Users\chaso\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\cmake.exe
+                Executable : D:\Android\Sdk\cmake\3.10.2.4988404\bin\cmake.exe
 arguments : 
--HC:\GITHUB\INTHECLOSET\app
+-HD:\Android\Project\In_The_Closet\app
 -DCMAKE_CXX_FLAGS=-std=c++11 -frtti -fexceptions
--DCMAKE_FIND_ROOT_PATH=C:\GITHUB\INTHECLOSET\app\.cxx\cmake\debug\prefab\armeabi-v7a\prefab
+-DCMAKE_FIND_ROOT_PATH=D:\Android\Project\In_The_Closet\app\.cxx\cmake\debug\prefab\armeabi-v7a\prefab
 -DCMAKE_BUILD_TYPE=Debug
--DCMAKE_TOOLCHAIN_FILE=C:\Users\chaso\AppData\Local\Android\Sdk\ndk\21.0.6113669\build\cmake\android.toolchain.cmake
+-DCMAKE_TOOLCHAIN_FILE=D:\Android\Sdk\ndk\21.1.6352462\build\cmake\android.toolchain.cmake
 -DANDROID_ABI=armeabi-v7a
--DANDROID_NDK=C:\Users\chaso\AppData\Local\Android\Sdk\ndk\21.0.6113669
+-DANDROID_NDK=D:\Android\Sdk\ndk\21.1.6352462
 -DANDROID_PLATFORM=android-23
 -DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
--DCMAKE_ANDROID_NDK=C:\Users\chaso\AppData\Local\Android\Sdk\ndk\21.0.6113669
+-DCMAKE_ANDROID_NDK=D:\Android\Sdk\ndk\21.1.6352462
 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
--DCMAKE_LIBRARY_OUTPUT_DIRECTORY=C:\GITHUB\INTHECLOSET\app\build\intermediates\cmake\debug\obj\armeabi-v7a
--DCMAKE_MAKE_PROGRAM=C:\Users\chaso\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\Android\Project\In_The_Closet\app\build\intermediates\cmake\debug\obj\armeabi-v7a
+-DCMAKE_MAKE_PROGRAM=D:\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
 -DCMAKE_SYSTEM_NAME=Android
 -DCMAKE_SYSTEM_VERSION=23
 -DANDROID_TOOLCHAIN=clang -DANDROID_STL=gnustl_static
--BC:\GITHUB\INTHECLOSET\app\.cxx\cmake\debug\armeabi-v7a
+-BD:\Android\Project\In_The_Closet\app\.cxx\cmake\debug\armeabi-v7a
 -GNinja
 jvmArgs : 
 

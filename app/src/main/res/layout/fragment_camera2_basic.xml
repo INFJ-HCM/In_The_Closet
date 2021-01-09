@@ -59,6 +59,15 @@
                     android:layout_margin="15dp"
                     android:layout_gravity="right"
                     android:background="@drawable/cloth"/>
+
+                <Button
+                    android:id="@+id/sttStart"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/voice" />
+
                 <Button
                     android:id="@+id/screenshot"
                     android:layout_width="47dp"

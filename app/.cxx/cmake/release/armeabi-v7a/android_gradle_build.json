@@ -1,57 +1,41 @@
 {
   "stringTable": {
-    "0": "C:/GITHUB/INTHECLOSET/app/.cxx/cmake/release/armeabi-v7a",
-    "1": "--target=armv7-none-linux-androideabi23 --gcc-toolchain=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/chaso/AppData/Local/Android/Sdk/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Djupiter_opencv_320_EXPORTS -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -std=c++11 -frtti -fexceptions -std=gnu++11 -fexceptions -frtti -Oz -DNDEBUG -fPIC"
+    "0": "D:/Android/Project/In_The_Closet/app/.cxx/cmake/release/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi23 --gcc-toolchain=D:/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Djupiter_opencv_320_EXPORTS -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -std=c++11 -frtti -fexceptions -std=gnu++11 -fexceptions -frtti -Oz -DNDEBUG -fPIC"
   },
   "buildFiles": [
-    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
-    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
-    "C:\\GITHUB\\INTHECLOSET\\app\\CMakeLists.txt"
+    "D:\\Android\\Project\\In_The_Closet\\app\\CMakeLists.txt",
+    "D:\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
+    "D:\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
-    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\GITHUB\\INTHECLOSET\\app\\.cxx\\cmake\\release\\armeabi-v7a\" clean"
+    "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\release\\armeabi-v7a\" clean"
   ],
-  "buildTargetsCommand": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\GITHUB\\INTHECLOSET\\app\\.cxx\\cmake\\release\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\release\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "jupiter_opencv_320-Release-armeabi-v7a": {
-      "buildCommand": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\GITHUB\\INTHECLOSET\\app\\.cxx\\cmake\\release\\armeabi-v7a\" jupiter_opencv_320",
+      "buildCommand": "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\release\\armeabi-v7a\" jupiter_opencv_320",
       "buildType": "release",
-      "toolchain": "1961462485",
+      "toolchain": "228155187",
       "abi": "armeabi-v7a",
       "artifactName": "jupiter_opencv_320",
       "files": [
         {
-          "src": "C:\\GITHUB\\INTHECLOSET\\app\\src\\main\\cpp\\native-lib.cpp",
+          "src": "D:\\Android\\Project\\In_The_Closet\\app\\src\\main\\cpp\\native-lib.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         }
       ],
       "headers": [],
-      "output": "C:\\GITHUB\\INTHECLOSET\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\libjupiter_opencv_320.so",
+      "output": "D:\\Android\\Project\\In_The_Closet\\app\\build\\intermediates\\cmake\\release\\obj\\armeabi-v7a\\libjupiter_opencv_320.so",
       "runtimeFiles": [
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_java3.so",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_calib3d.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_core.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_features2d.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_flann.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_highgui.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_imgcodecs.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_imgproc.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_ml.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_objdetect.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_photo.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_shape.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_stitching.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_superres.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_video.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_videoio.a",
-        "C:\\GITHUB\\INTHECLOSET\\app\\libs\\armeabi-v7a\\libopencv_videostab.a"
+        "D:\\Android\\Project\\In_The_Closet\\app\\libs\\armeabi-v7a\\libopencv_java3.so"
       ]
     }
   },
   "toolchains": {
-    "1961462485": {
-      "cppCompilerExecutable": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    "228155187": {
+      "cppCompilerExecutable": "D:\\Android\\Sdk\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
     }
   },
   "cFileExtensions": [],

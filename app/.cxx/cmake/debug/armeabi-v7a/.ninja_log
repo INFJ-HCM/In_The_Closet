@@ -1,3 +1,3 @@
 # ninja log v5
-0	3158	628267625	CMakeFiles/jupiter_opencv_320.dir/src/main/cpp/native-lib.cpp.o	dd2b64c4cd84902d
-3169	3874	628267626	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libjupiter_opencv_320.so	60759354e5b82d95
+0	2275	631879097	CMakeFiles/jupiter_opencv_320.dir/src/main/cpp/native-lib.cpp.o	e73a06951c8a6291
+2278	2715	631879097	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libjupiter_opencv_320.so	f10a088c3709500a

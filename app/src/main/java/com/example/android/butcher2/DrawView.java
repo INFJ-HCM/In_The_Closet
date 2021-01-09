@@ -121,7 +121,7 @@ public class DrawView extends View {
         Bitmap bit = null;
         int width, height;
         float baseNum;
-        Log.e("clothFlag", String.valueOf(clothFlag));
+        //Log.e("clothFlag", String.valueOf(clothFlag));
         switch (clothFlag) {
             case 0:
                 bit = clothArray[0].getBitmap();

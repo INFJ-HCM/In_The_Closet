@@ -63,6 +63,10 @@ import androidx.core.content.ContextCompat;
 
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -72,6 +76,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,6 +98,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -113,6 +119,24 @@ public class Camera2BasicFragment extends Fragment
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
 
+
+    /**
+     * 음성 인식
+     *
+     */
+    private String LogTT="[STT]";//LOG타이틀
+    //음성 인식용
+    private Intent SttIntent;
+    private SpeechRecognizer mRecognizer;
+    //음성 출력용
+    private TextToSpeech tts;
+
+    // 화면 처리용
+    private Button sttStart;
+    private String txtInMsg;
+    private String txtSystem;
+    //private EditText txtInMsg;
+    //private EditText txtSystem;
 
     /**
      * 스크린샷
@@ -512,6 +536,61 @@ public class Camera2BasicFragment extends Fragment
         countView = view.findViewById(R.id.countView);
 
 
+        /**
+        * 음성인식파트
+        */
+        //음성인식
+        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getApplicationContext().getPackageName());
+        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
+        mRecognizer=SpeechRecognizer.createSpeechRecognizer(getActivity());
+        mRecognizer.setRecognitionListener(recognitionListener);
+
+        //음성출력 생성, 리스너 초기화
+        tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status!=android.speech.tts.TextToSpeech.ERROR){
+                    tts.setLanguage(Locale.KOREAN);
+                }
+            }
+        });
+
+        //버튼설정
+        sttStart=(Button)view.findViewById(R.id.sttStart);
+        sttStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("음성인식 시작!");
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},1);
+                    //권한을 허용하지 않는 경우
+                }else{
+                    //권한을 허용한 경우
+                    try {
+                        mRecognizer.startListening(SttIntent);
+                    }catch (SecurityException e){e.printStackTrace();}
+                }
+            }
+        });
+
+       // txtInMsg=(EditText)view.findViewById(R.id.txtInMsg);
+        //txtSystem=(EditText)view.findViewById(R.id.txtSystem);
+
+        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
+                sttStart.performClick();
+            }
+        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+
+        /**==========================================================================*/
+
+        /**
+         * 옷 선택
+         */
         cloth = (Button) view.findViewById(R.id.cloth);
         drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         drawerView = (View) view.findViewById(R.id.drawerView);
@@ -630,40 +709,214 @@ public class Camera2BasicFragment extends Fragment
     };
 
 
+    /**
+     * 음성 인식
+     */
+    private RecognitionListener recognitionListener=new RecognitionListener() {
+        @Override
+        public void onReadyForSpeech(Bundle bundle) {
+            txtSystem = "";
+            txtSystem = "onReadyForSpeech..........."+"\r\n"+txtSystem;
+        }
+
+        @Override
+        public void onBeginningOfSpeech() {
+            txtSystem = "";
+            txtSystem = "지금부터 말을 해주세요..........."+"\r\n"+txtSystem;
+        }
+
+        @Override
+        public void onRmsChanged(float v) {
+        }
+
+        @Override
+        public void onBufferReceived(byte[] bytes) {
+            txtSystem = "";
+            txtSystem = "onBufferReceived..........."+"\r\n"+txtSystem;
+        }
+
+        @Override
+        public void onEndOfSpeech() {
+            txtSystem = "";
+            txtSystem = "onEndOfSpeech..........."+"\r\n"+txtSystem;
+        }
+
+        @Override
+        public void onError(int error) {
+            txtSystem = "";
+            txtSystem = "에러 발생..........."+"\r\n"+txtSystem;
+            // 천천히 다시 말해라
+            switch (error) {
+                case SpeechRecognizer.ERROR_AUDIO:
+                    txtSystem = "오디오 에러"+"\r\n"+txtSystem;
+                    break;
+
+                case SpeechRecognizer.ERROR_CLIENT:
+                    txtSystem = "클라이언트 에러"+"\r\n"+txtSystem;
+                    break;
+
+                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
+                    txtSystem = "퍼미션 없음"+"\r\n"+txtSystem;
+                    break;
+
+                case SpeechRecognizer.ERROR_NETWORK:
+                    txtSystem = "네트워크 에러"+"\r\n"+txtSystem;
+                    break;
+
+                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
+                    txtSystem = "네트워크 타임아웃"+"\r\n"+txtSystem;
+                    break;
+
+                case SpeechRecognizer.ERROR_NO_MATCH:
+                    txtSystem = "찾을 수 없음"+"\r\n"+txtSystem;
+                    break;
+                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                    txtSystem = "RECOGNIZER가 바쁨"+"\r\n"+txtSystem;
+                    break;
+                case SpeechRecognizer.ERROR_SERVER:
+                    txtSystem = "서버가 이상함"+"\r\n"+txtSystem;
+                    break;
+                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
+                    txtSystem = "말하는 시간초과"+"\r\n"+txtSystem;
+                    break;
+                default:
+                    txtSystem = "알 수 없는 오류"+"\r\n"+txtSystem;
+                    break;
+            }
+            System.out.println(txtSystem);
+        }
+
+        @Override
+        public void onResults(Bundle results) {
+            String key= "";
+            key = SpeechRecognizer.RESULTS_RECOGNITION;
+            ArrayList<String> mResult =results.getStringArrayList(key);
+            String[] rs = new String[mResult.size()];
+            mResult.toArray(rs);
+            txtSystem = "";
+            txtInMsg = rs[0]+"\r\n"+txtInMsg;
+            System.out.println(txtInMsg);
+            FuncVoiceOrderCheck(rs[0]);
+            mRecognizer.startListening(SttIntent);
+        }
+
+        @Override
+        public void onPartialResults(Bundle bundle) {
+            txtSystem = "onPartialResults..........."+"\r\n"+txtSystem;
+        }
+
+        @Override
+        public void onEvent(int i, Bundle bundle) {
+            txtSystem = "onEvent..........."+"\r\n"+txtSystem;
+        }
+    };
+
+    //입력된 음성 메세지 확인 후 동작 처리
+    private void FuncVoiceOrderCheck(String VoiceMsg){
+        if(VoiceMsg.length()<1)return;
+
+        VoiceMsg=VoiceMsg.replace(" ","");//공백제거
+
+        if(VoiceMsg.indexOf("카카오톡")>-1 || VoiceMsg.indexOf("카톡")>-1){
+            Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.kakao.talk");
+            startActivity(launchIntent);
+            onDestroy();
+        }//카카오톡 어플로 이동
+
+        if(VoiceMsg.indexOf("안녕")>-1){
+            FuncVoiceOut("안녕하세요");//전등을 끕니다 라는 음성 출력
+        }
+
+        if(VoiceMsg.indexOf("찰칵")>-1){
+            screenShot();
+
+        }
+    }
+
+
+
+    //음성 메세지 출력용
+    private void FuncVoiceOut(String OutMsg){
+        if(OutMsg.length()<1)return;
+        if(!tts.isSpeaking()) {
+            Log.e("1","1");
+            tts.setPitch(1.0f);//목소리 톤1.0
+            tts.setSpeechRate(1.0f);//목소리 속도
+            tts.speak(OutMsg,TextToSpeech.QUEUE_FLUSH,null, "id1");
+        }
+        Log.e("2","2");
+        //어플이 종료할때는 완전히 제거
+    }
+
+    //카톡으로 이동을 했는데 음성인식 어플이 종료되지 않아 계속 실행되는 경우를 막기위해 어플 종료 함수
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+    }
+
+    /**================================== 음성인식 =========================================*/
+
 
     public void screenShot() {
-        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/In the Closet"; // 경로 저장
+
+        String fileName = "";
 
         Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
         drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
-
-        File file = new File(path); // 파일 생성
-        if (!file.exists() || file.isDirectory()) {
-            file.mkdirs();
-        }
 
         SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
         Date date = new Date();
 
         drawView.buildDrawingCache(); // 옷이 그려지는 뷰 캐싱
         Bitmap captureview = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
-        FileOutputStream fos = null;
+
+        fileName =  "/Look" + day.format(date) + ".jpeg";
+
+        /** ========================================= After Q ============================================== */
+
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+        // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
+        values.put(MediaStore.Images.Media.IS_PENDING, 1);
+
+        ContentResolver contentResolver = getActivity().getContentResolver();
+        Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        Uri item = contentResolver.insert(collection, values);
 
         try {
-            fos = new FileOutputStream(path + "/Look" + day.format(date) + ".jpeg"); // 파일명 지정
-            captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG"))); // 폴더 위치
-            Log.e("File", "file://" + path + "/Look" + day.format(date) + ".JPEG");
+            ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
+            if (pdf == null) {
 
-            fos.flush();
-            fos.close();
-            drawView.destroyDrawingCache();
-
+            } else {
+                InputStream inputStream = getImageInputStram(captureview);
+                byte[] strToByte = getBytes(inputStream);
+                FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
+                fos.write(strToByte);
+                fos.close();
+                inputStream.close();
+                pdf.close();
+                contentResolver.update(item, values, null, null);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        values.clear();
+        // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
+        values.put(MediaStore.Images.Media.IS_PENDING, 0);
+        contentResolver.update(item, values, null, null);
+
+        /** ========================================= After Q ============================================== */
+
+        /** ========================================= After Q (내부) ============================================== */
+
+        /** ========================================= After Q (내부) ============================================== */
     }
 
 
@@ -742,6 +995,17 @@ public class Camera2BasicFragment extends Fragment
             countDownTimer.cancel();
         } catch (Exception e) {}
         countDownTimer=null;
+
+        if(tts!=null){
+            tts.stop();
+            tts.shutdown();
+            tts=null;
+        }
+        if(mRecognizer!=null){
+            mRecognizer.destroy();
+            mRecognizer.cancel();
+            mRecognizer=null;
+        }
     }
 
     private boolean allPermissionsGranted() {
