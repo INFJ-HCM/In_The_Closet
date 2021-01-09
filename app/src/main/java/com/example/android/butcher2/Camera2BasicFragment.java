@@ -30,7 +30,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -56,6 +58,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.legacy.app.FragmentCompat;
@@ -88,6 +91,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,10 +118,14 @@ public class Camera2BasicFragment extends Fragment
     private boolean runClassifier = false;
     private boolean checkedPermissions = false;
     private AutoFitFrameLayout layoutFrame;
-    private AutoFitTextureView textureView;
-    private DrawView drawView;
+    protected AutoFitTextureView textureView;
+    protected DrawView drawView;
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
+
+
+
+
 
 
     /**
@@ -141,6 +149,8 @@ public class Camera2BasicFragment extends Fragment
     /**
      * 스크린샷
      */
+    ScreenShot screenShot = new ScreenShot();
+
     private Button screenshot;
     private TextView countView;
     private TextView toastText;
@@ -535,7 +545,6 @@ public class Camera2BasicFragment extends Fragment
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
 
-
         /**
         * 음성인식파트
         */
@@ -653,7 +662,7 @@ public class Camera2BasicFragment extends Fragment
             @Override
             public void onFinish() {
                 countView.setVisibility(View.GONE);
-                screenShot();
+                screenShot.screenShot(textureView, drawView, getActivity());
                 countDownToast.start();
             }
         };
@@ -828,7 +837,7 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
-            screenShot();
+            screenShot.screenShot(textureView, drawView, getActivity());
 
         }
     }
@@ -859,88 +868,6 @@ public class Camera2BasicFragment extends Fragment
     }
 
     /**================================== 음성인식 =========================================*/
-
-
-    public void screenShot() {
-
-        String fileName = "";
-
-        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
-        drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
-
-        SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date date = new Date();
-
-        drawView.buildDrawingCache(); // 옷이 그려지는 뷰 캐싱
-        Bitmap captureview = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
-
-        fileName =  "/Look" + day.format(date) + ".jpeg";
-
-        /** ========================================= After Q ============================================== */
-
-        ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
-        // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
-        values.put(MediaStore.Images.Media.IS_PENDING, 1);
-
-        ContentResolver contentResolver = getActivity().getContentResolver();
-        Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
-        Uri item = contentResolver.insert(collection, values);
-
-        try {
-            ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
-            if (pdf == null) {
-
-            } else {
-                InputStream inputStream = getImageInputStram(captureview);
-                byte[] strToByte = getBytes(inputStream);
-                FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
-                fos.write(strToByte);
-                fos.close();
-                inputStream.close();
-                pdf.close();
-                contentResolver.update(item, values, null, null);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        values.clear();
-        // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
-        values.put(MediaStore.Images.Media.IS_PENDING, 0);
-        contentResolver.update(item, values, null, null);
-
-        /** ========================================= After Q ============================================== */
-
-        /** ========================================= After Q (내부) ============================================== */
-
-        /** ========================================= After Q (내부) ============================================== */
-    }
-
-
-    private InputStream getImageInputStram(Bitmap bmp) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
-        byte[] bitmapData = bytes.toByteArray();
-        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
-
-        return bs;
-    }
-
-    public byte[] getBytes(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
-        int bufferSize = 1024;
-        byte[] buffer = new byte[bufferSize];
-
-        int len = 0;
-        while ((len = inputStream.read(buffer)) != -1) {
-            byteBuffer.write(buffer, 0, len);
-        }
-        return byteBuffer.toByteArray();
-    }
-
 
     /**
      * Load the model and labels.

@@ -32,6 +32,8 @@ import java.util.Locale;
 //songhui20201128
 public class StartActivity extends Activity {
 
+    final int PERMISSIONS_REQUEST_CODE = 1;
+
     String LogTT="[STT]";//LOG타이틀
     //음성 인식용
     Intent SttIntent;
@@ -97,15 +99,18 @@ public class StartActivity extends Activity {
 
         /**==========================================================================*/
 
+
         //songhui20201128 읽기권한체크
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
-            }
-        }
+        requestPermission();
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+//            } else {
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+//                        1);
+//            }
+//        }
 
         //songhui20201101 로딩 액티비티 실행
         Intent intent=new Intent(this,Loading.class);
@@ -123,14 +128,46 @@ public class StartActivity extends Activity {
         lookbook.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Uri targetUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                String targetDir = Environment.getExternalStorageDirectory().toString() + "/In the Closet";   // 특정 경로
-                targetUri = targetUri.buildUpon().appendQueryParameter("bucketId", String.valueOf(targetDir.toLowerCase().hashCode())).build();
-                Intent intent;
-                intent = new Intent(Intent.ACTION_VIEW, targetUri);
+                Intent intent = new Intent(getApplicationContext(),LookBookActivity.class);
                 startActivity(intent);
+
+//                Uri targetUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+//                String targetDir = Environment.getExternalStorageDirectory().toString() + "/In the Closet";   // 특정 경로
+//                targetUri = targetUri.buildUpon().appendQueryParameter("bucketId", String.valueOf(targetDir.toLowerCase().hashCode())).build();
+//                Intent intent;
+//                intent = new Intent(Intent.ACTION_VIEW, targetUri);
+//                startActivity(intent);
             }
         });
+    }
+
+    private void requestPermission() {
+        boolean shouldProviceRationale =
+                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE);//사용자가 이전에 거절한적이 있어도 true 반환
+
+        if (shouldProviceRationale) {
+            //앱에 필요한 권한이 없어서 권한 요청
+            ActivityCompat.requestPermissions(StartActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_CODE);
+        } else {
+            ActivityCompat.requestPermissions(StartActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_REQUEST_CODE);
+            //권한있을때.
+            //오레오부터 꼭 권한체크내에서 파일 만들어줘야함
+            makeDir();
+        }
+    }
+
+    public void makeDir() {
+        String path = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY).getPath();
+        Log.e("path", path);
+        String directoryName = "abc";
+        final File myDir = new File(path + "/" + directoryName);
+        if (!myDir.exists()) {
+            myDir.mkdir();
+        } else {
+            System.out.println("file: " + path + "/" + directoryName +"already exists");
+        }
     }
 
     private RecognitionListener listener=new RecognitionListener() {
