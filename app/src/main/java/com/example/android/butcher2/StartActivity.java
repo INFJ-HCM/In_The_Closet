@@ -26,7 +26,7 @@ public class StartActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //songhui20201128 읽기권한체크
+        //songhui20210109
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)) {
             } else {
@@ -47,17 +47,13 @@ public class StartActivity extends Activity {
             startActivity(intent);
         }
         });
-        //songhui20201128 지정폴더 열기 - 안드로이드10 q적용X
+        //songhui20210109 룩북
         ImageButton lookbook = (ImageButton)findViewById(R.id.btn_lookbook);
         lookbook.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Uri targetUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                String targetDir = Environment.getExternalStorageDirectory().toString() + "/In the Closet";   // 특정 경로
-                targetUri = targetUri.buildUpon().appendQueryParameter("bucketId", String.valueOf(targetDir.toLowerCase().hashCode())).build();
-                Intent intent;
-                intent = new Intent(Intent.ACTION_VIEW, targetUri);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(),lookbook.class);
+                startActivity(intent2);
             }
         });
     }
