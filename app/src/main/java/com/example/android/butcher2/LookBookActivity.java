@@ -48,7 +48,7 @@ public class LookBookActivity extends Activity {
         myDataset = new ArrayList<>();
         mAdapter = new LookBookAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
-
+        System.out.println("여기까지는 들어오니?");
         readFile();
 
         Iterator<Integer> idIterator = imgID.iterator();
@@ -71,7 +71,7 @@ public class LookBookActivity extends Activity {
         String compareName = "";
 
         Uri externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
+        System.out.println(externalUri);
 
         String[] projection = new String[]{
                 MediaStore.Images.Media._ID,
@@ -87,8 +87,9 @@ public class LookBookActivity extends Activity {
         }
 
         do {
-            compareName = cursor.getString(1).substring(0, 14); // #In_The_Closet만 자름
-            Log.e("compareName", compareName);
+            compareName = cursor.getString(1).substring(0,14); // #In_The_Closet만 자름
+            Log.e("compareName", compareName);//지금여기까지 들어옴
+
             if(compareName.equals(token)) { // 맞는 이름인지 비교
                 String contentUrl = externalUri.toString() + "/" + cursor.getString(0);
                 Log.e("cursor.getString(1)", cursor.getString(1));
@@ -97,10 +98,16 @@ public class LookBookActivity extends Activity {
                     InputStream is = getContentResolver().openInputStream(Uri.parse(contentUrl));
 
                     if (is != null) {
+                        //들어옴
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        System.out.println(bitmap);
                         myDataset.add(new MyData(cursor.getString(1), bitmap));
+                        System.out.println(myDataset);
                         imgID.add(cursor.getInt(0)); // Add a bitmap
+                        System.out.println(imgID);
                         is.close();
+
+                        //여기까지도됨
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

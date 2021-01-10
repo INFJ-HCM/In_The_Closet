@@ -590,22 +590,16 @@ public class Camera2BasicFragment extends Fragment
        // txtInMsg=(EditText)view.findViewById(R.id.txtInMsg);
         //txtSystem=(EditText)view.findViewById(R.id.txtSystem);
 
-        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
-                sttStart.performClick();
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        // txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
-                        tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
-                        //btnSttStart.performClick();
-                    }
-                },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
-            }
-        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+
+//        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+//        new android.os.Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
+//                sttStart.performClick();
+//            }
+//        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+
 
         /**==========================================================================*/
 
@@ -735,6 +729,7 @@ public class Camera2BasicFragment extends Fragment
      */
     private RecognitionListener recognitionListener=new RecognitionListener() {
         @Override
+
         public void onReadyForSpeech(Bundle bundle) {
             txtSystem = "";
             txtSystem = "onReadyForSpeech..........."+"\r\n"+txtSystem;

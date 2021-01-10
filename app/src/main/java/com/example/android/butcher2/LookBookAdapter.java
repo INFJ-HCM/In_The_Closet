@@ -40,6 +40,7 @@ public class LookBookAdapter extends RecyclerView.Adapter<LookBookAdapter.ViewHo
     public LookBookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
         // create a new view
+
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_lookbook, parent, false);
         // set the view's size, margins, paddings and layout parameters
