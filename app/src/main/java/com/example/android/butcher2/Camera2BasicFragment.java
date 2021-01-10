@@ -107,6 +107,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 
+
 /**
  * Basic fragments for the Camera.
  */
@@ -568,15 +569,18 @@ public class Camera2BasicFragment extends Fragment
         //버튼설정
         sttStart=(Button)view.findViewById(R.id.sttStart);
         sttStart.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 System.out.println("음성인식 시작!");
+
                 if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},1);
                     //권한을 허용하지 않는 경우
                 }else{
                     //권한을 허용한 경우
                     try {
+
                         mRecognizer.startListening(SttIntent);
                     }catch (SecurityException e){e.printStackTrace();}
                 }
@@ -592,6 +596,14 @@ public class Camera2BasicFragment extends Fragment
             public void run() {
                 txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
                 sttStart.performClick();
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
+                        tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
+                        //btnSttStart.performClick();
+                    }
+                },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
             }
         },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
 
@@ -719,7 +731,7 @@ public class Camera2BasicFragment extends Fragment
 
 
     /**
-     * 음성 인식
+     * 음성 인식 (Start)
      */
     private RecognitionListener recognitionListener=new RecognitionListener() {
         @Override
@@ -867,7 +879,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    /**================================== 음성인식 =========================================*/
+    /**================================== 음성인식 (End) =========================================*/
 
     /**
      * Load the model and labels.

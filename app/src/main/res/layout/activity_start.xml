@@ -55,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Button" />
+                android:text="Button"
+                android:visibility="invisible"/>
 
             <ImageButton
                 android:id="@+id/btn_lookbook"
@@ -110,7 +111,8 @@
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/txtSystem"
@@ -119,7 +121,8 @@
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:visibility="invisible"/>
         </LinearLayout>
 
     </LinearLayout>
