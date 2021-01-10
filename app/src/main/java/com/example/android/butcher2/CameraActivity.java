@@ -16,70 +16,76 @@ limitations under the License.
 package com.example.android.butcher2;
 
 import android.app.Activity;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
-/** Main {@code Activity} class for the Camera app. */
-public class CameraActivity extends Activity{
+/**
+ * Main {@code Activity} class for the Camera app.
+ */
+public class CameraActivity extends Activity {
 
-  public static boolean isOpenCVInit = false;
+    public static boolean isOpenCVInit = false;
 
-  /** Tag for the {@link Log}. */
-  private static final String TAG = "butcher2";
 
-  public static void init() {
+
+    /**
+     * Tag for the {@link Log}.
+     */
+    private static final String TAG = "butcher2";
+
+    public static void init() {
         System.loadLibrary("opencv_java3");
-  }
-  private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-
-      @Override
-      public void onManagerConnected(int status) {
-          switch (status) {
-              case LoaderCallbackInterface.SUCCESS:
-                  {
-                      isOpenCVInit = true;
-                  } break;
-
-               default:
-                  {
-                      super.onManagerConnected(status);
-                  } break;
-          }
-        }
-  };
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_camera);
-
-    if (null == savedInstanceState) {
-        //1. 들어감
-        getFragmentManager()
-          .beginTransaction()
-          .replace(R.id.container, Camera2BasicFragment.newInstance())//2
-          .commit();
     }
-  }
 
-  @Override
-  public void onResume()
-  {
-      super.onResume();
-      if (!OpenCVLoader.initDebug()) {
-          OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, mLoaderCallback);
-      } else {
-          mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-      }
-  }
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status) {
+                case LoaderCallbackInterface.SUCCESS: {
+                    isOpenCVInit = true;
+                }
+                break;
+
+                default: {
+                    super.onManagerConnected(status);
+                }
+                break;
+            }
+        }
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_camera);
+        if (null == savedInstanceState) {
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, Camera2BasicFragment.newInstance())//2
+                    .commit();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!OpenCVLoader.initDebug()) {
+            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, this, mLoaderCallback);
+        } else {
+            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
+        }
+    }
 
 
 }

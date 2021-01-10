@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
     buildToolsVersion '29.0.2'
 
     defaultConfig {
         minSdkVersion 23//songhui20201031_LG공기계 SDK값과 맞춤
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -93,4 +93,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
     implementation project(':openCVLibrary341')
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    // annotationProcessor : annotation processor classpath 에서 compile processor classpath를 분리하여 빌드 성능개선
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 }

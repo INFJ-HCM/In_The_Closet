@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 public class CameraGLSurfaceView extends GLSurfaceView {
-
+    public static CameraGLSurfaceView mContext;
     private static final String LOGTAG = "CameraGLSurfaceView";
 
     public interface CameraTextureListener {
@@ -81,7 +81,9 @@ public class CameraGLSurfaceView extends GLSurfaceView {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+
         super.surfaceCreated(holder);
+        mContext=this;
     }
 
     @Override
