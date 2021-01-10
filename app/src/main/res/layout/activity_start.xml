@@ -50,12 +50,15 @@
                 android:src="@drawable/camera_button2" />
 
 
+
+
 <!--            <Button-->
 <!--                android:id="@+id/btn_stt_start"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_weight="1"-->
 <!--                android:text="Button" />-->
+
 
             <ImageButton
                 android:id="@+id/btn_lookbook"
@@ -103,6 +106,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+
 <!--            <EditText-->
 <!--                android:id="@+id/txtInMsg"-->
 <!--                android:layout_width="match_parent"-->
@@ -120,6 +124,7 @@
 <!--                android:layout_marginTop="10dp"-->
 <!--                android:ems="10"-->
 <!--                android:inputType="textPersonName" />-->
+
         </LinearLayout>
 
     </LinearLayout>

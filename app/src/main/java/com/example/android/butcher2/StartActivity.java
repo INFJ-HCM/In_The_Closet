@@ -45,7 +45,7 @@ public class StartActivity extends Activity {
     TextToSpeech tts;
 
     // 화면 처리용
-    Button btnSttStart;
+    Button btnSttStart; //사용안함
     EditText txtInMsg;
     EditText txtSystem;
 
@@ -54,6 +54,7 @@ public class StartActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
         permissionCheck();
 //        //음성인식
 //        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -91,6 +92,8 @@ public class StartActivity extends Activity {
 //        txtInMsg=(EditText)findViewById(R.id.txtInMsg);
 //        txtSystem=(EditText)findViewById(R.id.txtSystem);
 //        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+
+      
 //        new android.os.Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {

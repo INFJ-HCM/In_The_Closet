@@ -23,7 +23,7 @@ import java.util.Iterator;
 public class LookBookActivity extends Activity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager; //LinearLayoutManager로 변경
     private ArrayList<MyData> myDataset;
     private ArrayList<Integer> imgID = new ArrayList<Integer>();
 
@@ -40,6 +40,8 @@ public class LookBookActivity extends Activity {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true); //recyvlerview 뒤에서부터 보여주기(1)
+        mLayoutManager.setStackFromEnd(true); //recyvlerview 뒤에서부터 보여주기(1)
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
