@@ -52,50 +52,50 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        //음성인식
-        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getApplicationContext().getPackageName());
-        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
-        mRecognizer=SpeechRecognizer.createSpeechRecognizer(StartActivity.this);
-        mRecognizer.setRecognitionListener(listener);
+//        //음성인식
+//        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//        SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getApplicationContext().getPackageName());
+//        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
+//        mRecognizer=SpeechRecognizer.createSpeechRecognizer(StartActivity.this);
+//        mRecognizer.setRecognitionListener(listener);
 
-        //음성출력 생성, 리스너 초기화
-        tts=new TextToSpeech(StartActivity.this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status!=android.speech.tts.TextToSpeech.ERROR){
-                    tts.setLanguage(Locale.KOREAN);
-                }
-            }
-        });
-        //버튼설정
-        btnSttStart=(Button)findViewById(R.id.btn_stt_start);
-        btnSttStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("음성인식 시작!");
-                if(ContextCompat.checkSelfPermission(StartActivity.this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(StartActivity.this,new String[]{Manifest.permission.RECORD_AUDIO},1);
-                    //권한을 허용하지 않는 경우
-                }else{
-                    //권한을 허용한 경우
-                    try {
-                        mRecognizer.startListening(SttIntent);
-                    }catch (SecurityException e){e.printStackTrace();}
-                }
-            }
-        });
-        txtInMsg=(EditText)findViewById(R.id.txtInMsg);
-        txtSystem=(EditText)findViewById(R.id.txtSystem);
-        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
-                tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
-                btnSttStart.performClick();
-            }
-        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+//        //음성출력 생성, 리스너 초기화
+//        tts=new TextToSpeech(StartActivity.this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if(status!=android.speech.tts.TextToSpeech.ERROR){
+//                    tts.setLanguage(Locale.KOREAN);
+//                }
+//            }
+//        });
+//        //버튼설정
+//        btnSttStart=(Button)findViewById(R.id.btn_stt_start);
+//        btnSttStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println("음성인식 시작!");
+//                if(ContextCompat.checkSelfPermission(StartActivity.this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
+//                    ActivityCompat.requestPermissions(StartActivity.this,new String[]{Manifest.permission.RECORD_AUDIO},1);
+//                    //권한을 허용하지 않는 경우
+//                }else{
+//                    //권한을 허용한 경우
+//                    try {
+//                        mRecognizer.startListening(SttIntent);
+//                    }catch (SecurityException e){e.printStackTrace();}
+//                }
+//            }
+//        });
+//        txtInMsg=(EditText)findViewById(R.id.txtInMsg);
+//        txtSystem=(EditText)findViewById(R.id.txtSystem);
+//        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+//        new android.os.Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
+//                tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
+//                btnSttStart.performClick();
+//            }
+//        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
 
         /**==========================================================================*/
 
