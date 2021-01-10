@@ -48,7 +48,7 @@ public class ScreenShot {
             // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
             values.put(MediaStore.Images.Media.IS_PENDING, 1);
             values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/In_The_Closet"); // 새로 만들 폴더 명
-
+            System.out.println(MediaStore.Images.Media.RELATIVE_PATH);
             ContentResolver contentResolver = context.getContentResolver();
             Uri collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI; //
             Uri item = contentResolver.insert(collection, values);
