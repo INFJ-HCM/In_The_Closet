@@ -23,7 +23,7 @@ import java.util.Iterator;
 public class LookBookActivity extends Activity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager; //LinearLayoutManager로 변경
     private ArrayList<MyData> myDataset;
     private ArrayList<Integer> imgID = new ArrayList<Integer>();
 
@@ -40,6 +40,8 @@ public class LookBookActivity extends Activity {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true); //recyvlerview 뒤에서부터 보여주기(1)
+        mLayoutManager.setStackFromEnd(true); //recyvlerview 뒤에서부터 보여주기(1)
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
@@ -68,14 +70,9 @@ public class LookBookActivity extends Activity {
         String token = "#In_The_Closet";
         String compareName = "";
 
-        Uri externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI; //현아가 INTERNAL로 바꿔봄 //재식?ㅎ 그냥 불러봄^^
-        Log.e("externalUri : ", externalUri.toString()); //externaluri : content://media/external/images/media
-        // [START] chohui Park 20210110
-        //File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        Uri externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
 
-        //[출처] #모각코 #4일차 #학습결과|작성자 아롱다롱
-        // [END] chohui Park 20210110
         String[] projection = new String[]{
                 MediaStore.Images.Media._ID,
                 MediaStore.Images.Media.DISPLAY_NAME,
@@ -85,14 +82,14 @@ public class LookBookActivity extends Activity {
         Cursor cursor = getContentResolver().query(externalUri, projection, null, null, null);
 
         if (cursor == null || !cursor.moveToFirst()) {
-            Log.e("TAG", "cursor null or cursor is empty"); //사진이 없을 때
+            Log.e("TAG", "cursor null or cursor is empty");
             return;
         }
 
         do {
-            compareName = cursor.getString(1).substring(0, 14); // #In_The_Closet만 자름 //맨 뒤에 _는 어디갔어 재식?
-            Log.e("compareName", compareName); //20190305_19222 //가운데 _가 왜 붙어 재식? 이 친구가 가져오는 사진들은 어디에 저장되어있는거야 재식?
-            if(compareName.equals(token)) { // 맞는 이름인지 비교 //근데 compareName이 #In_The_Closet이 아니야 재식?
+            compareName = cursor.getString(1).substring(0, 14); // #In_The_Closet만 자름
+            Log.e("compareName", compareName);
+            if(compareName.equals(token)) { // 맞는 이름인지 비교
                 String contentUrl = externalUri.toString() + "/" + cursor.getString(0);
                 Log.e("cursor.getString(1)", cursor.getString(1));
 

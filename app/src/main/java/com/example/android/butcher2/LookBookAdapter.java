@@ -1,6 +1,7 @@
 package com.example.android.butcher2;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,8 @@ public class LookBookAdapter extends RecyclerView.Adapter<LookBookAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
-            mImageView = (ImageView)view.findViewById(R.id.image);
-            mTextView = (TextView)view.findViewById(R.id.textview);
+            mImageView = (ImageView)view.findViewById(R.id.image); //lookbook image
+            mTextView = (TextView)view.findViewById(R.id.textview); //lookbook text
         }
     }
 
@@ -49,10 +50,12 @@ public class LookBookAdapter extends RecyclerView.Adapter<LookBookAdapter.ViewHo
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) { //view_lookbook.xml에 보이는 이미지&텍스트
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset.get(position).text);
+        String textDate = mDataset.get(position).text.substring(15, 19)+"-"+mDataset.get(position).text.substring(19, 21)+"-"+mDataset.get(position).text.substring(21, 23)
+                +"  "+mDataset.get(position).text.substring(23, 25)+":"+mDataset.get(position).text.substring(25, 27)+":"+mDataset.get(position).text.substring(27, 29);
+        holder.mTextView.setText(textDate); //YYYY-MM-DD HH:MM:SS
         holder.mImageView.setImageBitmap(mDataset.get(position).img);
     }
 
