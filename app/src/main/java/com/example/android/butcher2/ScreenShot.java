@@ -47,7 +47,7 @@ public class ScreenShot {
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
             // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
             values.put(MediaStore.Images.Media.IS_PENDING, 1);
-            values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/In_The_Closet"); // 새로 만들 폴더 명
+            values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/Camera"); // 새로 만들 폴더 명
 
             ContentResolver contentResolver = context.getContentResolver();
             Uri collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI; //
