@@ -838,7 +838,6 @@ public class Camera2BasicFragment extends Fragment
 
         if(VoiceMsg.indexOf("찰칵")>-1){
             screenShot.screenShot(textureView, drawView, getActivity());
-
         }
     }
 
