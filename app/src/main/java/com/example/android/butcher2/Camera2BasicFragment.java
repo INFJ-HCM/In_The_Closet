@@ -50,6 +50,7 @@ import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.media.MediaActionSound;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -126,9 +127,6 @@ public class Camera2BasicFragment extends Fragment
 
 
 
-
-
-
     /**
      * 음성 인식
      *
@@ -146,6 +144,7 @@ public class Camera2BasicFragment extends Fragment
     private String txtSystem;
     //private EditText txtInMsg;
     //private EditText txtSystem;
+
 
     /**
      * 스크린샷
@@ -167,11 +166,14 @@ public class Camera2BasicFragment extends Fragment
     private View drawerView;
     private Button cloth;
     private ImageView none;
+    private ImageView amiMtm;
+    private ImageView denimShirt;
     private ImageView shirt;
-    private ImageView dress;
     private ImageView suit;
-    private ImageView short_shirt;
-    private ImageView white_dress;
+    private ImageView dress;
+    private ImageView blackCoat;
+    private ImageView redCoat;
+    private ImageView longparka;
 
     /**
      * Tag for the {@link Log}.
@@ -580,8 +582,8 @@ public class Camera2BasicFragment extends Fragment
                 }else{
                     //권한을 허용한 경우
                     try {
-
                         mRecognizer.startListening(SttIntent);
+
                     }catch (SecurityException e){e.printStackTrace();}
                 }
             }
@@ -613,11 +615,14 @@ public class Camera2BasicFragment extends Fragment
         toastText = view.findViewById(R.id.toast);
 
         none = (ImageView)view.findViewById(R.id.none);
+        amiMtm = (ImageView)view.findViewById(R.id.ami_mtm);
         shirt = (ImageView)view.findViewById(R.id.shirt);
-        dress = (ImageView)view.findViewById(R.id.dress);
+        denimShirt = (ImageView)view.findViewById(R.id.denim_shirt);
         suit = (ImageView)view.findViewById(R.id.suit);
-        short_shirt = (ImageView)view.findViewById(R.id.short_shirt);
-        white_dress = (ImageView)view.findViewById(R.id.white_dress);
+        dress = (ImageView)view.findViewById(R.id.dress);
+        blackCoat = (ImageView)view.findViewById(R.id.black_coat);
+        redCoat = (ImageView)view.findViewById(R.id.red_coat);
+        longparka = (ImageView)view.findViewById(R.id.longparka);
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -626,20 +631,29 @@ public class Camera2BasicFragment extends Fragment
                     case R.id.none :
                         drawView.setClothFlag(-1);
                         break ;
-                    case R.id.shirt :
+                    case R.id.ami_mtm :
                         drawView.setClothFlag(0);
-                        break ;
-                    case R.id.dress :
+                        break;
+                    case R.id.shirt :
                         drawView.setClothFlag(1);
                         break ;
-                    case R.id.short_shirt :
+                    case R.id.denim_shirt :
                         drawView.setClothFlag(2);
                         break ;
-                    case R.id.white_dress :
+                    case R.id.suit :
                         drawView.setClothFlag(3);
                         break ;
-                    case R.id.suit :
+                    case R.id.dress :
                         drawView.setClothFlag(4);
+                        break ;
+                    case R.id.black_coat :
+                        drawView.setClothFlag(5);
+                        break ;
+                    case R.id.red_coat :
+                        drawView.setClothFlag(6);
+                        break ;
+                    case R.id.longparka :
+                        drawView.setClothFlag(7);
                         break ;
                 }
             }
@@ -698,11 +712,14 @@ public class Camera2BasicFragment extends Fragment
         });
 
         none.setOnClickListener(onClickListener) ;
+        amiMtm.setOnClickListener(onClickListener) ;
         shirt.setOnClickListener(onClickListener) ;
-        dress.setOnClickListener(onClickListener) ;
+        denimShirt.setOnClickListener(onClickListener) ;
         suit.setOnClickListener(onClickListener) ;
-        short_shirt.setOnClickListener(onClickListener) ;
-        white_dress.setOnClickListener(onClickListener) ;
+        dress.setOnClickListener(onClickListener) ;
+        blackCoat.setOnClickListener(onClickListener);
+        redCoat.setOnClickListener(onClickListener) ;
+        longparka.setOnClickListener(onClickListener) ;
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -844,6 +861,7 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
+            FuncVoiceOut("차아아아아아아아아아아알 칵");//전등을 끕니다 라는 음성 출력
             screenShot.screenShot(textureView, drawView, getActivity());
 
         }
@@ -855,12 +873,10 @@ public class Camera2BasicFragment extends Fragment
     private void FuncVoiceOut(String OutMsg){
         if(OutMsg.length()<1)return;
         if(!tts.isSpeaking()) {
-            Log.e("1","1");
             tts.setPitch(1.0f);//목소리 톤1.0
             tts.setSpeechRate(1.0f);//목소리 속도
             tts.speak(OutMsg,TextToSpeech.QUEUE_FLUSH,null, "id1");
         }
-        Log.e("2","2");
         //어플이 종료할때는 완전히 제거
     }
 
