@@ -37,10 +37,9 @@ public class LookBookAdapter extends RecyclerView.Adapter<LookBookAdapter.ViewHo
 
     // Create new views (invoked by the layout manager)
     @Override
-    public LookBookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                         int viewType) {
-        // create a new view
+    public LookBookAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
+        // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_lookbook, parent, false);
         // set the view's size, margins, paddings and layout parameters
@@ -54,8 +53,8 @@ public class LookBookAdapter extends RecyclerView.Adapter<LookBookAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) { //view_lookbook.xml에 보이는 이미지&텍스트
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        String textDate = mDataset.get(position).text.substring(15, 19)+"-"+mDataset.get(position).text.substring(19, 21)+"-"+mDataset.get(position).text.substring(21, 23)
-                +"  "+mDataset.get(position).text.substring(23, 25)+":"+mDataset.get(position).text.substring(25, 27)+":"+mDataset.get(position).text.substring(27, 29);
+        String textDate = mDataset.get(position).text.substring(15, 19) + "-" + mDataset.get(position).text.substring(19, 21) + "-" + mDataset.get(position).text.substring(21, 23)
+                + "  " + mDataset.get(position).text.substring(23, 25) + ":" + mDataset.get(position).text.substring(25, 27) + ":" + mDataset.get(position).text.substring(27, 29);
         holder.mTextView.setText(textDate); //YYYY-MM-DD HH:MM:SS
         holder.mImageView.setImageBitmap(mDataset.get(position).img);
     }

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,12 +29,14 @@ public class LookBookActivity extends Activity {
     private ArrayList<MyData> myDataset;
     private ArrayList<Integer> imgID = new ArrayList<Integer>();
 
+    TextView empty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lookbook);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        empty = (TextView)findViewById(R.id.empty);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -48,7 +52,6 @@ public class LookBookActivity extends Activity {
         myDataset = new ArrayList<>();
         mAdapter = new LookBookAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
-        System.out.println("여기까지는 들어오니?");
         readFile();
 
         Iterator<Integer> idIterator = imgID.iterator();
@@ -56,6 +59,14 @@ public class LookBookActivity extends Activity {
             System.out.println(idIterator.next());
         }
 
+
+        empty.setVisibility(View.GONE);
+
+        if (myDataset.size() <= 0) {
+            System.out.println("TextView를 지우자.");
+            empty.setVisibility(View.VISIBLE);
+            //setContentView(R.layout.empty_lookbook);
+        }
 //        myDataset.add(new MyData("#InsideOut", R.drawable.camera_button2));
 //        myDataset.add(new MyData("#Mini", R.drawable.cloth));
 //        myDataset.add(new MyData("#ToyStroy", R.drawable.short_sleve));
@@ -100,11 +111,11 @@ public class LookBookActivity extends Activity {
                     if (is != null) {
                         //들어옴
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
-                        System.out.println(bitmap);
+                        //System.out.println(bitmap);
                         myDataset.add(new MyData(cursor.getString(1), bitmap));
-                        System.out.println(myDataset);
+                        //System.out.println(myDataset);
                         imgID.add(cursor.getInt(0)); // Add a bitmap
-                        System.out.println(imgID);
+                        //System.out.println(imgID);
                         is.close();
 
                         //여기까지도됨
