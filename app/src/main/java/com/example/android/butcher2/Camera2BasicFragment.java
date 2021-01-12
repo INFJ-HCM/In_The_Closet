@@ -48,9 +48,12 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.AudioManager;
 import android.media.Image;
 import android.media.ImageReader;
+import android.media.SoundPool;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -124,9 +127,11 @@ public class Camera2BasicFragment extends Fragment
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
 
-
-
-
+    //효과음
+    SoundPool soundPool;
+    SoundManager soundManager;
+    boolean play;
+    int playSoundId;
 
 
     /**
@@ -545,7 +550,20 @@ public class Camera2BasicFragment extends Fragment
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
-
+        //효과음
+        //롤리팝 이상 버전일 경우
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool.Builder().build();
+        }else{
+            //롤리팝 이하 버전일 경우
+            //new SoundPool(1번,2번,3번)
+            //1번 - 음악 파일 갯수
+            //2번 - 스트림 타입
+            //3번 - 음질
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+        }
+        soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
+        soundManager.addSound(0,R.raw.shot);
         /**
         * 음성인식파트
         */
@@ -844,6 +862,14 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
+
+            if(!play){
+                playSoundId=soundManager.playSound(0);
+                play = true;
+            }else{
+                soundManager.pauseSound(0);
+                play = false;
+            }
             screenShot.screenShot(textureView, drawView, getActivity());
 
         }
