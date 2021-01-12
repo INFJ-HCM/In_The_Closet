@@ -20,7 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_closet_round"
         android:theme="@style/MaterialTheme"
         tools:targetApi="q">
-        <activity android:name=".TutorialActivity"></activity>
+        <activity android:name=".TutorialActivity"
+            android:noHistory="true"
+            />
         <activity
             android:name=".Loading"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
