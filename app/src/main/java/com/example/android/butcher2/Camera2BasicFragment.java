@@ -685,6 +685,13 @@ public class Camera2BasicFragment extends Fragment
 
             @Override
             public void onFinish() {
+                if(!play){
+                    playSoundId=soundManager.playSound(0);
+                    play = true;
+                }else{
+                    soundManager.pauseSound(0);
+                    play = false;
+                }
                 countView.setVisibility(View.GONE);
                 screenShot.screenShot(textureView, drawView, getActivity());
                 countDownToast.start();
@@ -870,8 +877,10 @@ public class Camera2BasicFragment extends Fragment
                 soundManager.pauseSound(0);
                 play = false;
             }
+            System.out.println("함수호출 전");
             screenShot.screenShot(textureView, drawView, getActivity());
-
+            System.out.println("함수호출 후");
+            toastText.setVisibility(View.VISIBLE);
         }
     }
 
