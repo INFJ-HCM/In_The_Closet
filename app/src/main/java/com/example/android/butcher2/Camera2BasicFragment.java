@@ -176,6 +176,22 @@ public class Camera2BasicFragment extends Fragment
     private ImageView blackCoat;
     private ImageView redCoat;
 
+    private ImageView brownKnit; //5
+    private ImageView knit1; //6
+    private ImageView knit2; //7
+    private ImageView knit3; //8
+    private ImageView narrowCardigan; //9
+    private ImageView wideCardigan; //10
+    private ImageView knitVest; //11
+
+    private ImageView whiteshirt; //12
+    private ImageView whiteshirt2; //13
+    private ImageView blackdress; //14
+    private ImageView denimdress; //15
+    private ImageView flowerdress; //16
+    private ImageView hmgoepprod; //17
+    private ImageView opencoat; //18
+
     /**
      * Tag for the {@link Log}.
      */
@@ -635,6 +651,22 @@ public class Camera2BasicFragment extends Fragment
         blackCoat = (ImageView)view.findViewById(R.id.black_coat);
         redCoat = (ImageView)view.findViewById(R.id.red_coat);
 
+        brownKnit = (ImageView)view.findViewById(R.id.brownknit);
+        knit1 = (ImageView)view.findViewById(R.id.knit1);
+        knit2 = (ImageView)view.findViewById(R.id.knit2);
+        knit3 = (ImageView)view.findViewById(R.id.knit3);
+        narrowCardigan = (ImageView)view.findViewById(R.id.narrowcardigan);
+        wideCardigan = (ImageView)view.findViewById(R.id.widecardigan);
+        knitVest = (ImageView)view.findViewById(R.id.knitvest);
+
+        whiteshirt = (ImageView)view.findViewById(R.id.whiteshirt); //12
+        whiteshirt2 = (ImageView)view.findViewById(R.id.whiteshirt2); //13
+        blackdress = (ImageView)view.findViewById(R.id.blackdress); //14
+        denimdress = (ImageView)view.findViewById(R.id.denimdress); //15
+        flowerdress = (ImageView)view.findViewById(R.id.flowerdress); //16
+        hmgoepprod = (ImageView)view.findViewById(R.id.hmgoepprod); //17
+        opencoat = (ImageView)view.findViewById(R.id.opencoat); //18
+
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -656,6 +688,49 @@ public class Camera2BasicFragment extends Fragment
                         break ;
                     case R.id.red_coat :
                         drawView.setClothFlag(4);
+                        break ;
+                    case R.id.brownknit :
+                        drawView.setClothFlag(5);
+                        break ;
+                    case R.id.knit1 :
+                        drawView.setClothFlag(6);
+                        break ;
+                    case R.id.knit2 :
+                        drawView.setClothFlag(7);
+                        break ;
+                    case R.id.knit3 :
+                        drawView.setClothFlag(8);
+                        break ;
+                    case R.id.narrowcardigan :
+                        drawView.setClothFlag(9);
+                        break ;
+                    case R.id.widecardigan :
+                        drawView.setClothFlag(10);
+                        break ;
+                    case R.id.knitvest :
+                        drawView.setClothFlag(11);
+                        break ;
+
+                    case R.id.whiteshirt :  //12
+                        drawView.setClothFlag(12);
+                        break ;
+                    case R.id.whiteshirt2 :  //13
+                        drawView.setClothFlag(13);
+                        break ;
+                    case R.id.blackdress :  //14
+                        drawView.setClothFlag(14);
+                        break ;
+                    case R.id.denimdress :  //15
+                        drawView.setClothFlag(15);
+                        break ;
+                    case R.id.flowerdress :  //16
+                        drawView.setClothFlag(16);
+                        break ;
+                    case R.id.hmgoepprod : //17
+                        drawView.setClothFlag(17);
+                        break ;
+                    case R.id.opencoat :  //18
+                        drawView.setClothFlag(18);
                         break ;
                 }
             }
@@ -721,6 +796,20 @@ public class Camera2BasicFragment extends Fragment
         dress.setOnClickListener(onClickListener) ;
         blackCoat.setOnClickListener(onClickListener) ;
         redCoat.setOnClickListener(onClickListener) ;
+        brownKnit.setOnClickListener(onClickListener) ;
+        knit1.setOnClickListener(onClickListener) ;
+        knit2.setOnClickListener(onClickListener) ;
+        knit3.setOnClickListener(onClickListener) ;
+        narrowCardigan.setOnClickListener(onClickListener) ;
+        wideCardigan.setOnClickListener(onClickListener) ;
+        knitVest.setOnClickListener(onClickListener) ;
+        whiteshirt.setOnClickListener(onClickListener) ; //12
+        whiteshirt2.setOnClickListener(onClickListener) ; //13
+        blackdress.setOnClickListener(onClickListener) ; //14
+        denimdress.setOnClickListener(onClickListener) ; //15
+        flowerdress.setOnClickListener(onClickListener) ; //16
+        hmgoepprod.setOnClickListener(onClickListener) ; //17
+        opencoat.setOnClickListener(onClickListener) ; //18
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {

@@ -90,6 +90,126 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/redcoat" />
 
+            <ImageView
+                android:id="@+id/brownknit"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/brownknit" />
+            <ImageView
+                android:id="@+id/knit1"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/knit1" />
+            <ImageView
+                android:id="@+id/knit2"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/knit2" />
+            <ImageView
+                android:id="@+id/knit3"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/knit3" />
+            <ImageView
+                android:id="@+id/narrowcardigan"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/cardigan_narrow" />
+            <ImageView
+                android:id="@+id/widecardigan"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/cardigan_wide" />
+            <ImageView
+                android:id="@+id/knitvest"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/knitvest" />
+
+            <ImageView
+                android:id="@+id/whiteshirt"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/whiteshirt" />
+
+            <ImageView
+                android:id="@+id/whiteshirt2"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/whiteshirt2" />
+
+            <ImageView
+                android:id="@+id/blackdress"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/blackdress" />
+
+
+            <ImageView
+                android:id="@+id/denimdress"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/denimdress" />
+
+            <ImageView
+                android:id="@+id/flowerdress"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/flowerdress" />
+
+            <ImageView
+                android:id="@+id/hmgoepprod"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/hmgoepprod" />
+
+            <ImageView
+                android:id="@+id/opencoat"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/opencoat" />
+
 
 
         </LinearLayout>
