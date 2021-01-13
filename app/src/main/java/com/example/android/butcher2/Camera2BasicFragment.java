@@ -33,6 +33,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -52,6 +53,7 @@ import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaActionSound;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -104,6 +106,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -158,6 +162,8 @@ public class Camera2BasicFragment extends Fragment
     private CountDownTimer countDownToast;
     private int count = 5;
 
+    private ImageView imgCamera;
+    private ImageView imgDraw;
 
     /**
      * 옷 선택
@@ -167,13 +173,10 @@ public class Camera2BasicFragment extends Fragment
     private Button cloth;
     private ImageView none;
     private ImageView amiMtm;
-    private ImageView denimShirt;
     private ImageView shirt;
-    private ImageView suit;
     private ImageView dress;
     private ImageView blackCoat;
     private ImageView redCoat;
-    private ImageView longparka;
 
     /**
      * Tag for the {@link Log}.
@@ -617,12 +620,9 @@ public class Camera2BasicFragment extends Fragment
         none = (ImageView)view.findViewById(R.id.none);
         amiMtm = (ImageView)view.findViewById(R.id.ami_mtm);
         shirt = (ImageView)view.findViewById(R.id.shirt);
-        denimShirt = (ImageView)view.findViewById(R.id.denim_shirt);
-        suit = (ImageView)view.findViewById(R.id.suit);
         dress = (ImageView)view.findViewById(R.id.dress);
         blackCoat = (ImageView)view.findViewById(R.id.black_coat);
         redCoat = (ImageView)view.findViewById(R.id.red_coat);
-        longparka = (ImageView)view.findViewById(R.id.longparka);
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -637,23 +637,14 @@ public class Camera2BasicFragment extends Fragment
                     case R.id.shirt :
                         drawView.setClothFlag(1);
                         break ;
-                    case R.id.denim_shirt :
+                    case R.id.dress :
                         drawView.setClothFlag(2);
                         break ;
-                    case R.id.suit :
+                    case R.id.black_coat :
                         drawView.setClothFlag(3);
                         break ;
-                    case R.id.dress :
-                        drawView.setClothFlag(4);
-                        break ;
-                    case R.id.black_coat :
-                        drawView.setClothFlag(5);
-                        break ;
                     case R.id.red_coat :
-                        drawView.setClothFlag(6);
-                        break ;
-                    case R.id.longparka :
-                        drawView.setClothFlag(7);
+                        drawView.setClothFlag(4);
                         break ;
                 }
             }
@@ -682,7 +673,7 @@ public class Camera2BasicFragment extends Fragment
             @Override
             public void onFinish() {
                 countView.setVisibility(View.GONE);
-                screenShot.screenShot(textureView, drawView, getActivity());
+                screenShot();
                 countDownToast.start();
             }
         };
@@ -702,6 +693,8 @@ public class Camera2BasicFragment extends Fragment
         /**
          * 스크린샷
          */
+        imgCamera = view.findViewById(R.id.imgCamera);
+        imgDraw = view.findViewById(R.id.imgDraw);
         screenshot = view.findViewById(R.id.screenshot);
         screenshot.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
@@ -714,12 +707,9 @@ public class Camera2BasicFragment extends Fragment
         none.setOnClickListener(onClickListener) ;
         amiMtm.setOnClickListener(onClickListener) ;
         shirt.setOnClickListener(onClickListener) ;
-        denimShirt.setOnClickListener(onClickListener) ;
-        suit.setOnClickListener(onClickListener) ;
         dress.setOnClickListener(onClickListener) ;
         blackCoat.setOnClickListener(onClickListener);
         redCoat.setOnClickListener(onClickListener) ;
-        longparka.setOnClickListener(onClickListener) ;
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -739,6 +729,125 @@ public class Camera2BasicFragment extends Fragment
         public void onDrawerStateChanged(int newState) {
         }
     };
+
+
+    /**
+     * 스크린샷
+     */
+
+    public void screenShot() {
+
+        String fileName = "";
+        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
+        drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
+
+        Log.e("capture0", " : " + bitmap);
+        imgCamera.setImageBitmap(bitmap);
+
+        SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss"); // 현재 시각
+        Date date = new Date();
+        fileName = "#In_The_Closet_" + day.format(date) + ".JPEG"; // 저장할 파일 명
+
+        drawView.buildDrawingCache(); // 옷이 그려지는 뷰 캐싱
+        Bitmap perfectView = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
+        Log.e("이건 달라야지", "그치? :" + perfectView);
+        imgDraw.setImageBitmap(perfectView);
+
+
+        /** After Q */
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//
+//            ContentValues values = new ContentValues();
+//            values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
+//            values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
+//            // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
+//            values.put(MediaStore.Images.Media.IS_PENDING, 1);
+//            values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/In_The_Closet"); // 새로 만들 폴더 명
+//            System.out.println(MediaStore.Images.Media.RELATIVE_PATH);
+//            ContentResolver contentResolver = getActivity().getContentResolver();
+//            Uri collection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI; //
+//            Uri item = contentResolver.insert(collection, values);
+//
+//            try {
+//                ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
+//                if (pdf == null) {
+//
+//                } else {
+//                    InputStream inputStream = getImageInputStram(captureview);
+//                    byte[] strToByte = getBytes(inputStream);
+//                    FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
+//                    fos.write(strToByte);
+//                    fos.close();
+//                    inputStream.close();
+//                    pdf.close();
+//                    contentResolver.update(item, values, null, null);
+//                }
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            values.clear();
+//            // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
+//            values.put(MediaStore.Images.Media.IS_PENDING, 0);
+//            contentResolver.update(item, values, null, null);
+//        }
+//
+//        /** Before Q */
+//        else {
+//            String path = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() +
+//                    "/In_The_Closet";
+//
+//            Log.e("path", path);
+//
+//            File file = new File(path); // 파일 생성
+//            if (!file.exists() || file.isDirectory()) {
+//                file.mkdirs();
+//            }
+//
+//            FileOutputStream fos = null;
+//
+//            try {
+//                fos = new FileOutputStream(path + file); // 파일명 지정
+//                captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + fileName))); // 폴더 위치
+//                Log.e("File", "file://" + path + "/Look" + day.format(date) + ".JPEG");
+//
+//                fos.flush();
+//                fos.close();
+//                drawView.destroyDrawingCache();
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
+    private InputStream getImageInputStram(Bitmap bmp) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+        byte[] bitmapData = bytes.toByteArray();
+        ByteArrayInputStream bs = new ByteArrayInputStream(bitmapData);
+
+        return bs;
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+
+
 
 
     /**
@@ -861,9 +970,7 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
-            FuncVoiceOut("차아아아아아아아아아아알 칵");//전등을 끕니다 라는 음성 출력
-            screenShot.screenShot(textureView, drawView, getActivity());
-
+            screenShot();
         }
     }
 
@@ -1525,6 +1632,7 @@ public class Camera2BasicFragment extends Fragment
 
         classifier.classifyFrame(bitmap, textToShow);
         bitmap.recycle();
+
         drawView.setDrawPoint(classifier.mPrintPointArray, 0.5f);
         showToast(textToShow);
     }

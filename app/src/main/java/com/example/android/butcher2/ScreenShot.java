@@ -27,11 +27,11 @@ import java.util.Date;
 
 public class ScreenShot {
 
-    public void screenShot(AutoFitTextureView textureView, DrawView drawView, Context context) {
+    public void screenShot(Bitmap bitmap, DrawView drawView, Context context) {
 
         String fileName = "";
+        //Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
 
-        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
         drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
 
         SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss"); // 현재 시각
