@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card:cardCornerRadius="3dp">
+
         <LinearLayout
             android:id="@+id/linearview"
             android:layout_width="match_parent"

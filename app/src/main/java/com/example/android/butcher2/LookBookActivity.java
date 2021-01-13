@@ -63,9 +63,7 @@ public class LookBookActivity extends Activity {
         empty.setVisibility(View.GONE);
 
         if (myDataset.size() <= 0) {
-            System.out.println("TextView를 지우자.");
             empty.setVisibility(View.VISIBLE);
-            //setContentView(R.layout.empty_lookbook);
         }
 //        myDataset.add(new MyData("#InsideOut", R.drawable.camera_button2));
 //        myDataset.add(new MyData("#Mini", R.drawable.cloth));
@@ -82,7 +80,6 @@ public class LookBookActivity extends Activity {
         String compareName = "";
 
         Uri externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        System.out.println(externalUri);
 
         String[] projection = new String[]{
                 MediaStore.Images.Media._ID,
