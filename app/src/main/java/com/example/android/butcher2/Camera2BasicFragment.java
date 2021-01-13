@@ -169,12 +169,27 @@ public class Camera2BasicFragment extends Fragment
     private DrawerLayout drawerLayout;
     private View drawerView;
     private Button cloth;
-    private ImageView none;
-    private ImageView amiMtm;
-    private ImageView shirt;
-    private ImageView dress;
-    private ImageView blackCoat;
-    private ImageView redCoat;
+    // #1
+    private ImageView none; //-1
+    private ImageView amiMtm; //0
+    private ImageView shirt; //1
+    private ImageView dress; //2
+    private ImageView blackCoat; //3
+    private ImageView redCoat; //4
+    private ImageView brownKnit; //5
+    private ImageView knit1; //6
+    private ImageView knit2; //7
+    private ImageView knit3; //8
+    private ImageView narrowCardigan; //9
+    private ImageView wideCardigan; //10
+    private ImageView knitVest; //11
+    private ImageView whiteshirt; //12
+    private ImageView whiteshirt2; //13
+    private ImageView blackdress; //14
+    private ImageView denimdress; //15
+    private ImageView flowerdress; //16
+    private ImageView hmgoepprod; //17
+    private ImageView opencoat; //18
 
     /**
      * Tag for the {@link Log}.
@@ -627,35 +642,92 @@ public class Camera2BasicFragment extends Fragment
         drawerView = (View) view.findViewById(R.id.drawerView);
         drawerLayout.setDrawerListener(listener);
         toastText = view.findViewById(R.id.toast);
-
+        // #2
         none = (ImageView)view.findViewById(R.id.none);
         amiMtm = (ImageView)view.findViewById(R.id.ami_mtm);
         shirt = (ImageView)view.findViewById(R.id.shirt);
         dress = (ImageView)view.findViewById(R.id.dress);
         blackCoat = (ImageView)view.findViewById(R.id.black_coat);
         redCoat = (ImageView)view.findViewById(R.id.red_coat);
+        brownKnit = (ImageView)view.findViewById(R.id.brownknit);
+        knit1 = (ImageView)view.findViewById(R.id.knit1);
+        knit2 = (ImageView)view.findViewById(R.id.knit2);
+        knit3 = (ImageView)view.findViewById(R.id.knit3);
+        narrowCardigan = (ImageView)view.findViewById(R.id.narrowcardigan);
+        wideCardigan = (ImageView)view.findViewById(R.id.widecardigan);
+        knitVest = (ImageView)view.findViewById(R.id.knitvest);
+        whiteshirt = (ImageView)view.findViewById(R.id.whiteshirt); //12
+        whiteshirt2 = (ImageView)view.findViewById(R.id.whiteshirt2); //13
+        blackdress = (ImageView)view.findViewById(R.id.blackdress); //14
+        denimdress = (ImageView)view.findViewById(R.id.denimdress); //15
+        flowerdress = (ImageView)view.findViewById(R.id.flowerdress); //16
+        hmgoepprod = (ImageView)view.findViewById(R.id.hmgoepprod); //17
+        opencoat = (ImageView)view.findViewById(R.id.opencoat); //18
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // #3
                 switch (view.getId()) {
-                    case R.id.none :
+                    case R.id.none :  //-1
                         drawView.setClothFlag(-1);
                         break ;
-                    case R.id.ami_mtm :
+                    case R.id.ami_mtm :  //0
                         drawView.setClothFlag(0);
                         break ;
-                    case R.id.shirt :
+                    case R.id.shirt :  //1
                         drawView.setClothFlag(1);
                         break ;
-                    case R.id.dress :
+                    case R.id.dress :  //2
                         drawView.setClothFlag(2);
                         break ;
-                    case R.id.black_coat :
+                    case R.id.black_coat :  //3
                         drawView.setClothFlag(3);
                         break ;
-                    case R.id.red_coat :
+                    case R.id.red_coat :  //4
                         drawView.setClothFlag(4);
+                        break ;
+                    case R.id.brownknit :
+                        drawView.setClothFlag(5);
+                        break ;
+                    case R.id.knit1 :
+                        drawView.setClothFlag(6);
+                        break ;
+                    case R.id.knit2 :
+                        drawView.setClothFlag(7);
+                        break ;
+                    case R.id.knit3 :
+                        drawView.setClothFlag(8);
+                        break ;
+                    case R.id.narrowcardigan :
+                        drawView.setClothFlag(9);
+                        break ;
+                    case R.id.widecardigan :
+                        drawView.setClothFlag(10);
+                        break ;
+                    case R.id.knitvest :
+                        drawView.setClothFlag(11);
+                        break ;
+                    case R.id.whiteshirt :  //12
+                        drawView.setClothFlag(12);
+                        break ;
+                    case R.id.whiteshirt2 :  //13
+                        drawView.setClothFlag(13);
+                        break ;
+                    case R.id.blackdress :  //14
+                        drawView.setClothFlag(14);
+                        break ;
+                    case R.id.denimdress :  //15
+                        drawView.setClothFlag(15);
+                        break ;
+                    case R.id.flowerdress :  //16
+                        drawView.setClothFlag(16);
+                        break ;
+                    case R.id.hmgoepprod : //17
+                        drawView.setClothFlag(17);
+                        break ;
+                    case R.id.opencoat :  //18
+                        drawView.setClothFlag(18);
                         break ;
                 }
             }
