@@ -98,22 +98,6 @@
                 android:layout_marginBottom="20dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/knit1" />
-            <ImageView
-                android:id="@+id/knit2"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/knit2" />
-            <ImageView
-                android:id="@+id/knit3"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/knit3" />
 
             <ImageView
                 android:id="@+id/whiteshirt2"
@@ -152,14 +136,6 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/opencoat" />
 
-            <ImageView
-                android:id="@+id/mj"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/mj" />
 
         </LinearLayout>
     </LinearLayout>

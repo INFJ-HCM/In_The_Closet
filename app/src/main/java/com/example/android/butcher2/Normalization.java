@@ -37,7 +37,7 @@ public class Normalization {
         float len = 0;
         float avg = 0;
 
-        if(shoulderLength.size() > 15) { //15개가 쌓이면 정규화 시작
+        if(shoulderLength.size() > 8) { //8개가 쌓이면 정규화 시작
             for(int i=0; i<shoulderLength.size(); i++) {
                 len += shoulderLength.get(i);
             }
@@ -55,7 +55,7 @@ public class Normalization {
 
         PointF avg = new PointF();
 
-        if(neckList.size() > 10) { // 10개 이상 쌓이면
+        if(neckList.size() > 8) { // 8개 이상 쌓이면
             for(int i=0; i<neckList.size(); i++) {
                 x += neckList.get(i).x;
                 y += neckList.get(i).y;
@@ -79,7 +79,7 @@ public class Normalization {
     }
 
     public boolean checkArea () { // 옷이 그려지는 영역 지정 neck 값을 기준으로
-        if(neck.x >= (displayWidth * 0.25) && neck.x <= ((double)displayWidth * 0.75) && neck.y >= ((double)displayHeight * 0.2) && neck.y <= ((double)displayHeight * 0.666)) {
+        if(neck.x >= (displayWidth * 0.25) && neck.x <= ((double)displayWidth * 0.75) && neck.y <= ((double)displayHeight * 0.666)) {
             Log.e("CheckArea", "true");
             return true;
         }
