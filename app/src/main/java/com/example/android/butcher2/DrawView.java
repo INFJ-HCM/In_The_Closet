@@ -3,7 +3,10 @@ package com.example.android.butcher2;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import org.opencv.android.FpsMeter;
 
 public class DrawView extends View {
+
     private static final String TAG = "PCH :"; //PCH
     private int mRatioWidth  = 0;
     private int mRatioHeight  = 0;
@@ -29,7 +33,7 @@ public class DrawView extends View {
 
     private int clothFlag = -1;
     private Bitmap clothBitmap = null;
-
+    public static boolean ondraw = false;
     private Bitmap captureview = null;
     private boolean captureFlag = false;
 
@@ -106,10 +110,6 @@ public class DrawView extends View {
         requestLayout();
     }
 
-    public void setCaptureview (Bitmap bitmap) {
-        captureview = bitmap;
-        captureFlag = true;
-    }
 
     public void setClothFlag (int flag) {
         clothFlag = flag;
@@ -253,14 +253,19 @@ public class DrawView extends View {
 
     private FpsMeter fpsMeter = new FpsMeter();
 
-    // 描写するメソッド
+    public void setCaptureview (Bitmap bitmap) {
+        if(captureview != null)
+            captureview = null;
+        captureview = bitmap;
+        captureFlag = true;
+        invalidate();//20210113 songhui ondraw강제호출
+    }
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        ondraw = true;
         initcircleRadius();
         initmPaint();
-
 
         if(captureFlag) { // 캡쳐 버튼을 누를 때만 그려라
             canvas.drawBitmap(captureview, 0, 0,null);
@@ -271,20 +276,20 @@ public class DrawView extends View {
         if(clothFlag == -1) {
             return;
         }
-        /*
-        문재식 Fps 그리기
-        */
-        //fpsMeter.measure();
-       // fpsMeter.draw(canvas, 500, 200);
-
-        if (mDrawPoint.isEmpty()) {
-            return;
-        }
-
-
-        PointF prePointF = null;
-        mPaint.setColor((int)0xff6fa8dc);
-        PointF p1 = mDrawPoint.get(1);
+//        /*
+//        문재식 Fps 그리기
+//        */
+//        //fpsMeter.measure();
+//       // fpsMeter.draw(canvas, 500, 200);
+//
+//        if (mDrawPoint.isEmpty()) {
+//            return;
+//        }
+//
+//
+//        PointF prePointF = null;
+//        mPaint.setColor((int)0xff6fa8dc);
+//        PointF p1 = mDrawPoint.get(1);
 
 //        for (int i = 0; i < mDrawPoint.size(); i++) {
 //            if (i == 1) continue;

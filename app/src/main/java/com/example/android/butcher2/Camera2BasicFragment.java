@@ -127,7 +127,7 @@ public class Camera2BasicFragment extends Fragment
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
 
-    //효과음
+    //효과음 songhui
     SoundPool soundPool;
     SoundManager soundManager;
     boolean play;
@@ -550,20 +550,20 @@ public class Camera2BasicFragment extends Fragment
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
-        //효과음
+        //효과음 songhui
         //롤리팝 이상 버전일 경우
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             soundPool = new SoundPool.Builder().build();
         }else{
             //롤리팝 이하 버전일 경우
-            //new SoundPool(1번,2번,3번)
-            //1번 - 음악 파일 갯수
-            //2번 - 스트림 타입
-            //3번 - 음질
+           // new SoundPool(1번,2번,3번)
+           // 1번 - 음악 파일 갯수
+          //  2번 - 스트림 타입
+           // 3번 - 음질
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         }
         soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
-        soundManager.addSound(0,R.raw.shot);
+        soundManager.addSound(0,R.raw.shot);//효과음 songhui
         /**
         * 음성인식파트
         */
@@ -682,12 +682,24 @@ public class Camera2BasicFragment extends Fragment
                 countView.setText(String.valueOf(count));
                 count--;
             }
-
+//            //효과음 실행 함수 20210113 songhui
+//            public void shot(){
+//                //효과음 실행되는 부분 songhui
+//                if(!play){
+//                    playSoundId=soundManager.playSound(0);
+//                    play = true;
+//                }else{
+//                    soundManager.pauseSound(0);
+//                    play = false;
+//                }
+//            }
             @Override
             public void onFinish() {
+                //20210113songhui 스크린샷버튼 눌렀을 때 효과음
                 if(!play){
                     playSoundId=soundManager.playSound(0);
-                    play = true;
+                    System.out.println("소리남"+play);
+                    play = false;
                 }else{
                     soundManager.pauseSound(0);
                     play = false;
@@ -706,6 +718,9 @@ public class Camera2BasicFragment extends Fragment
 
             @Override
             public void onFinish() {
+
+                screenShot.screenShot(textureView, drawView, getActivity());
+                toastText.setVisibility(View.VISIBLE);
                 toastText.setVisibility(View.GONE);
             }
         };
@@ -872,14 +887,14 @@ public class Camera2BasicFragment extends Fragment
 
             if(!play){
                 playSoundId=soundManager.playSound(0);
-                play = true;
+                System.out.println("소리남"+play);
+                play = false;
             }else{
                 soundManager.pauseSound(0);
                 play = false;
+                System.out.println("소리안남"+play);
             }
-            System.out.println("함수호출 전");
             screenShot.screenShot(textureView, drawView, getActivity());
-            System.out.println("함수호출 후");
             toastText.setVisibility(View.VISIBLE);
         }
     }
