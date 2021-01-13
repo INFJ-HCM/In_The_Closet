@@ -787,12 +787,27 @@ public class Camera2BasicFragment extends Fragment
             }
         });
 
+        //#
         none.setOnClickListener(onClickListener) ;
         amiMtm.setOnClickListener(onClickListener) ;
         shirt.setOnClickListener(onClickListener) ;
         dress.setOnClickListener(onClickListener) ;
         blackCoat.setOnClickListener(onClickListener) ;
         redCoat.setOnClickListener(onClickListener) ;
+        brownknit.setOnClickListener(onClickListener) ;
+        knit1.setOnClickListener(onClickListener) ;
+        knit2.setOnClickListener(onClickListener) ;
+        knit3.setOnClickListener(onClickListener) ;
+        cardigan_narrow.setOnClickListener(onClickListener) ;
+        cardigan_wide.setOnClickListener(onClickListener) ;
+        knitvest.setOnClickListener(onClickListener) ;
+        whiteshirt.setOnClickListener(onClickListener) ; //12
+        whiteshirt2.setOnClickListener(onClickListener) ; //13
+        blackdress.setOnClickListener(onClickListener) ; //14
+        denimdress.setOnClickListener(onClickListener) ; //15
+        flowerdress.setOnClickListener(onClickListener) ; //16
+        hmgoepprod.setOnClickListener(onClickListener) ; //17
+        opencoat.setOnClickListener(onClickListener) ; //18
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
