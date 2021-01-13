@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -25,12 +26,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.android.butcher2.support.PermissionSupport;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Locale;
 
 //songhui20201128
 public class StartActivity extends Activity {
+    private PermissionSupport permission;
 
     final int PERMISSIONS_REQUEST_CODE = 1;
 
@@ -42,7 +46,7 @@ public class StartActivity extends Activity {
     TextToSpeech tts;
 
     // 화면 처리용
-    Button btnSttStart;
+    Button btnSttStart; //사용안함
     EditText txtInMsg;
     EditText txtSystem;
 
@@ -52,57 +56,59 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        //음성인식
-        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getApplicationContext().getPackageName());
-        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
-        mRecognizer=SpeechRecognizer.createSpeechRecognizer(StartActivity.this);
-        mRecognizer.setRecognitionListener(listener);
+        permissionCheck();
+//        //음성인식
+//        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+//        SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,getApplicationContext().getPackageName());
+//        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
+//        mRecognizer=SpeechRecognizer.createSpeechRecognizer(StartActivity.this);
+//        mRecognizer.setRecognitionListener(listener);
 
-        //음성출력 생성, 리스너 초기화
-        tts=new TextToSpeech(StartActivity.this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status!=android.speech.tts.TextToSpeech.ERROR){
-                    tts.setLanguage(Locale.KOREAN);
-                }
-            }
-        });
-        //버튼설정
-        btnSttStart=(Button)findViewById(R.id.btn_stt_start);
-        btnSttStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("음성인식 시작!");
-                if(ContextCompat.checkSelfPermission(StartActivity.this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
-                    ActivityCompat.requestPermissions(StartActivity.this,new String[]{Manifest.permission.RECORD_AUDIO},1);
-                    //권한을 허용하지 않는 경우
-                }else{
-                    //권한을 허용한 경우
-                    try {
-                        mRecognizer.startListening(SttIntent);
-                    }catch (SecurityException e){e.printStackTrace();}
-                }
-            }
-        });
-        txtInMsg=(EditText)findViewById(R.id.txtInMsg);
-        txtSystem=(EditText)findViewById(R.id.txtSystem);
-        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
-                tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
-                btnSttStart.performClick();
-            }
-        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+//        //음성출력 생성, 리스너 초기화
+//        tts=new TextToSpeech(StartActivity.this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if(status!=android.speech.tts.TextToSpeech.ERROR){
+//                    tts.setLanguage(Locale.KOREAN);
+//                }
+//            }
+//        });
+//        //버튼설정
+//        btnSttStart=(Button)findViewById(R.id.btn_stt_start);
+//        btnSttStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println("음성인식 시작!");
+//                if(ContextCompat.checkSelfPermission(StartActivity.this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
+//                    ActivityCompat.requestPermissions(StartActivity.this,new String[]{Manifest.permission.RECORD_AUDIO},1);
+//                    //권한을 허용하지 않는 경우
+//                }else{
+//                    //권한을 허용한 경우
+//                    try {
+//                        mRecognizer.startListening(SttIntent);
+//                    }catch (SecurityException e){e.printStackTrace();}
+//                }
+//            }
+//        });
+//        txtInMsg=(EditText)findViewById(R.id.txtInMsg);
+//        txtSystem=(EditText)findViewById(R.id.txtSystem);
+//        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+
+      
+//        new android.os.Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                txtSystem.setText("어플 실행됨--자동 실행-----------"+"\r\n"+txtSystem.getText());
+//                tts.speak("시작",TextToSpeech.QUEUE_FLUSH,null, "myUtteranceID");
+//                btnSttStart.performClick();
+//            }
+//        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
 
         /**==========================================================================*/
 
 
         //songhui20201128 읽기권한체크
         requestPermission();
-
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
 //            } else {
@@ -140,7 +146,30 @@ public class StartActivity extends Activity {
             }
         });
     }
+    // 권한 체크 songhui 20210110
+    private void permissionCheck(){
 
+        // SDK 23버전 이하 버전에서는 Permission이 필요하지 않습니다.
+        if(Build.VERSION.SDK_INT >= 23){
+            // 방금 전 만들었던 클래스 객체 생성
+            permission = new PermissionSupport(this, this);
+
+            // 권한 체크한 후에 리턴이 false로 들어온다면
+            if (!permission.checkPermission()){
+                // 권한 요청을 해줍니다.
+                permission.requestPermission();
+            }
+        }
+    }
+    // Request Permission에 대한 결과 값을 받아올 수 있습니다.
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // 여기서도 리턴이 false로 들어온다면 (사용자가 권한 허용을 거부하였다면)
+        if(!permission.permissionResult(requestCode, permissions, grantResults)){
+            // 다시 Permission 요청을 걸었습니다.
+            permission.requestPermission();
+        }
+    }
     private void requestPermission() {
         boolean shouldProviceRationale =
                 ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE);//사용자가 이전에 거절한적이 있어도 true 반환
@@ -157,7 +186,7 @@ public class StartActivity extends Activity {
             makeDir();
         }
     }
-
+//권한체크 끝
     public void makeDir() {
         String path = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY).getPath();
         Log.e("path", path);

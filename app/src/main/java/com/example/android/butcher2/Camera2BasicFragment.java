@@ -48,9 +48,12 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.AudioManager;
 import android.media.Image;
 import android.media.ImageReader;
+import android.media.SoundPool;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -107,6 +110,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 
+
 /**
  * Basic fragments for the Camera.
  */
@@ -123,9 +127,11 @@ public class Camera2BasicFragment extends Fragment
     private ViewGroup layoutBottom;
     private ImageClassifier classifier;
 
-
-
-
+    //효과음
+    SoundPool soundPool;
+    SoundManager soundManager;
+    boolean play;
+    int playSoundId;
 
 
     /**
@@ -544,7 +550,20 @@ public class Camera2BasicFragment extends Fragment
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
-
+        //효과음
+        //롤리팝 이상 버전일 경우
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            soundPool = new SoundPool.Builder().build();
+        }else{
+            //롤리팝 이하 버전일 경우
+            //new SoundPool(1번,2번,3번)
+            //1번 - 음악 파일 갯수
+            //2번 - 스트림 타입
+            //3번 - 음질
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
+        }
+        soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
+        soundManager.addSound(0,R.raw.shot);
         /**
         * 음성인식파트
         */
@@ -568,15 +587,18 @@ public class Camera2BasicFragment extends Fragment
         //버튼설정
         sttStart=(Button)view.findViewById(R.id.sttStart);
         sttStart.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 System.out.println("음성인식 시작!");
+
                 if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},1);
                     //권한을 허용하지 않는 경우
                 }else{
                     //권한을 허용한 경우
                     try {
+
                         mRecognizer.startListening(SttIntent);
                     }catch (SecurityException e){e.printStackTrace();}
                 }
@@ -586,14 +608,16 @@ public class Camera2BasicFragment extends Fragment
        // txtInMsg=(EditText)view.findViewById(R.id.txtInMsg);
         //txtSystem=(EditText)view.findViewById(R.id.txtSystem);
 
-        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
-                sttStart.performClick();
-            }
-        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+
+//        //어플이 실행되면 자동으로 1초뒤에 음성 인식 시작
+//        new android.os.Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                txtSystem = "어플 실행됨--자동 실행-----------"+"\r\n"+ txtSystem;
+//                sttStart.performClick();
+//            }
+//        },1000);//바로 실행을 원하지 않으면 지워주시면 됩니다
+
 
         /**==========================================================================*/
 
@@ -661,6 +685,13 @@ public class Camera2BasicFragment extends Fragment
 
             @Override
             public void onFinish() {
+                if(!play){
+                    playSoundId=soundManager.playSound(0);
+                    play = true;
+                }else{
+                    soundManager.pauseSound(0);
+                    play = false;
+                }
                 countView.setVisibility(View.GONE);
                 screenShot.screenShot(textureView, drawView, getActivity());
                 countDownToast.start();
@@ -719,10 +750,11 @@ public class Camera2BasicFragment extends Fragment
 
 
     /**
-     * 음성 인식
+     * 음성 인식 (Start)
      */
     private RecognitionListener recognitionListener=new RecognitionListener() {
         @Override
+
         public void onReadyForSpeech(Bundle bundle) {
             txtSystem = "";
             txtSystem = "onReadyForSpeech..........."+"\r\n"+txtSystem;
@@ -837,7 +869,18 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
+
+            if(!play){
+                playSoundId=soundManager.playSound(0);
+                play = true;
+            }else{
+                soundManager.pauseSound(0);
+                play = false;
+            }
+            System.out.println("함수호출 전");
             screenShot.screenShot(textureView, drawView, getActivity());
+            System.out.println("함수호출 후");
+            toastText.setVisibility(View.VISIBLE);
         }
     }
 
@@ -866,7 +909,7 @@ public class Camera2BasicFragment extends Fragment
         }
     }
 
-    /**================================== 음성인식 =========================================*/
+    /**================================== 음성인식 (End) =========================================*/
 
     /**
      * Load the model and labels.

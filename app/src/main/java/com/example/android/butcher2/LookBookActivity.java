@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,16 +25,18 @@ import java.util.Iterator;
 public class LookBookActivity extends Activity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager; //LinearLayoutManager로 변경
     private ArrayList<MyData> myDataset;
     private ArrayList<Integer> imgID = new ArrayList<Integer>();
 
+    TextView empty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lookbook);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        empty = (TextView)findViewById(R.id.empty);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -40,13 +44,14 @@ public class LookBookActivity extends Activity {
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true); //recyvlerview 뒤에서부터 보여주기(1)
+        mLayoutManager.setStackFromEnd(true); //recyvlerview 뒤에서부터 보여주기(1)
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
         myDataset = new ArrayList<>();
         mAdapter = new LookBookAdapter(myDataset);
         mRecyclerView.setAdapter(mAdapter);
-
         readFile();
 
         Iterator<Integer> idIterator = imgID.iterator();
@@ -54,6 +59,14 @@ public class LookBookActivity extends Activity {
             System.out.println(idIterator.next());
         }
 
+
+        empty.setVisibility(View.GONE);
+
+        if (myDataset.size() <= 0) {
+            System.out.println("TextView를 지우자.");
+            empty.setVisibility(View.VISIBLE);
+            //setContentView(R.layout.empty_lookbook);
+        }
 //        myDataset.add(new MyData("#InsideOut", R.drawable.camera_button2));
 //        myDataset.add(new MyData("#Mini", R.drawable.cloth));
 //        myDataset.add(new MyData("#ToyStroy", R.drawable.short_sleve));
@@ -69,7 +82,7 @@ public class LookBookActivity extends Activity {
         String compareName = "";
 
         Uri externalUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
+        System.out.println(externalUri);
 
         String[] projection = new String[]{
                 MediaStore.Images.Media._ID,
@@ -85,8 +98,9 @@ public class LookBookActivity extends Activity {
         }
 
         do {
-            compareName = cursor.getString(1).substring(0, 14); // #In_The_Closet만 자름
-            Log.e("compareName", compareName);
+            compareName = cursor.getString(1).substring(0,14); // #In_The_Closet만 자름
+            Log.e("compareName", compareName);//지금여기까지 들어옴
+
             if(compareName.equals(token)) { // 맞는 이름인지 비교
                 String contentUrl = externalUri.toString() + "/" + cursor.getString(0);
                 Log.e("cursor.getString(1)", cursor.getString(1));
@@ -95,10 +109,16 @@ public class LookBookActivity extends Activity {
                     InputStream is = getContentResolver().openInputStream(Uri.parse(contentUrl));
 
                     if (is != null) {
+                        //들어옴
                         Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        //System.out.println(bitmap);
                         myDataset.add(new MyData(cursor.getString(1), bitmap));
+                        //System.out.println(myDataset);
                         imgID.add(cursor.getInt(0)); // Add a bitmap
+                        //System.out.println(imgID);
                         is.close();
+
+                        //여기까지도됨
                     }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
