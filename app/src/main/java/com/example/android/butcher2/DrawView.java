@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.BoringLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +37,17 @@ public class DrawView extends View {
     private Bitmap cameraView;
     private boolean captureFlag = false;
 
+    private int displayWidth;           // 최대 화면 넓이 (해상도)
+    private int displayHeight;       // 최대 화면 높이
+
+
     Normalization normalization = new Normalization();
+
+    PointF normalNeckPoint = new PointF();
+    PointF neckPoint = new PointF();
+
+    float shoulderLength = 0;
+    float normalShoulderLength = 0;
 
     private BitmapDrawable[] clothArray = {
             (BitmapDrawable)getResources().getDrawable(R.drawable.amimtm, null),
@@ -104,7 +115,11 @@ public class DrawView extends View {
         }
     }
 
-    // 画像のサイズをセットするメソッド
+    public void setDisplay (int width, int height) {
+        displayWidth = width;
+        displayHeight = height;
+    }
+
     public void setImgSize(int width, int height) {
         mImgWidth  = width;
         mImgHeight = height;
@@ -178,7 +193,19 @@ public class DrawView extends View {
                     break;
 
             }
-            baseImageSize = (float)(shoulderWidth * n); // 옷 사이즈 = 어깨사이 넓이 * n
+
+            if(normalization.shoulderLength.size() > 15) {
+                normalShoulderLength = normalization.sizeNormalization();
+            }
+
+            if(shoulderLength == 0 ) {
+                shoulderLength = shoulderWidth;
+            }
+            else {
+                shoulderLength = normalShoulderLength;
+            }
+
+            baseImageSize = (float)(shoulderLength * n); // 옷 사이즈 = 어깨사이 넓이 * n
             baseNum = baseImageSize / clothWidth; // 기준 사이즈 배수 = 기준 사이즈 / 옷 사이즈
             Log.e("배율", String.valueOf(baseNum));
         }
@@ -220,6 +247,8 @@ public class DrawView extends View {
         initcircleRadius();
         initmPaint();
 
+        normalization.setDisplay(displayWidth, displayHeight);
+
         /*
         문재식 Fps 그리기
         */
@@ -232,9 +261,11 @@ public class DrawView extends View {
         }
 
 
-        if (mDrawPoint.isEmpty() || clothFlag == -1) {
+        if( clothFlag == -1 || mDrawPoint.isEmpty()) {
             return;
         }
+
+        // 옷을 선택하지 않거나, 인식이 되지 않거나, 지정된 영역 안에 들어가 있지 않으면 옷을 그리지 않음
 
 //        PointF prePointF = null;
 //        mPaint.setColor((int)0xff6fa8dc);
@@ -280,11 +311,32 @@ public class DrawView extends View {
 //            canvas.drawCircle(mDrawPoint.get(i).x, mDrawPoint.get(i).y,circleRadius, mPaint);
 //        }
 
-        chooseCloth();
 
+        normalization.setPoint(mDrawPoint.get(2), mDrawPoint.get(5), mDrawPoint.get(1));
+
+
+        if(normalization.neckList.size() > 10) {
+            normalNeckPoint = normalization.posNormalization();
+        }
+
+        if(normalNeckPoint.x == 0 ) {
+            neckPoint = mDrawPoint.get(1);
+        }
+        else {
+            neckPoint = normalNeckPoint;
+        }
+
+        Log.e("neckPoint : ", neckPoint.x + ", " + neckPoint.y);
+
+        if(!normalization.checkArea()) { // 지정 영역 neck 값이 없으면 옷 안 그려
+            neckPoint.set((float)displayWidth / 2, (float)displayHeight / 3);
+        }
+
+        chooseCloth();
         switch (clothFlag) {
+
             case 0: // ami mtm
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 70,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 70,null);
                 break;
 
             case 1: //shirt

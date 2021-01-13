@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,15 +33,15 @@ public class StartActivity extends Activity {
         permissionCheck();
 
         //songhui20201101 로딩 액티비티 실행
-        Intent intent=new Intent(this,Loading.class);
+        Intent intent = new Intent(this, Loading.class);
 
-        ImageButton camerabutton = (ImageButton)findViewById(R.id.btn_camera);
-        camerabutton.setOnClickListener(new View.OnClickListener(){
+        ImageButton camerabutton = (ImageButton) findViewById(R.id.btn_camera);
+        camerabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(),CameraActivity.class);
-            startActivity(intent);
-        }
+                Intent intent = new Intent(getApplicationContext(), CameraActivity.class);
+                startActivity(intent);
+            }
         });
 
         //songhui20201128 지정폴더 열기 - 안드로이드10 q적용X

@@ -199,8 +199,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="80dp"
-            android:id="@+id/toast_text"
-            >
+            android:id="@+id/toast_text">
+
             <TextView
                 android:id="@+id/toast"
                 android:layout_width="wrap_content"
@@ -215,22 +215,6 @@
                 android:visibility="gone"
                 android:textSize="20sp" />
         </LinearLayout>
-
-
-        <ImageView
-            android:id="@+id/imgCamera"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="left|bottom"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <ImageView
-            android:id="@+id/imgDraw"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="right|bottom"
-            tools:srcCompat="@tools:sample/avatars" />
-
     </FrameLayout>
 
 
