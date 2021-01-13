@@ -95,35 +95,37 @@ public class LookBookActivity extends Activity {
         }
 
         do {
-            compareName = cursor.getString(1).substring(0,14); // #In_The_Closet만 자름
-            Log.e("compareName", compareName);//지금여기까지 들어옴
+            Log.e("cursor", cursor.getString(1));
+            if(cursor.getString(1).length() >= 14) { // 길이가 14자 이내이면 그냥 패스
+                compareName = cursor.getString(1).substring(0, 14); // #In_The_Closet만 자름
+                Log.e("compareName", compareName);//지금여기까지 들어옴
 
-            if(compareName.equals(token)) { // 맞는 이름인지 비교
-                String contentUrl = externalUri.toString() + "/" + cursor.getString(0);
-                Log.e("cursor.getString(1)", cursor.getString(1));
+                if (compareName.equals(token)) { // 맞는 이름인지 비교
+                    String contentUrl = externalUri.toString() + "/" + cursor.getString(0);
+                    Log.e("cursor.getString(1)", cursor.getString(1));
 
-                try {
-                    InputStream is = getContentResolver().openInputStream(Uri.parse(contentUrl));
+                    try {
+                        InputStream is = getContentResolver().openInputStream(Uri.parse(contentUrl));
 
-                    if (is != null) {
-                        //들어옴
-                        Bitmap bitmap = BitmapFactory.decodeStream(is);
-                        //System.out.println(bitmap);
-                        myDataset.add(new MyData(cursor.getString(1), bitmap));
-                        //System.out.println(myDataset);
-                        imgID.add(cursor.getInt(0)); // Add a bitmap
-                        //System.out.println(imgID);
-                        is.close();
+                        if (is != null) {
+                            //들어옴
+                            Bitmap bitmap = BitmapFactory.decodeStream(is);
+                            //System.out.println(bitmap);
+                            myDataset.add(new MyData(cursor.getString(1), bitmap));
+                            //System.out.println(myDataset);
+                            imgID.add(cursor.getInt(0)); // Add a bitmap
+                            //System.out.println(imgID);
+                            is.close();
 
-                        //여기까지도됨
+                            //여기까지도됨
+                        }
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
-
         } while (cursor.moveToNext());
     }
 }
