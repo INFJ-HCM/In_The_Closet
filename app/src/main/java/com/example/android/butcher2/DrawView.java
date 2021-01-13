@@ -369,7 +369,7 @@ public class DrawView extends View {
 //        }
 
 
-        normalization.setPoint(mDrawPoint.get(2), mDrawPoint.get(5), mDrawPoint.get(1));
+        normalization.setPoint(mDrawPoint.get(2), mDrawPoint.get(5), mDrawPoint.get(1)); // 실시간 좌표 전송
 
 
         if(normalization.neckList.size() > 10) {
@@ -397,41 +397,40 @@ public class DrawView extends View {
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 70,null);
                 break;
             case 1: //shirt
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 40,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 40,null);
                 break;
             case 2: // dress
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 100,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 100,null);
                 break;
             case 3: // black coat
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 50,null);
                 break;
             case 4: // red coat
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 50,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+20, neckPoint.y - 50,null);
                 break;
             case 5: // knit1
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 30,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+20, neckPoint.y - 30,null);
                 break;
             case 6: // knit2
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+10, mDrawPoint.get(1).y - 30,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+10, neckPoint.y - 30,null);
                 break;
             case 7: // knit3
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 30,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 30,null);
                 break;
             case 8: //whiteshirt2
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 35,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+20, neckPoint.y - 35,null);
                 break;
             case 9: // blackdress
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+30, mDrawPoint.get(1).y - 20,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+30, neckPoint.y - 20,null);
                 break;
-
             case 10: // denimdress
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 40,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+20, neckPoint.y - 40,null);
                 break;
             case 11: // opencoat
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+80, mDrawPoint.get(1).y - 30,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+80, neckPoint.y - 30,null);
                 break;
             case 12: // mj
-                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 50,null);
                 break;
         }
     }

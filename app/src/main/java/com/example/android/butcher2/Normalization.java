@@ -22,7 +22,7 @@ public class Normalization {
     public ArrayList<PointF> neckList = new ArrayList<>();
 
 
-    public void setPoint (PointF ls, PointF rs, PointF nk) {
+    public void setPoint (PointF ls, PointF rs, PointF nk) { // 실시간 좌표
         leftShoulder = ls;
         rightSholder = rs;
         neck = nk;
@@ -33,20 +33,21 @@ public class Normalization {
         }
     }
 
-    public float sizeNormalization() {
+    public float sizeNormalization() { // 옷 사이즈 정규화
         float len = 0;
         float avg = 0;
-        if(shoulderLength.size() > 15) {
+
+        if(shoulderLength.size() > 15) { //15개가 쌓이면 정규화 시작
             for(int i=0; i<shoulderLength.size(); i++) {
                 len += shoulderLength.get(i);
             }
-            avg = len / shoulderLength.size();
+            avg = len / shoulderLength.size(); // 평균 구하고
         }
-        shoulderLength.clear();
+        shoulderLength.clear(); // 배열 비우기
         return avg;
     }
 
-    public PointF posNormalization () {
+    public PointF posNormalization () { // 옷 위치 정규화
         float x = 0;
         float y = 0;
         float avgx = 0;
@@ -54,7 +55,7 @@ public class Normalization {
 
         PointF avg = new PointF();
 
-        if(neckList.size() > 10) { // 20개 이상 쌓이면
+        if(neckList.size() > 10) { // 10개 이상 쌓이면
             for(int i=0; i<neckList.size(); i++) {
                 x += neckList.get(i).x;
                 y += neckList.get(i).y;
@@ -64,7 +65,7 @@ public class Normalization {
             Log.e("avgx", String.valueOf(avgx));
             Log.e("avgy", String.valueOf(avgy));
         }
-        neckList.clear();
+        neckList.clear(); // 배열 비우고
 
         Log.e("neckList 크기", String.valueOf(neckList.size()));
 
@@ -72,13 +73,13 @@ public class Normalization {
         return avg;
     }
 
-    public void setDisplay (int width, int height) {
+    public void setDisplay (int width, int height) { // DrawView를 기준으로 화면 사이즈
         displayWidth = width;
         displayHeight = height;
     }
 
     public boolean checkArea () { // 옷이 그려지는 영역 지정 neck 값을 기준으로
-        if(neck.x >= (displayWidth * 0.25) && neck.x <= ((double)displayWidth * 0.75) && neck.y >= ((double)displayHeight * 0.25) && neck.y <= ((double)displayHeight * 0.666)) { //1200x1920 기준 x: 300~900, y: 480~1278.72
+        if(neck.x >= (displayWidth * 0.25) && neck.x <= ((double)displayWidth * 0.75) && neck.y >= ((double)displayHeight * 0.2) && neck.y <= ((double)displayHeight * 0.666)) {
             Log.e("CheckArea", "true");
             return true;
         }
