@@ -60,7 +60,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-import androidx.annotation.NavigationRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -109,6 +108,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
 
 
 /**
@@ -174,12 +174,21 @@ public class Camera2BasicFragment extends Fragment
     private DrawerLayout drawerLayout;
     private View drawerView;
     private Button cloth;
-    private ImageView none;
-    private ImageView amiMtm;
-    private ImageView shirt;
-    private ImageView dress;
-    private ImageView blackCoat;
-    private ImageView redCoat;
+    private ImageView none;//0
+    private ImageView amiMtm;//1
+    private ImageView shirt;//2
+    private ImageView dress;//3
+    private ImageView blackCoat;//4
+    private ImageView redCoat;//5
+    private ImageView knit1; //6
+    private ImageView knit2; //7
+    private ImageView knit3; //8
+    private ImageView whiteshirt2; //9
+    private ImageView blackdress; //10
+    private ImageView denimdress; //11
+    private ImageView opencoat; //12
+    private ImageView mj; //13
+
 
     /**
      * Tag for the {@link Log}.
@@ -573,49 +582,46 @@ public class Camera2BasicFragment extends Fragment
         //soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
         //soundManager.addSound(0,R.raw.shot);//효과음 songhui
         /**
-         * 음성인식파트
-         */
+        * 음성인식파트
+        */
         //음성인식
-        SttIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getApplicationContext().getPackageName());
-        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ko-KR");//한국어 사용
-        mRecognizer = SpeechRecognizer.createSpeechRecognizer(getActivity());
+        SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
+        mRecognizer=SpeechRecognizer.createSpeechRecognizer(getActivity());
         mRecognizer.setRecognitionListener(recognitionListener);
 
         //음성출력 생성, 리스너 초기화
         tts = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if (status != android.speech.tts.TextToSpeech.ERROR) {
+                if(status!=android.speech.tts.TextToSpeech.ERROR){
                     tts.setLanguage(Locale.KOREAN);
                 }
             }
         });
 
         //버튼설정
-        sttStart = (Button) view.findViewById(R.id.sttStart);
+        sttStart=(Button)view.findViewById(R.id.sttStart);
         sttStart.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 System.out.println("음성인식 시작!");
 
-                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},1);
                     //권한을 허용하지 않는 경우
-                } else {
+                }else{
                     //권한을 허용한 경우
                     try {
-
                         mRecognizer.startListening(SttIntent);
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                    }
+                    }catch (SecurityException e){e.printStackTrace();}
                 }
             }
         });
 
-        // txtInMsg=(EditText)view.findViewById(R.id.txtInMsg);
+       // txtInMsg=(EditText)view.findViewById(R.id.txtInMsg);
         //txtSystem=(EditText)view.findViewById(R.id.txtSystem);
 
 
@@ -635,17 +641,25 @@ public class Camera2BasicFragment extends Fragment
          * 옷 선택
          */
         cloth = (Button) view.findViewById(R.id.cloth);
-        drawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        drawerLayout = (DrawerLayout)view.findViewById(R.id.drawer_layout);
         drawerView = (View) view.findViewById(R.id.drawerView);
         drawerLayout.setDrawerListener(listener);
         toastText = view.findViewById(R.id.toast);
 
-        none = (ImageView) view.findViewById(R.id.none);
-        amiMtm = (ImageView) view.findViewById(R.id.ami_mtm);
-        shirt = (ImageView) view.findViewById(R.id.shirt);
-        dress = (ImageView) view.findViewById(R.id.dress);
-        blackCoat = (ImageView) view.findViewById(R.id.black_coat);
-        redCoat = (ImageView) view.findViewById(R.id.red_coat);
+        none = (ImageView)view.findViewById(R.id.none);//0
+        amiMtm = (ImageView)view.findViewById(R.id.ami_mtm);//1
+        shirt = (ImageView)view.findViewById(R.id.shirt);//2
+        dress = (ImageView)view.findViewById(R.id.dress);//3
+        blackCoat = (ImageView)view.findViewById(R.id.black_coat);//4
+        redCoat = (ImageView)view.findViewById(R.id.red_coat);//5
+        knit1 = (ImageView)view.findViewById(R.id.knit1);//6
+        knit2 = (ImageView)view.findViewById(R.id.knit2);//7
+        knit3 = (ImageView)view.findViewById(R.id.knit3);//8
+        whiteshirt2 = (ImageView)view.findViewById(R.id.whiteshirt2); //9
+        blackdress = (ImageView)view.findViewById(R.id.blackdress); //10
+        denimdress = (ImageView)view.findViewById(R.id.denimdress); //11
+        opencoat = (ImageView)view.findViewById(R.id.opencoat); //12
+        mj = (ImageView)view.findViewById(R.id.mj); //13
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -668,10 +682,34 @@ public class Camera2BasicFragment extends Fragment
                         break;
                     case R.id.red_coat:
                         drawView.setClothFlag(4);
-                        break;
+                        break ;
+                    case R.id.knit1 :
+                        drawView.setClothFlag(5);
+                        break ;
+                    case R.id.knit2 :
+                        drawView.setClothFlag(6);
+                        break ;
+                    case R.id.knit3 :
+                        drawView.setClothFlag(7);
+                        break ;
+                    case R.id.whiteshirt2 :
+                        drawView.setClothFlag(8);
+                        break ;
+                    case R.id.blackdress :
+                        drawView.setClothFlag(9);
+                        break ;
+                    case R.id.denimdress :
+                        drawView.setClothFlag(10);
+                        break ;
+                    case R.id.opencoat :
+                        drawView.setClothFlag(11);
+                        break ;
+                    case R.id.mj :
+                        drawView.setClothFlag(12);
+                        break ;
                 }
             }
-        };
+        } ;
 
         /**
          * Open Drawer
@@ -686,7 +724,7 @@ public class Camera2BasicFragment extends Fragment
         /**
          * 타이머 설정
          */
-        countDownTimer = new CountDownTimer(5000, 1000) { // 5초 카운트 다운
+        countDownTimer = new CountDownTimer(5000,1000) { // 5초 카운트 다운
             @Override
             public void onTick(long millisUntilFinished) { // 카운트 다운 동안 1초마다 -1씩 숫자 변환
                 countView.setText(String.valueOf(count));
@@ -696,14 +734,14 @@ public class Camera2BasicFragment extends Fragment
             @Override
             public void onFinish() { // 끝나면 촬영
                 //20210113songhui 스크린샷버튼 눌렀을 때 효과음
-                countView.setVisibility(View.GONE); // 카운트 다운 뷰 없애고
                 playSound(getActivity()); //찰칵 효과음
+                countView.setVisibility(View.GONE); // 카운트 다운 뷰 없애고
                 screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
                 countDownToast.start(); // 토스트 시작
             }
         };
 
-        countDownToast = new CountDownTimer(3000, 1000) {
+        countDownToast = new CountDownTimer(3000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 toastText.setVisibility(View.VISIBLE);
@@ -727,12 +765,21 @@ public class Camera2BasicFragment extends Fragment
             }
         });
 
-        none.setOnClickListener(onClickListener);
-        amiMtm.setOnClickListener(onClickListener);
-        shirt.setOnClickListener(onClickListener);
-        dress.setOnClickListener(onClickListener);
-        blackCoat.setOnClickListener(onClickListener);
-        redCoat.setOnClickListener(onClickListener);
+        none.setOnClickListener(onClickListener) ;
+        amiMtm.setOnClickListener(onClickListener) ;
+        shirt.setOnClickListener(onClickListener) ;
+        dress.setOnClickListener(onClickListener) ;
+        blackCoat.setOnClickListener(onClickListener) ;
+        redCoat.setOnClickListener(onClickListener) ;
+        knit1.setOnClickListener(onClickListener) ;
+        knit2.setOnClickListener(onClickListener) ;
+        knit3.setOnClickListener(onClickListener) ;
+        whiteshirt2.setOnClickListener(onClickListener) ;
+        blackdress.setOnClickListener(onClickListener) ;
+        denimdress.setOnClickListener(onClickListener) ;
+        opencoat.setOnClickListener(onClickListener) ;
+        mj.setOnClickListener(onClickListener) ;
+
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -757,18 +804,18 @@ public class Camera2BasicFragment extends Fragment
     /**
      * 음성 인식 (Start)
      */
-    private RecognitionListener recognitionListener = new RecognitionListener() {
+    private RecognitionListener recognitionListener=new RecognitionListener() {
         @Override
 
         public void onReadyForSpeech(Bundle bundle) {
             txtSystem = "";
-            txtSystem = "onReadyForSpeech..........." + "\r\n" + txtSystem;
+            txtSystem = "onReadyForSpeech..........."+"\r\n"+txtSystem;
         }
 
         @Override
         public void onBeginningOfSpeech() {
             txtSystem = "";
-            txtSystem = "지금부터 말을 해주세요..........." + "\r\n" + txtSystem;
+            txtSystem = "지금부터 말을 해주세요..........."+"\r\n"+txtSystem;
         }
 
         @Override
@@ -778,55 +825,55 @@ public class Camera2BasicFragment extends Fragment
         @Override
         public void onBufferReceived(byte[] bytes) {
             txtSystem = "";
-            txtSystem = "onBufferReceived..........." + "\r\n" + txtSystem;
+            txtSystem = "onBufferReceived..........."+"\r\n"+txtSystem;
         }
 
         @Override
         public void onEndOfSpeech() {
             txtSystem = "";
-            txtSystem = "onEndOfSpeech..........." + "\r\n" + txtSystem;
+            txtSystem = "onEndOfSpeech..........."+"\r\n"+txtSystem;
         }
 
         @Override
         public void onError(int error) {
             txtSystem = "";
-            txtSystem = "에러 발생..........." + "\r\n" + txtSystem;
+            txtSystem = "에러 발생..........."+"\r\n"+txtSystem;
             // 천천히 다시 말해라
             switch (error) {
                 case SpeechRecognizer.ERROR_AUDIO:
-                    txtSystem = "오디오 에러" + "\r\n" + txtSystem;
+                    txtSystem = "오디오 에러"+"\r\n"+txtSystem;
                     break;
 
                 case SpeechRecognizer.ERROR_CLIENT:
-                    txtSystem = "클라이언트 에러" + "\r\n" + txtSystem;
+                    txtSystem = "클라이언트 에러"+"\r\n"+txtSystem;
                     break;
 
                 case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
-                    txtSystem = "퍼미션 없음" + "\r\n" + txtSystem;
+                    txtSystem = "퍼미션 없음"+"\r\n"+txtSystem;
                     break;
 
                 case SpeechRecognizer.ERROR_NETWORK:
-                    txtSystem = "네트워크 에러" + "\r\n" + txtSystem;
+                    txtSystem = "네트워크 에러"+"\r\n"+txtSystem;
                     break;
 
                 case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
-                    txtSystem = "네트워크 타임아웃" + "\r\n" + txtSystem;
+                    txtSystem = "네트워크 타임아웃"+"\r\n"+txtSystem;
                     break;
 
                 case SpeechRecognizer.ERROR_NO_MATCH:
-                    txtSystem = "찾을 수 없음" + "\r\n" + txtSystem;
+                    txtSystem = "찾을 수 없음"+"\r\n"+txtSystem;
                     break;
                 case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
-                    txtSystem = "RECOGNIZER가 바쁨" + "\r\n" + txtSystem;
+                    txtSystem = "RECOGNIZER가 바쁨"+"\r\n"+txtSystem;
                     break;
                 case SpeechRecognizer.ERROR_SERVER:
-                    txtSystem = "서버가 이상함" + "\r\n" + txtSystem;
+                    txtSystem = "서버가 이상함"+"\r\n"+txtSystem;
                     break;
                 case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                    txtSystem = "말하는 시간초과" + "\r\n" + txtSystem;
+                    txtSystem = "말하는 시간초과"+"\r\n"+txtSystem;
                     break;
                 default:
-                    txtSystem = "알 수 없는 오류" + "\r\n" + txtSystem;
+                    txtSystem = "알 수 없는 오류"+"\r\n"+txtSystem;
                     break;
             }
             System.out.println(txtSystem);
@@ -834,13 +881,13 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onResults(Bundle results) {
-            String key = "";
+            String key= "";
             key = SpeechRecognizer.RESULTS_RECOGNITION;
-            ArrayList<String> mResult = results.getStringArrayList(key);
+            ArrayList<String> mResult =results.getStringArrayList(key);
             String[] rs = new String[mResult.size()];
             mResult.toArray(rs);
             txtSystem = "";
-            txtInMsg = rs[0] + "\r\n" + txtInMsg;
+            txtInMsg = rs[0]+"\r\n"+txtInMsg;
             System.out.println(txtInMsg);
             FuncVoiceOrderCheck(rs[0]);
             mRecognizer.startListening(SttIntent);
@@ -848,32 +895,32 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void onPartialResults(Bundle bundle) {
-            txtSystem = "onPartialResults..........." + "\r\n" + txtSystem;
+            txtSystem = "onPartialResults..........."+"\r\n"+txtSystem;
         }
 
         @Override
         public void onEvent(int i, Bundle bundle) {
-            txtSystem = "onEvent..........." + "\r\n" + txtSystem;
+            txtSystem = "onEvent..........."+"\r\n"+txtSystem;
         }
     };
 
     //입력된 음성 메세지 확인 후 동작 처리
-    private void FuncVoiceOrderCheck(String VoiceMsg) {
-        if (VoiceMsg.length() < 1) return;
+    private void FuncVoiceOrderCheck(String VoiceMsg){
+        if(VoiceMsg.length()<1)return;
 
-        VoiceMsg = VoiceMsg.replace(" ", "");//공백제거
+        VoiceMsg=VoiceMsg.replace(" ","");//공백제거
 
-        if (VoiceMsg.indexOf("카카오톡") > -1 || VoiceMsg.indexOf("카톡") > -1) {
+        if(VoiceMsg.indexOf("카카오톡")>-1 || VoiceMsg.indexOf("카톡")>-1){
             Intent launchIntent = getActivity().getPackageManager().getLaunchIntentForPackage("com.kakao.talk");
             startActivity(launchIntent);
             onDestroy();
         }//카카오톡 어플로 이동
 
-        if (VoiceMsg.indexOf("안녕") > -1) {
+        if(VoiceMsg.indexOf("안녕")>-1){
             FuncVoiceOut("안녕하세요");//전등을 끕니다 라는 음성 출력
         }
 
-        if (VoiceMsg.indexOf("찰칵") > -1) {
+        if(VoiceMsg.indexOf("찰칵")>-1){
             playSound(getActivity()); // 찰칵 효과음
             screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
             countDownToast.start(); // 토스트 메시지 3초
@@ -881,13 +928,14 @@ public class Camera2BasicFragment extends Fragment
     }
 
 
+
     //음성 메세지 출력용
-    private void FuncVoiceOut(String OutMsg) {
-        if (OutMsg.length() < 1) return;
-        if (!tts.isSpeaking()) {
+    private void FuncVoiceOut(String OutMsg){
+        if(OutMsg.length()<1)return;
+        if(!tts.isSpeaking()) {
             tts.setPitch(1.0f);//목소리 톤1.0
             tts.setSpeechRate(1.0f);//목소리 속도
-            tts.speak(OutMsg, TextToSpeech.QUEUE_FLUSH, null, "id1");
+            tts.speak(OutMsg,TextToSpeech.QUEUE_FLUSH,null, "id1");
         }
         //어플이 종료할때는 완전히 제거
     }
@@ -905,9 +953,7 @@ public class Camera2BasicFragment extends Fragment
     /**================================== 음성인식 (End) =========================================*/
 
 
-    /**
-     * PlaySound
-     **/
+    /** PlaySound **/
 
     public void playSound(Context context) {
         // context, resId, priority
@@ -970,21 +1016,20 @@ public class Camera2BasicFragment extends Fragment
     public void onDestroy() {
         classifier.close();
         super.onDestroy();
-        try {
+        try{
             countDownTimer.cancel();
-        } catch (Exception e) {
-        }
-        countDownTimer = null;
+        } catch (Exception e) {}
+        countDownTimer=null;
 
-        if (tts != null) {
+        if(tts!=null){
             tts.stop();
             tts.shutdown();
-            tts = null;
+            tts=null;
         }
-        if (mRecognizer != null) {
+        if(mRecognizer!=null){
             mRecognizer.destroy();
             mRecognizer.cancel();
-            mRecognizer = null;
+            mRecognizer=null;
         }
     }
 

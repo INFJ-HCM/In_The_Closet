@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.text.BoringLayout;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -50,11 +49,21 @@ public class DrawView extends View {
     float normalShoulderLength = 0;
 
     private BitmapDrawable[] clothArray = {
-            (BitmapDrawable)getResources().getDrawable(R.drawable.amimtm, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.shirt, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.dress, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.blackcoat, null),
-            (BitmapDrawable)getResources().getDrawable(R.drawable.redcoat, null),
+            (BitmapDrawable)getResources().getDrawable(R.drawable.amimtm, null), //1
+            (BitmapDrawable)getResources().getDrawable(R.drawable.shirt, null), //2
+            (BitmapDrawable)getResources().getDrawable(R.drawable.dress, null), //3
+            (BitmapDrawable)getResources().getDrawable(R.drawable.blackcoat, null), //4
+            (BitmapDrawable)getResources().getDrawable(R.drawable.redcoat, null), //5
+            (BitmapDrawable)getResources().getDrawable(R.drawable.knit1, null), //6
+            (BitmapDrawable)getResources().getDrawable(R.drawable.knit2, null), //7
+            (BitmapDrawable)getResources().getDrawable(R.drawable.knit3, null), //8
+            (BitmapDrawable)getResources().getDrawable(R.drawable.whiteshirt2, null), //9
+            (BitmapDrawable)getResources().getDrawable(R.drawable.blackdress, null), //10
+            (BitmapDrawable)getResources().getDrawable(R.drawable.denimdress, null), //11
+            (BitmapDrawable)getResources().getDrawable(R.drawable.opencoat, null), //12
+            (BitmapDrawable)getResources().getDrawable(R.drawable.mj, null), //13
+
+
     };
 
     private int mColorArray[] = {   //15개 중 0~13만 사용 총 14개 사용
@@ -157,6 +166,30 @@ public class DrawView extends View {
             case 4: // redcoat
                 bit = clothArray[4].getBitmap();
                 break;
+            case 5: // knit1
+                bit = clothArray[5].getBitmap();
+                break;
+            case 6: // knit2
+                bit = clothArray[6].getBitmap();
+                break;
+            case 7: // knit3
+                bit = clothArray[7].getBitmap();
+                break;
+            case 8: //whiteshirt2
+                bit = clothArray[8].getBitmap();
+                break;
+            case 9: //blackdress
+                bit = clothArray[9].getBitmap();
+                break;
+            case 10: //denimdress
+                bit = clothArray[10].getBitmap();
+                break;
+            case 11: //opencoat
+                bit = clothArray[11].getBitmap();
+                break;
+            case 12: //mj
+                bit = clothArray[12].getBitmap();
+                break;
         }
         clothBitmap = bit;
 
@@ -190,6 +223,30 @@ public class DrawView extends View {
                     break;
                 case 4: // red coat
                     n = 2.0;
+                    break;
+                case 5: // knit1
+                    n = 1.7;
+                    break;
+                case 6: // knit2
+                    n = 1.6;
+                    break;
+                case 7: // knit3
+                    n = 1.6;
+                    break;
+                case 8: // whiteshirt2
+                    n = 1.9;
+                    break;
+                case 9: // blakderss
+                    n = 1.7;
+                    break;
+                case 10: // denimdress
+                    n = 2.2;
+                    break;
+                case 11: // opencoat
+                    n = 2.2;
+                    break;
+                case 12: // mj
+                    n = 1.7;
                     break;
 
             }
@@ -261,7 +318,7 @@ public class DrawView extends View {
         }
 
 
-        if( clothFlag == -1 || mDrawPoint.isEmpty()) {
+        if (mDrawPoint.isEmpty() || clothFlag == -1) {
             return;
         }
 
@@ -333,24 +390,47 @@ public class DrawView extends View {
         }
 
         chooseCloth();
+
         switch (clothFlag) {
 
             case 0: // ami mtm
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 70,null);
                 break;
-
             case 1: //shirt
                 canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 40,null);
                 break;
             case 2: // dress
                 canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 100,null);
                 break;
-
             case 3: // black coat
                 canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
                 break;
-
             case 4: // red coat
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 50,null);
+                break;
+            case 5: // knit1
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 30,null);
+                break;
+            case 6: // knit2
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+10, mDrawPoint.get(1).y - 30,null);
+                break;
+            case 7: // knit3
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 30,null);
+                break;
+            case 8: //whiteshirt2
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 35,null);
+                break;
+            case 9: // blackdress
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+30, mDrawPoint.get(1).y - 20,null);
+                break;
+
+            case 10: // denimdress
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+20, mDrawPoint.get(1).y - 40,null);
+                break;
+            case 11: // opencoat
+                canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2)+80, mDrawPoint.get(1).y - 30,null);
+                break;
+            case 12: // mj
                 canvas.drawBitmap(clothBitmap, mDrawPoint.get(1).x - (clothBitmap.getWidth()/2), mDrawPoint.get(1).y - 50,null);
                 break;
         }
