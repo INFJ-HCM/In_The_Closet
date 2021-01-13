@@ -29,24 +29,25 @@ public class ScreenShot {
 
     public void screenShot(AutoFitTextureView textureView, DrawView drawView, Context context) {
         String fileName = "";
-        Bitmap bitmap=null;
-        Bitmap captureview=null;
-        bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
+
+        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
 
         drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
        
         SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss"); // 현재 시각
         Date date = new Date();
+
         drawView.buildDrawingCache(); // 옷이 그려지는 뷰 캐싱
-        captureview = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
+        Bitmap captureView = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
+
         fileName = "#In_The_Closet_" + day.format(date) + ".JPEG"; // 저장할 파일 명 시간찍는거
+
         /** After Q */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ContentValues values = new ContentValues();
             values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/*");
-            // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
-            values.put(MediaStore.Images.Media.IS_PENDING, 1);
+            values.put(MediaStore.Images.Media.IS_PENDING, 1);  // 파일을 write중이라면 다른곳에서 데이터요구를 무시하겠다는 의미입니다.
             values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/In_The_Closet"); // 새로 만들 폴더 명
             System.out.println(MediaStore.Images.Media.RELATIVE_PATH);
             ContentResolver contentResolver = context.getContentResolver();
@@ -57,7 +58,7 @@ public class ScreenShot {
                 ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(item, "w", null);
                 if (pdf == null) {
                 } else {
-                    InputStream inputStream = getImageInputStram(captureview);
+                    InputStream inputStream = getImageInputStram(captureView);
                     byte[] strToByte = getBytes(inputStream);
                     FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
                     fos.write(strToByte);
@@ -72,8 +73,7 @@ public class ScreenShot {
                 e.printStackTrace();
             }
             values.clear();
-            // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
-            values.put(MediaStore.Images.Media.IS_PENDING, 0);
+            values.put(MediaStore.Images.Media.IS_PENDING, 0); // 파일을 모두 write하고 다른곳에서 사용할 수 있도록 0으로 업데이트를 해줍니다.
             contentResolver.update(item, values, null, null);
 
         }
@@ -82,8 +82,6 @@ public class ScreenShot {
         else {
             String path = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() +
                     "/In_The_Closet";
-
-            Log.e("path", path);
 
             File file = new File(path); // 파일 생성
             if (!file.exists() || file.isDirectory()) {
@@ -94,7 +92,7 @@ public class ScreenShot {
 
             try {
                 fos = new FileOutputStream(path + file); // 파일명 지정
-                captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                captureView.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + fileName))); // 폴더 위치
                 Log.e("File", "file://" + path + "/Look" + day.format(date) + ".JPEG");
 

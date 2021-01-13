@@ -130,8 +130,6 @@ public class Camera2BasicFragment extends Fragment
     //효과음 songhui
     SoundPool soundPool;
     SoundManager soundManager;
-    boolean play;
-    int playSoundId;
 
 
     /**
@@ -172,11 +170,11 @@ public class Camera2BasicFragment extends Fragment
     private View drawerView;
     private Button cloth;
     private ImageView none;
+    private ImageView amiMtm;
     private ImageView shirt;
     private ImageView dress;
-    private ImageView suit;
-    private ImageView short_shirt;
-    private ImageView white_dress;
+    private ImageView blackCoat;
+    private ImageView redCoat;
 
     /**
      * Tag for the {@link Log}.
@@ -562,8 +560,8 @@ public class Camera2BasicFragment extends Fragment
            // 3번 - 음질
             soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC,0);
         }
-        soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
-        soundManager.addSound(0,R.raw.shot);//효과음 songhui
+        //soundManager = new SoundManager(getActivity(),soundPool);//this->  getActivity
+        //soundManager.addSound(0,R.raw.shot);//효과음 songhui
         /**
         * 음성인식파트
         */
@@ -631,11 +629,11 @@ public class Camera2BasicFragment extends Fragment
         toastText = view.findViewById(R.id.toast);
 
         none = (ImageView)view.findViewById(R.id.none);
+        amiMtm = (ImageView)view.findViewById(R.id.ami_mtm);
         shirt = (ImageView)view.findViewById(R.id.shirt);
         dress = (ImageView)view.findViewById(R.id.dress);
-        suit = (ImageView)view.findViewById(R.id.suit);
-        short_shirt = (ImageView)view.findViewById(R.id.short_shirt);
-        white_dress = (ImageView)view.findViewById(R.id.white_dress);
+        blackCoat = (ImageView)view.findViewById(R.id.black_coat);
+        redCoat = (ImageView)view.findViewById(R.id.red_coat);
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -644,19 +642,19 @@ public class Camera2BasicFragment extends Fragment
                     case R.id.none :
                         drawView.setClothFlag(-1);
                         break ;
-                    case R.id.shirt :
+                    case R.id.ami_mtm :
                         drawView.setClothFlag(0);
                         break ;
-                    case R.id.dress :
+                    case R.id.shirt :
                         drawView.setClothFlag(1);
                         break ;
-                    case R.id.short_shirt :
+                    case R.id.dress :
                         drawView.setClothFlag(2);
                         break ;
-                    case R.id.white_dress :
+                    case R.id.black_coat :
                         drawView.setClothFlag(3);
                         break ;
-                    case R.id.suit :
+                    case R.id.red_coat :
                         drawView.setClothFlag(4);
                         break ;
                 }
@@ -676,37 +674,20 @@ public class Camera2BasicFragment extends Fragment
         /**
          * 타이머 설정
          */
-        countDownTimer = new CountDownTimer(5000,1000) {
+        countDownTimer = new CountDownTimer(5000,1000) { // 5초 카운트 다운
             @Override
-            public void onTick(long millisUntilFinished) {
+            public void onTick(long millisUntilFinished) { // 카운트 다운 동안 1초마다 -1씩 숫자 변환
                 countView.setText(String.valueOf(count));
                 count--;
             }
-//            //효과음 실행 함수 20210113 songhui
-//            public void shot(){
-//                //효과음 실행되는 부분 songhui
-//                if(!play){
-//                    playSoundId=soundManager.playSound(0);
-//                    play = true;
-//                }else{
-//                    soundManager.pauseSound(0);
-//                    play = false;
-//                }
-//            }
+
             @Override
-            public void onFinish() {
+            public void onFinish() { // 끝나면 촬영
                 //20210113songhui 스크린샷버튼 눌렀을 때 효과음
-                if(!play){
-                    playSoundId=soundManager.playSound(0);
-                    System.out.println("소리남"+play);
-                    play = false;
-                }else{
-                    soundManager.pauseSound(0);
-                    play = false;
-                }
-                countView.setVisibility(View.GONE);
-                screenShot.screenShot(textureView, drawView, getActivity());
-                countDownToast.start();
+                playSound(getActivity()); //찰칵 효과음
+                countView.setVisibility(View.GONE); // 카운트 다운 뷰 없애고
+                screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
+                countDownToast.start(); // 토스트 시작
             }
         };
 
@@ -718,9 +699,6 @@ public class Camera2BasicFragment extends Fragment
 
             @Override
             public void onFinish() {
-
-                screenShot.screenShot(textureView, drawView, getActivity());
-                toastText.setVisibility(View.VISIBLE);
                 toastText.setVisibility(View.GONE);
             }
         };
@@ -738,11 +716,11 @@ public class Camera2BasicFragment extends Fragment
         });
 
         none.setOnClickListener(onClickListener) ;
+        amiMtm.setOnClickListener(onClickListener) ;
         shirt.setOnClickListener(onClickListener) ;
         dress.setOnClickListener(onClickListener) ;
-        suit.setOnClickListener(onClickListener) ;
-        short_shirt.setOnClickListener(onClickListener) ;
-        white_dress.setOnClickListener(onClickListener) ;
+        blackCoat.setOnClickListener(onClickListener) ;
+        redCoat.setOnClickListener(onClickListener) ;
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -884,18 +862,9 @@ public class Camera2BasicFragment extends Fragment
         }
 
         if(VoiceMsg.indexOf("찰칵")>-1){
-
-            if(!play){
-                playSoundId=soundManager.playSound(0);
-                System.out.println("소리남"+play);
-                play = false;
-            }else{
-                soundManager.pauseSound(0);
-                play = false;
-                System.out.println("소리안남"+play);
-            }
-            screenShot.screenShot(textureView, drawView, getActivity());
-            toastText.setVisibility(View.VISIBLE);
+            playSound(getActivity()); // 찰칵 효과음
+            screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
+            countDownToast.start(); // 토스트 메시지 3초
         }
     }
 
@@ -905,12 +874,10 @@ public class Camera2BasicFragment extends Fragment
     private void FuncVoiceOut(String OutMsg){
         if(OutMsg.length()<1)return;
         if(!tts.isSpeaking()) {
-            Log.e("1","1");
             tts.setPitch(1.0f);//목소리 톤1.0
             tts.setSpeechRate(1.0f);//목소리 속도
             tts.speak(OutMsg,TextToSpeech.QUEUE_FLUSH,null, "id1");
         }
-        Log.e("2","2");
         //어플이 종료할때는 완전히 제거
     }
 
@@ -926,6 +893,21 @@ public class Camera2BasicFragment extends Fragment
 
     /**================================== 음성인식 (End) =========================================*/
 
+
+    /** PlaySound **/
+
+    public void playSound(Context context) {
+        // context, resId, priority
+        final int sound = soundPool.load(context, R.raw.shot, 1);
+        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                // soundId, leftVolumn, rightVolumn, priority, loop, rate
+                soundPool.play(sound, 5f, 5f, 0, 0, 1.0f);
+            }
+        });
+    }
+
     /**
      * Load the model and labels.
      */
@@ -940,7 +922,7 @@ public class Camera2BasicFragment extends Fragment
                 drawView.setImgSize(classifier.getImageSizeX(), classifier.getImageSizeY());
             }
 
-            file = new File(getActivity().getExternalFilesDir(null), "suiber.jpg");
+            file = new File(getActivity().getExternalFilesDir(null), "hello.jpg");
 
         } catch (IOException e) {
             Log.e(TAG, "Failed to initialize an image classifier.", e);
