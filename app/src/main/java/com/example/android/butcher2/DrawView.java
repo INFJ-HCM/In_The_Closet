@@ -207,7 +207,7 @@ public class DrawView extends View {
                     n = 2.4;
                     break;
                 case 3: // black coat
-                    n = 1.9;
+                    n = 1.7;
                     break;
                 case 4: // red coat
                     n = 1.8;
@@ -385,9 +385,9 @@ public class DrawView extends View {
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y - 50,null);
                 break;
             case 4: // red coat
-                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+20, neckPoint.y - 25,null);
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+0, neckPoint.y - 25,null);
                 break;
-            case 5: // knit1
+            case 5: // knit1//o
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2), neckPoint.y+10,null);
                 break;
             case 6: //whiteshirt2
@@ -396,11 +396,11 @@ public class DrawView extends View {
             case 7: // blackdress
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+30, neckPoint.y - 10,null);
                 break;
-            case 8: // denimdress
+            case 8: // denimdress//o
                 canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+10, neckPoint.y - 25,null);
                 break;
-            case 9: // opencoat
-                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+80, neckPoint.y - 30,null);
+            case 9: // opencoat//o-
+                canvas.drawBitmap(clothBitmap, neckPoint.x - (clothBitmap.getWidth()/2)+60, neckPoint.y - 30,null);
                 break;
         }
     }

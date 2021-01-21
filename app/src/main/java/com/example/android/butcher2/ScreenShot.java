@@ -30,12 +30,11 @@ public class ScreenShot {
     public void screenShot(AutoFitTextureView textureView, DrawView drawView, Context context) {
         String fileName = "";
 
-        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
-
-        drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
-       
         SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss"); // 현재 시각
         Date date = new Date();
+
+        Bitmap bitmap = textureView.getBitmap(textureView.getWidth(), textureView.getHeight()); // 카메라 화면 캡쳐
+        drawView.setCaptureview(bitmap); // 캡쳐한 카메라 화면을 캔버스로 보내
 
         drawView.buildDrawingCache(); // 옷이 그려지는 뷰 캐싱
         Bitmap captureView = drawView.getDrawingCache(); // 그걸 비트맵으로 만들어
