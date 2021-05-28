@@ -109,6 +109,7 @@ import java.util.Locale;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.System.exit;
 
 
 /**
@@ -711,9 +712,10 @@ public class Camera2BasicFragment extends Fragment
          */
         countDownTimer = new CountDownTimer(5000,1000) { // 5초 카운트 다운
             @Override
-            public void onTick(long millisUntilFinished) { // 카운트 다운 동안 1초마다 -1씩 숫자 변환
+            public void onTick(long millisUntilFinished) { //카운트 다운 동안 1초마다 -1씩 숫자 변환
                 countView.setText(String.valueOf(count));
-                count--;
+                    System.out.println(millisUntilFinished);
+                    count--;
             }
 
             @Override
@@ -723,18 +725,23 @@ public class Camera2BasicFragment extends Fragment
                 countView.setVisibility(View.GONE); // 카운트 다운 뷰 없애고
                 screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
                 countDownToast.start(); // 토스트 시작
+                screenshot.setEnabled(true);//스크린샷 버튼 다시 활성화 
             }
         };
-
+        //카운트
         countDownToast = new CountDownTimer(3000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+
                 toastText.setVisibility(View.VISIBLE);
+
             }
 
             @Override
             public void onFinish() {
                 toastText.setVisibility(View.GONE);
+
+
             }
         };
 
@@ -744,6 +751,7 @@ public class Camera2BasicFragment extends Fragment
         screenshot = view.findViewById(R.id.screenshot);
         screenshot.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
+                screenshot.setEnabled(false);//20210528 songhui 스크린샷 버튼 잠금
                 countView.setVisibility(View.VISIBLE);
                 count = 5;
                 countDownTimer.start(); // 시작햐
