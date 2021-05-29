@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.android.butcher2.support.PermissionSupport;
@@ -35,7 +36,7 @@ public class StartActivity extends Activity {
         //songhui20201101 로딩 액티비티 실행
         Intent intent = new Intent(this, Loading.class);
 
-        ImageButton camerabutton = (ImageButton) findViewById(R.id.btn_camera);
+        Button camerabutton = (Button) findViewById(R.id.btn_camera);
         camerabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +46,7 @@ public class StartActivity extends Activity {
         });
 
         //songhui20201128 지정폴더 열기 - 안드로이드10 q적용X
-        ImageButton lookbook = (ImageButton)findViewById(R.id.btn_lookbook);
+        Button lookbook = (Button)findViewById(R.id.btn_lookbook);
         lookbook.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
