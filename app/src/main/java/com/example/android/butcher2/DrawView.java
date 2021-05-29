@@ -10,6 +10,7 @@ import android.view.View;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.widget.ImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class DrawView extends View {
 
     private int displayWidth;           // 최대 화면 넓이 (해상도)
     private int displayHeight;       // 최대 화면 높이
+
+    public ImageView guideView;
 
 
     Normalization normalization = new Normalization();
@@ -365,7 +368,11 @@ public class DrawView extends View {
         Log.e("neckPoint : ", neckPoint.x + ", " + neckPoint.y);
 
         if(!normalization.checkArea()) { // 지정 영역 neck 값이 없으면 옷 안 그려
-            neckPoint.set((float)displayWidth / 2, (float)displayHeight / 3);
+            neckPoint.set((float)displayWidth / 2, (float)displayHeight / 5);
+            guideView.setVisibility(VISIBLE);
+        }
+        else {
+            guideView.setVisibility(GONE);
         }
 
         chooseCloth();

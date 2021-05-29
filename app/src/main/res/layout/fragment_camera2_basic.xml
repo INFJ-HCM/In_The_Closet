@@ -194,6 +194,16 @@
             android:visibility="gone" />
 
 
+        <ImageView
+            android:id="@+id/guideView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/guideline"
+            android:gravity="center"
+            android:layout_marginTop="210px"
+
+            android:visibility="visible" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

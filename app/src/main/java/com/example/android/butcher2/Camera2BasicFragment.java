@@ -162,6 +162,7 @@ public class Camera2BasicFragment extends Fragment
     ScreenShot screenShot = new ScreenShot();
 
     private Button screenshot;
+    private ImageView guideView;
     private TextView countView;
     private TextView toastText;
     private CountDownTimer countDownTimer;
@@ -493,12 +494,12 @@ public class Camera2BasicFragment extends Fragment
      * whose aspect ratio matches with the specified value.
      *
      * @param choices           The list of sizes that the camera supports for the intended output class
-     * @param textureViewWidth  The width of the texture view relative to sensor coordinate
-     * @param textureViewHeight The height of the texture view relative to sensor coordinate
-     * @param maxWidth          The maximum width that can be chosen
-     * @param maxHeight         The maximum height that can be chosen
-     * @param aspectRatio       The aspect ratio
-     * @return The optimal {@code Size}, or an arbitrary one if none were big enough
+     *      * @param textureViewWidth  The width of the texture view relative to sensor coordinate
+     *      * @param textureViewHeight The height of the texture view relative to sensor coordinate
+     *      * @param maxWidth          The maximum width that can be chosen
+     *      * @param maxHeight         The maximum height that can be chosen
+     *      * @param aspectRatio       The aspect ratio
+     *      * @return The optimal {@code Size}, or an arbitrary one if none were big enough
      */
     private static Size chooseOptimalSize(
             Size[] choices,
@@ -560,6 +561,10 @@ public class Camera2BasicFragment extends Fragment
         drawView = view.findViewById(R.id.drawview);
         layoutBottom = view.findViewById(R.id.layout_bottom);
         countView = view.findViewById(R.id.countView);
+        guideView = view.findViewById(R.id.guideView);
+
+
+        drawView.guideView = guideView;
 
 
         /**정규화*/
@@ -725,7 +730,7 @@ public class Camera2BasicFragment extends Fragment
                 countView.setVisibility(View.GONE); // 카운트 다운 뷰 없애고
                 screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
                 countDownToast.start(); // 토스트 시작
-                screenshot.setEnabled(true);//스크린샷 버튼 다시 활성화 
+                screenshot.setEnabled(true);//스크린샷 버튼 다시 활성화
             }
         };
         //카운트
