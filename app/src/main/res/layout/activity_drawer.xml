@@ -14,6 +14,7 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <ImageView
                 android:id="@+id/none"
@@ -135,6 +137,105 @@
                 android:layout_marginBottom="20dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/opencoat" />
+
+            <ImageView
+                android:id="@+id/dress1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress1" />
+            <ImageView
+                android:id="@+id/dress2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress2" />
+            <ImageView
+                android:id="@+id/dress3"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress3" />
+            <ImageView
+                android:id="@+id/dress4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress4" />
+            <ImageView
+                android:id="@+id/dress5"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress5" />
+<!--            <ImageView-->
+<!--                android:id="@+id/dress6"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:src="@drawable/dress6" />-->
+            <ImageView
+                android:id="@+id/dress7"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress7" />
+            <ImageView
+                android:id="@+id/dress8"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dress8" />
+            <ImageView
+                android:id="@+id/jacket1"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/jacket1" />
+            <ImageView
+                android:id="@+id/jacket2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/jacket2" />
+            <ImageView
+                android:id="@+id/jacket3"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/jacket3" />
+            <ImageView
+                android:id="@+id/jacket4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/jacket4" />
+            <ImageView
+                android:id="@+id/knit4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/knit4" />
+<!--            <ImageView-->
+<!--                android:id="@+id/knit5"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:scaleType="fitCenter"-->
+<!--                android:src="@drawable/knit5" />-->
 
 
         </LinearLayout>

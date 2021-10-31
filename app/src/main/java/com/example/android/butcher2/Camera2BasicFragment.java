@@ -134,12 +134,6 @@ public class Camera2BasicFragment extends Fragment
 
 
     /**
-     * 정규화
-     */
-    Normalization normalization;
-
-
-    /**
      * 음성 인식
      */
     private String LogTT = "[STT]";//LOG타이틀
@@ -187,6 +181,21 @@ public class Camera2BasicFragment extends Fragment
     private ImageView blackdress; //8
     private ImageView denimdress; //9
     private ImageView opencoat; //10
+    private ImageView dress1;//11
+    private ImageView dress2;//12
+    private ImageView dress3;//13
+    private ImageView dress4;//14
+    private ImageView dress5;//15
+//    private ImageView dress6; //16
+    private ImageView dress7; //17
+    private ImageView dress8; //18
+    private ImageView jacket1; //19
+    private ImageView jacket2; //20
+    private ImageView jacket3; //21
+    private ImageView jacket4; //22
+    private ImageView knit4; //23
+//    private ImageView knit5; //24
+
 
 
     /**
@@ -567,8 +576,6 @@ public class Camera2BasicFragment extends Fragment
         drawView.guideView = guideView;
 
 
-        /**정규화*/
-        normalization = new Normalization();
 
         //효과음 songhui
         //롤리팝 이상 버전일 경우
@@ -591,6 +598,11 @@ public class Camera2BasicFragment extends Fragment
         SttIntent=new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         SttIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getApplicationContext().getPackageName());
         SttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");//한국어 사용
+//        20211016 송희 stt대기시간 조절
+        SttIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, 10000);
+        SttIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, 10000);
+        SttIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, 10000);
+
         mRecognizer=SpeechRecognizer.createSpeechRecognizer(getActivity());
         mRecognizer.setRecognitionListener(recognitionListener);
 
@@ -660,6 +672,20 @@ public class Camera2BasicFragment extends Fragment
         blackdress = (ImageView)view.findViewById(R.id.blackdress); //8
         denimdress = (ImageView)view.findViewById(R.id.denimdress); //9
         opencoat = (ImageView)view.findViewById(R.id.opencoat); //10
+        dress1 = (ImageView)view.findViewById(R.id.dress1);//11
+        dress2 = (ImageView)view.findViewById(R.id.dress2);//12
+        dress3 = (ImageView)view.findViewById(R.id.dress3);//13
+        dress4 = (ImageView)view.findViewById(R.id.dress4);//14
+        dress5 = (ImageView)view.findViewById(R.id.dress5);//15
+//        dress6 = (ImageView)view.findViewById(R.id.dress6);//16
+        dress7 = (ImageView)view.findViewById(R.id.dress7); //17
+        dress8 = (ImageView)view.findViewById(R.id.dress8); //18
+        jacket1 = (ImageView)view.findViewById(R.id.jacket1); //19
+        jacket2 = (ImageView)view.findViewById(R.id.jacket2); //20
+        jacket3 = (ImageView)view.findViewById(R.id.jacket3); //22
+        jacket4 = (ImageView)view.findViewById(R.id.jacket4); //23
+        knit4 = (ImageView)view.findViewById(R.id.knit4);//24
+//        knit5 = (ImageView)view.findViewById(R.id.knit5);//25
 
         Button.OnClickListener onClickListener = new Button.OnClickListener() {
             @Override
@@ -697,6 +723,48 @@ public class Camera2BasicFragment extends Fragment
                         break ;
                     case R.id.opencoat :
                         drawView.setClothFlag(9);
+                        break ;
+                    case R.id.dress1:
+                        drawView.setClothFlag(10);
+                        break;
+                    case R.id.dress2:
+                        drawView.setClothFlag(11);
+                        break;
+                    case R.id.dress3:
+                        drawView.setClothFlag(12);
+                        break;
+                    case R.id.dress4:
+                        drawView.setClothFlag(13);
+                        break;
+                    case R.id.dress5:
+                        drawView.setClothFlag(14);
+                        break ;
+//                    case R.id.dress6:
+//                        drawView.setClothFlag(15);
+//                        break ;
+                    case R.id.dress7 :
+                        drawView.setClothFlag(15);
+                        break ;
+                    case R.id.dress8 :
+                        drawView.setClothFlag(16);
+                        break ;
+                    case R.id.jacket1 :
+                        drawView.setClothFlag(17);
+                        break ;
+                    case R.id.jacket2 :
+                        drawView.setClothFlag(18);
+                        break ;
+                    case R.id.jacket3 :
+                        drawView.setClothFlag(19);
+                        break ;
+                    case R.id.jacket4 :
+                        drawView.setClothFlag(20);
+                        break ;
+                    case R.id.knit4 :
+                        drawView.setClothFlag(21);
+//                        break ;
+//                    case R.id.knit5 :
+//                        drawView.setClothFlag(23);
                         break ;
                 }
             }
@@ -774,6 +842,20 @@ public class Camera2BasicFragment extends Fragment
         blackdress.setOnClickListener(onClickListener) ;
         denimdress.setOnClickListener(onClickListener) ;
         opencoat.setOnClickListener(onClickListener) ;
+        dress1.setOnClickListener(onClickListener) ;
+        dress2.setOnClickListener(onClickListener) ;
+        dress3.setOnClickListener(onClickListener) ;
+        dress4.setOnClickListener(onClickListener) ;
+        dress5.setOnClickListener(onClickListener) ;
+//        dress6.setOnClickListener(onClickListener) ;
+        dress7.setOnClickListener(onClickListener) ;
+        dress8.setOnClickListener(onClickListener) ;
+        jacket1.setOnClickListener(onClickListener) ;
+        jacket2.setOnClickListener(onClickListener) ;
+        jacket3.setOnClickListener(onClickListener) ;
+        jacket4.setOnClickListener(onClickListener) ;
+        knit4.setOnClickListener(onClickListener) ;
+//        knit5.setOnClickListener(onClickListener) ;
 
     }
 
@@ -919,6 +1001,13 @@ public class Camera2BasicFragment extends Fragment
             playSound(getActivity()); // 찰칵 효과음
             screenShot.screenShot(textureView, drawView, getActivity()); // 스크린샷
             countDownToast.start(); // 토스트 메시지 3초
+        }
+        if(VoiceMsg.indexOf("다음")>-1){
+            int clothFlag = drawView.getClothFlag() + 1;
+            if (clothFlag >= 10 ) { // 마지막 옷까지 가면 처음으로 설정
+                drawView.setClothFlag(0);
+            }
+            else drawView.setClothFlag(clothFlag);
         }
     }
 
@@ -1555,7 +1644,6 @@ public class Camera2BasicFragment extends Fragment
 
         @Override
         public void run() {
-            Log.e(TAG, "7");
             ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
             byte[] bytes = new byte[buffer.remaining()];
             buffer.get(bytes);

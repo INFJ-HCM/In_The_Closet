@@ -1,2 +1,3 @@
-ninja: Entering directory `D:\Android\Project\In_The_Closet\app\.cxx\cmake\debug\armeabi-v7a'
-ninja: no work to do.
+ninja: Entering directory `C:\Users\chaso\Desktop\In_The_Closet\app\.cxx\cmake\debug\armeabi-v7a'
+[1/2] Building CXX object CMakeFiles/jupiter_opencv_320.dir/src/main/cpp/native-lib.cpp.o
+[2/2] Linking CXX shared library ..\..\..\..\build\intermediates\cmake\debug\obj\armeabi-v7a\libjupiter_opencv_320.so

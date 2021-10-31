@@ -1,21 +1,21 @@
 {
   "buildFiles": [
-    "D:\\Android\\Project\\In_The_Closet\\app\\CMakeLists.txt",
-    "D:\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
-    "D:\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
+    "C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\CMakeLists.txt",
+    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
-    "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
+    "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
   ],
-  "buildTargetsCommand": "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "jupiter_opencv_320-Debug-armeabi-v7a": {
       "artifactName": "jupiter_opencv_320",
-      "buildCommand": "D:\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\Project\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" jupiter_opencv_320",
+      "buildCommand": "C:\\Users\\chaso\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" jupiter_opencv_320",
       "abi": "armeabi-v7a",
-      "output": "D:\\Android\\Project\\In_The_Closet\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libjupiter_opencv_320.so",
+      "output": "C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libjupiter_opencv_320.so",
       "runtimeFiles": [
-        "D:\\Android\\Project\\In_The_Closet\\app\\libs\\armeabi-v7a\\libopencv_java3.so"
+        "C:\\Users\\chaso\\Desktop\\In_The_Closet\\app\\libs\\armeabi-v7a\\libopencv_java3.so"
       ]
     }
   }

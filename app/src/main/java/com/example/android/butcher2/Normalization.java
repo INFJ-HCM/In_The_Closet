@@ -21,6 +21,8 @@ public class Normalization {
     public ArrayList<Float> shoulderLength = new ArrayList<>();
     public ArrayList<PointF> neckList = new ArrayList<>();
 
+    private final static int LISTFULL = 3;
+
 
     public void setPoint (PointF ls, PointF rs, PointF nk) { // 실시간 좌표
         leftShoulder = ls;
@@ -37,11 +39,11 @@ public class Normalization {
         float len = 0;
         float avg = 0;
 
-        if(shoulderLength.size() > 8) { //8개가 쌓이면 정규화 시작
-            for(int i=0; i<shoulderLength.size(); i++) {
+        if(shoulderLength.size() >= LISTFULL) { // 3개가 쌓이면 정규화 시작
+            for(int i=0; i < LISTFULL; i++) {
                 len += shoulderLength.get(i);
             }
-            avg = len / shoulderLength.size(); // 평균 구하고
+            avg = len / LISTFULL; // 평균 구하고
         }
         shoulderLength.clear(); // 배열 비우기
         return avg;
@@ -55,19 +57,18 @@ public class Normalization {
 
         PointF avg = new PointF();
 
-        if(neckList.size() > 8) { // 8개 이상 쌓이면
-            for(int i=0; i<neckList.size(); i++) {
+        if(neckList.size() >= LISTFULL) { // 3개 이상 쌓이면
+            for(int i=0; i<LISTFULL; i++) {
                 x += neckList.get(i).x;
                 y += neckList.get(i).y;
             }
-            avgx = x / neckList.size();
-            avgy = y / neckList.size();
-            Log.e("avgx", String.valueOf(avgx));
-            Log.e("avgy", String.valueOf(avgy));
+            avgx = x / LISTFULL;
+            avgy = y / LISTFULL;
+
         }
         neckList.clear(); // 배열 비우고
 
-        Log.e("neckList 크기", String.valueOf(neckList.size()));
+
 
         avg.set(avgx, avgy);
         return avg;
