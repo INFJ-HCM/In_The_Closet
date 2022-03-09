@@ -1,5 +1,5 @@
 openCVLibrary341/* linguist-vendored
 app/libs/* linguist-vendored
 app/src/main/cpp/* linguist-vendored
-*.cpp linguist-detectable=false
-*.c linguist-detectable=false
+*.hpp linguist-detectable=false
+*.h linguist-detectable=false
